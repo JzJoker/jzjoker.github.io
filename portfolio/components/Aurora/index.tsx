@@ -1,4 +1,4 @@
-'use client';
+"use client"
 import { useEffect, useRef } from 'react';
 import { Renderer, Program, Mesh, Color, Triangle } from 'ogl';
 
@@ -206,5 +206,5 @@ export default function Aurora(props: AuroraProps) {
     };
   }, [amplitude]);
 
-  return <div ref={ctnDom} className="aurora-container w-full h-full" />;
+  return <div ref={ctnDom} className="w-full h-full" />;
 }
