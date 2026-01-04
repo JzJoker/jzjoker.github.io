@@ -51,6 +51,7 @@ export default function Home() {
                     cardDistance={100}
                     verticalDistance={75}
                     skewAmount={7}
+                    easing="elastic"
                   >
                   <Card className="p-8 flex flex-col items-start justify-center">
                     <Circle className="w-8 h-8 text-white mb-4" />
