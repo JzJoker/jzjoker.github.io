@@ -3,6 +3,7 @@ import { FaAws, FaReact, FaPython, FaDocker, FaGitAlt, FaJs } from 'react-icons/
 import { SiNextdotjs } from 'react-icons/si';
 import { Luxurious_Script } from 'next/font/google';
 import { motion } from 'framer-motion';
+import FadeInOnScroll from '../components/FadeInOnScroll';
 
 const luxuriousScript = Luxurious_Script({
   subsets: ['latin'],
@@ -82,7 +83,7 @@ export default function Home() {
 
 
       {/* Works */}
-      <div id='works' className='p-20 pb-0 relative bg-white'>
+      <div id='works' className='p-20 pb-0 pt-5 relative bg-white'>
 
         {/* UX Interviewer */}
         <div id='interviewer' className="grid grid-rows-4 grid-cols-6 h-full w-full gap-5 h-screen bg-white">
@@ -93,12 +94,12 @@ export default function Home() {
             </div>
             <a href="" className='underline text-lg underline-offset-6'>Visit Case Study</a>
           </div>
-          <div className="row-span-1 col-span-3  shadow-md border-1 border-gray"> <img src="/images/ux-interviewer/uxinterviewerbanner.png" alt="" /></div>
-          <div className="row-span-2 col-span-2 shadow-md border-1 border-gray"><img src="/images/ux-interviewer/home.png" alt="" className="w-full h-full object-cover " /></div>
-          <div className="row-span-2 col-span-1 pb-10"><img src="/images/ux-interviewer/whiteboard.png" alt="" className="w-full h-full shadow-md object-cover object-[10%]" /></div>
-          <div className="row-span-2 col-span-2 shadow-md"><img src="/images/ux-interviewer/stats.png" alt="" className="w-full h-full object-cover " /></div>
-          <div className="row-span-1 col-span-1 rounded-lg shadow-md"><img src="/images/ux-interviewer/speech.png" alt="" className="object-cover w-full h-full " /></div>
-          <div className="row-span-2 col-span-2 pb-10 pr-10"><img src="/images/ux-interviewer/home.png" alt="" className="w-full h-full shadow-md object-cover object-top" /></div>
+          <div className="row-span-1 col-span-3"><FadeInOnScroll><img src="/images/ux-interviewer/uxinterviewerbanner.png" alt="" /></FadeInOnScroll></div>
+          <div className="row-span-2 col-span-2"><FadeInOnScroll><img src="/images/ux-interviewer/home.png" alt="" className="w-full h-full object-cover " /></FadeInOnScroll></div>
+          <div className="row-span-2 col-span-1 pb-10"><FadeInOnScroll><img src="/images/ux-interviewer/whiteboard.png" alt="" className="w-full h-full shadow-md object-cover object-[10%]" /></FadeInOnScroll></div>
+          <div className="row-span-2 col-span-2"><FadeInOnScroll><img src="/images/ux-interviewer/stats.png" alt="" className="w-full h-full object-cover " /></FadeInOnScroll></div>
+          <div className="row-span-1 col-span-1"><FadeInOnScroll><img src="/images/ux-interviewer/speech.png" alt="" className="object-cover w-full h-full " /></FadeInOnScroll></div>
+          <div className="row-span-2 col-span-2 pb-10 pr-10"><FadeInOnScroll><img src="/images/ux-interviewer/home.png" alt="" className="w-full h-full shadow-md object-cover object-top" /></FadeInOnScroll></div>
           <div className='col-span-2 bg-[#F0F0F0] -ml-10 p-5 h-fit'>
             <div className='font-semibold '>Quick Links</div>
             <ul className='list-none'>
