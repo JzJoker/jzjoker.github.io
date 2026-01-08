@@ -32,8 +32,8 @@ const EnterEffect = ({ children, x = 150, y = -20, delay = 0, className, rotate 
       }}
       transition={{
         type: "spring",
-        stiffness: 100,
-        damping: 10,
+        stiffness: 80,
+        damping: 12,
         delay: delay
       }}
     >
