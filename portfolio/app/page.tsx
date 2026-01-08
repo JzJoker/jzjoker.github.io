@@ -94,10 +94,10 @@ export default function Home() {
               </EnterEffect>
             </div>
             <div className="w-[17.5%] text-right h-full flex flex-col justify-between">
-              <FadeInOnScroll className="" delay={.8} direction='right'><img className="w-full rounded-lg" src={"/images/image0.jpg"}></img></FadeInOnScroll>
+              <FadeInOnScroll className="" delay={1.2} direction='right'><img className="w-full rounded-lg" src={"/images/image0.jpg"}></img></FadeInOnScroll>
               
               <p className='text-right font-semibold'>
-                <FadeInOnScroll className=''>
+                <FadeInOnScroll className='' delay={1.2}>
                   Hi, I'm <span className="text-blue-500">Justin</span>,<br />
                   A <span className="text-green-500">Full Stack Developer</span><br />
                   Based In<br />
