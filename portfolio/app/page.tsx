@@ -84,43 +84,26 @@ export default function Home() {
       <div id='works' className='p-20 pb-0 relative'>
 
         {/* UX Interviewer */}
-          <div className="grid grid-rows-5 grid-cols-6 h-full w-full gap-y-10 gap-x-5 h-screen">
-          {/* Box 1 */}
-          <div className="row-span-3 col-span-3 rounded-lg flex flex-col justify-between">
+          <div className="grid grid-rows-4 grid-cols-6 h-full w-full gap-5 h-screen">
+          <div className="row-span-2 col-span-3 rounded-lg flex flex-col justify-between">
             <div>
               <h2 className='text-3xl font-poppins tracking-tighter mb-5 font-semibold pt-5'>UX Interviewer</h2>
               <p className='mr-30 font-light'>There are many interview prep resources for software engineers out there on the web—the most notorious being LeetCode; however, while software engineers can practice active recall for technical interiviews doing DSA problems, there is no real way to practice retrieval of UI/UX design principles in preperation for design interviews. So we decided to make it. The First Structured Interview Prep Platform for UI/UX Design.</p>
             </div>
             <a href="" className='underline text-lg underline-offset-6'>Visit Case Study</a>
           </div>
-          
-          {/* Box 2 */}
-          
-          {/* Box 3 */}
-          
-          {/* Box 4 */}
           <div className="row-span-1 col-span-3  shadow-md border-1 border-gray"> <img src="/images/ux-interviewer/uxinterviewerbanner.png" alt="" /></div>
-
           <div className="row-span-2 col-span-2 shadow-md border-1 border-gray"><img src="/images/ux-interviewer/home.png" alt="" className="w-full h-full object-cover " /></div>
-          <div className="row-span-2 col-span-1 shadow-md"><img src="/images/ux-interviewer/whiteboard.png" alt="" className="w-full h-full object-cover object-[10%]" /></div>
-
-
-          {/* Box 5 */}
-          <div className="row-span-2 col-span-2 shadow-md"><img src="/images/ux-interviewer/login.png" alt="" className="w-full h-full object-cover " /></div>
-
-          {/* Box 6 */}
+          <div className="row-span-2 col-span-1 pb-10"><img src="/images/ux-interviewer/whiteboard.png" alt="" className="w-full h-full shadow-md object-cover object-[10%]" /></div>
+          <div className="row-span-2 col-span-2 shadow-md"><img src="/images/ux-interviewer/stats.png" alt="" className="w-full h-full object-cover " /></div>
           <div className="row-span-1 col-span-1 rounded-lg shadow-md"><img src="/images/ux-interviewer/speech.png" alt="" className="object-cover w-full h-full " /></div>
-
-
-          {/* Box 8 */}
-          {/* Box 7 */}
-          <div className="row-span-2 col-span-2 pb-10 pr-10"> <img src="/images/ux-interviewer/stats.png" alt="" className="w-full h-full shadow-md object-cover" /></div>
-          <div>
-            <div className='font-semibold'>Quick Links</div>
+          <div className="row-span-2 col-span-2 pb-10 pr-10"><img src="/images/ux-interviewer/stats.png" alt="" className="w-full h-full shadow-md object-cover object-top" /></div>
+          <div className='col-span-2 bg-[#F0F0F0] -ml-10 p-5 h-fit'>
+            <div className='font-semibold '>Quick Links</div>
             <ul className='list-none'>
-              <li><a href="" className=' font-light'>Case Study</a></li>
-              <li><a href="" className=' font-light'>GitHub Repo</a></li>
-              <li><a href="" className=' font-light'>Live Demo</a></li>
+              <li className='my-1'><a href="" className='underline underline-offset-6 decoration-gray-500 font-light'>Case Study</a></li>
+              <li className='my-1'><a href="" className='underline underline-offset-6 decoration-gray-500 font-light'>GitHub Repo</a></li>
+              <li className='my-1'><a href="" className='underline underline-offset-6 decoration-gray-500 font-light'>Live Demo</a></li>
             </ul>
           </div>
 
