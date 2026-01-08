@@ -130,42 +130,6 @@
   box-shadow: 0px 15px 10px rgba(0, 0, 0, 0.5); /* Drop shadow */
 }
 
-.icon-rotate-1 {
-  transform: rotate(-15deg);
-}
-
-.icon-rotate-2 {
-  transform: rotate(10deg);
-}
-
-.icon-rotate-3 {
-  transform: rotate(-25deg);
-}
-
-.icon-rotate-4 {
-  transform: rotate(20deg);
-}
-
-.icon-rotate-5 {
-  transform: rotate(-10deg);
-}
-
-.icon-rotate-6 {
-  transform: rotate(15deg);
-}
-
-.icon-rotate-7 {
-  transform: rotate(-30deg);
-}
-
-.icon-rotate-8 {
-  transform: rotate(5deg);
-}
-
-.icon-rotate-9 {
-  transform: rotate(-20deg);
-}
-
 @layer base {
   * {
     @apply border-border outline-ring/50;
