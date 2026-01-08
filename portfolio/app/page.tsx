@@ -4,6 +4,7 @@ import { SiNextdotjs } from 'react-icons/si';
 import { Luxurious_Script } from 'next/font/google';
 import { motion } from 'framer-motion';
 import FadeInOnScroll from '../components/FadeInOnScroll';
+import EnterEffect from '@/components/EnterEffect';
 
 const luxuriousScript = Luxurious_Script({
   subsets: ['latin'],
@@ -41,23 +42,58 @@ export default function Home() {
         <div className="flex justify-between items-center w-full h-full flex flex-col">
           <div className="flex flex-row h-full justify-between">
             <div className="bg-none color-none grid grid-rows-5 grid-cols-5 justify-items-center items-center w-[80%] h-full">
-              <div className="icon-container icon-rotate-1"><FaReact size={40} color="#61DAFB" /></div>
-              <div className="icon-container col-start-3 margin-auto icon-rotate-2"><FaAws size={40} color="black" /></div>
-              <div className="icon-container col-start-5 icon-rotate-3"><FaPython size={40} color="#3776AB" /></div>
-              <div className="text-8xl  row-span-3 col-span-3 text-center">
-              <span className={`text-[200px] ${luxuriousScript.className}`}>J</span>
-              <span className="font-poppins italic tracking-tighter">ustin </span> 
-              <span className={`text-[200px] ${luxuriousScript.className}`}>Z</span>
-              <span className="font-poppins italic tracking-tighter">hao</span>
+              {/* Top-left */}
+              <EnterEffect x={-100} y={-100} delay={0} className="icon-container" rotate={-15}>
+                <FaReact size={40} color="#61DAFB" />
+              </EnterEffect>
+
+              {/* Top-center */}
+              <EnterEffect x={0} y={-120} delay={0.1} className="icon-container col-start-3" rotate={10}>
+                <FaAws size={40} color="black" />
+              </EnterEffect>
+
+              {/* Top-right */}
+              <EnterEffect x={100} y={-100} delay={0.2} className="icon-container col-start-5" rotate={-25}>
+                <FaPython size={40} color="#3776AB" />
+              </EnterEffect>
+
+              {/* Center text */}
+              <div className="text-8xl row-start-2 col-start-2 row-span-3 col-span-3 text-center">
+                <FadeInOnScroll className="">
+                  <span className={`text-[200px] ${luxuriousScript.className}`}>J</span>
+                  <span className="font-poppins italic tracking-tighter">ustin </span> 
+                  <span className={`text-[200px] ${luxuriousScript.className}`}>Z</span>
+                  <span className="font-poppins italic tracking-tighter">hao</span>
+                </FadeInOnScroll>
               </div>
-              <div className="icon-container row-start-3 col-start-5 icon-rotate-4"><FaDocker size={40} color="#29A2BF" /></div>
-              <div className="icon-container row-start-3 icon-rotate-5"><FaGitAlt size={40} color="#EB4D28" /></div>
-              <div className="icon-container row-start-5 col-start-5 icon-rotate-6"><FaJs size={40} color="#F0DB4E" /></div>
-              <div className="icon-container row-start-5 col-start-3 icon-rotate-7"><SiNextdotjs size={40} color="black" /></div>
-              <div className="icon-container row-start-5 bg-black icon-rotate-8"><FaReact size={40} color="black" /></div>
-            </div>  
+
+              {/* Middle-right */}
+              <EnterEffect x={120} y={0} delay={0.3} className="icon-container row-start-3 col-start-5" rotate={20}>
+                <FaDocker size={40} color="#29A2BF" />
+              </EnterEffect>
+
+              {/* Bottom-right */}
+              <EnterEffect x={100} y={100} delay={0.4} className="icon-container row-start-5 col-start-5" rotate={15}>
+                <FaJs size={40} color="#F0DB4E" />
+              </EnterEffect>
+
+              {/* Bottom-center */}
+              <EnterEffect x={0} y={120} delay={0.5} className="icon-container row-start-5 col-start-3" rotate={-30}>
+                <SiNextdotjs size={40} color="black" />
+              </EnterEffect>
+
+              {/* Bottom-left */}
+              <EnterEffect x={-100} y={100} delay={0.6} className="icon-container row-start-5 col-start-1" rotate={5}>
+                <FaReact size={40} color="black" />
+              </EnterEffect>
+
+              {/* Middle-left */}
+              <EnterEffect x={-120} y={0} delay={0.7} className="icon-container row-start-3 col-start-1" rotate={-10}>
+                <FaGitAlt size={40} color="#EB4D28" />
+              </EnterEffect>
+            </div>
             <div className="w-[17.5%] text-right h-full flex flex-col justify-between">
-              <img className="w-full rounded-lg" src={"/images/image0.jpg"}></img>
+              <FadeInOnScroll className="" delay={.8} direction='right'><img className="w-full rounded-lg" src={"/images/image0.jpg"}></img></FadeInOnScroll>
               <p className='text-right font-semibold'>
                 Hi, I'm <span className="text-blue-500">Justin</span>,<br />
                 A <span className="text-green-500">Full Stack Developer</span><br />
