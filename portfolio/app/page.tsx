@@ -13,7 +13,7 @@ export default function Home() {
       {/* First Section */}
       <div className="p-30 pb-0 relative h-screen overflow-hidden">
         {/* Nav Bar */}
-        <nav className="pl-30 pr-30 absolute top-0 left-0 w-full p-4 flex justify-between gap-4 z-10">
+        <nav className="pl-20 pr-20 absolute top-0 left-0 w-full p-4 flex justify-between gap-4 z-10">
           <button className=" hover:text-gray-400 cursor-pointer flex font-semibold">
             <Circle size={24} fill='black'/>
             <h2 className="pl-2.5">Justin</h2>
@@ -74,10 +74,80 @@ export default function Home() {
                 Open to Work
               </div>
             </div>              
-            <div>Current Project: UX Interviewer</div>
+            <div>Current Project: <span className='underline'>UX Interviewer</span></div>
           </div>
         </div>
-        
+      </div>
+
+
+      {/* Works */}
+      <div id='works' className='p-20 pb-0 relative'>
+
+        {/* UX Interviewer */}
+          <div className="grid grid-rows-5 grid-cols-6 h-full w-full gap-y-10 gap-x-5 h-screen">
+          {/* Box 1 */}
+          <div className="row-span-3 col-span-3 rounded-lg flex flex-col justify-between">
+            <div>
+              <h2 className='text-3xl font-poppins tracking-tighter mb-5 font-semibold pt-5'>UX Interviewer</h2>
+              <p className='mr-30 font-light'>There are many interview prep resources for software engineers out there on the web—the most notorious being LeetCode; however, while software engineers can practice active recall for technical interiviews doing DSA problems, there is no real way to practice retrieval of UI/UX design principles in preperation for design interviews. So we decided to make it. The First Structured Interview Prep Platform for UI/UX Design.</p>
+            </div>
+            <a href="" className='underline text-lg underline-offset-6'>Visit Case Study</a>
+          </div>
+          
+          {/* Box 2 */}
+          
+          {/* Box 3 */}
+          
+          {/* Box 4 */}
+          <div className="row-span-1 col-span-3  shadow-md border-1 border-gray"> <img src="/images/ux-interviewer/uxinterviewerbanner.png" alt="" /></div>
+
+          <div className="row-span-2 col-span-2 shadow-md border-1 border-gray"><img src="/images/ux-interviewer/home.png" alt="" className="w-full h-full object-cover " /></div>
+          <div className="row-span-2 col-span-1 shadow-md"><img src="/images/ux-interviewer/whiteboard.png" alt="" className="w-full h-full object-cover object-[10%]" /></div>
+
+
+          {/* Box 5 */}
+          <div className="row-span-2 col-span-2 shadow-md"><img src="/images/ux-interviewer/login.png" alt="" className="w-full h-full object-cover " /></div>
+
+          {/* Box 6 */}
+          <div className="row-span-1 col-span-1 rounded-lg shadow-md"><img src="/images/ux-interviewer/speech.png" alt="" className="object-cover w-full h-full " /></div>
+
+
+          {/* Box 8 */}
+          {/* Box 7 */}
+          <div className="row-span-2 col-span-2 pb-10 pr-10"> <img src="/images/ux-interviewer/stats.png" alt="" className="w-full h-full shadow-md object-cover" /></div>
+          <div>
+            <div className='font-semibold'>Quick Links</div>
+            <ul className='list-none'>
+              <li><a href="" className=' font-light'>Case Study</a></li>
+              <li><a href="" className=' font-light'>GitHub Repo</a></li>
+              <li><a href="" className=' font-light'>Live Demo</a></li>
+            </ul>
+          </div>
+
+        </div>
+
+        {/* Writely */}
+        <div className="grid grid-rows-5 grid-cols-6 h-full w-full gap-2 pt-10 h-screen">
+          {/* Box 1 */}
+          <div className="row-span-3 col-span-3 rounded-lg flex flex-col justify-between">
+            <div>
+              <h2 className='text-3xl font-poppins tracking-tighter mb-5'>Writely</h2>
+              <p className='mr-30'>WriteAI is an AI-powered collaborative writing platform designed to enhance productivity, creativity, and research-backed writing. Users can create and edit rich-text documents in a Slate.js-based editor, where AI assists with autocomplete, sentence generation, and evidence citation. The platform learns the user's writing style by embedding uploaded documents into a vector database using OpenAI's text-embedding-3-small model. These embeddings are stored in an Aurora PostgreSQL database with pgvector support, enabling similarity searches for real-time AI suggestions.</p>
+            </div>
+            <a href="" className='underline'>Visit Case Study</a>
+          </div>
+          
+          {/* Box 2 */}
+          <div className="bg-blue-500 row-span-1 col-span-3 rounded-lg shadow-md"></div>
+          
+          {/* Box 3 */}
+          <div className="bg-green-500 row-span-2 col-span-1 rounded-lg shadow-md"></div>
+          
+          {/* Box 4 */}
+          <div className="bg-yellow-500 row-span-2 col-span-2 rounded-lg shadow-md"></div>
+          
+        </div>
+
       </div>
     </main>
   );
