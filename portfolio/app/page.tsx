@@ -5,6 +5,7 @@ import { Luxurious_Script } from 'next/font/google';
 import { motion } from 'framer-motion';
 import FadeInOnScroll from '../components/FadeInOnScroll';
 import EnterEffect from '@/components/EnterEffect';
+import TextEffect from '@/components/TextEffect';
 
 const luxuriousScript = Luxurious_Script({
   subsets: ['latin'],
@@ -94,12 +95,16 @@ export default function Home() {
             </div>
             <div className="w-[17.5%] text-right h-full flex flex-col justify-between">
               <FadeInOnScroll className="" delay={.8} direction='right'><img className="w-full rounded-lg" src={"/images/image0.jpg"}></img></FadeInOnScroll>
+              
               <p className='text-right font-semibold'>
-                Hi, I'm <span className="text-blue-500">Justin</span>,<br />
-                A <span className="text-green-500">Full Stack Developer</span><br />
-                Based In<br />
-                <span className="text-gray-500">New York City</span>
+                <FadeInOnScroll className=''>
+                  Hi, I'm <span className="text-blue-500">Justin</span>,<br />
+                  A <span className="text-green-500">Full Stack Developer</span><br />
+                  Based In<br />
+                  <span className="text-gray-500">New York City</span>
+                </FadeInOnScroll>
               </p>
+              
             </div>
           </div>
           <div className="w-full pt-30 pb-10 flex flex-row justify-between">
