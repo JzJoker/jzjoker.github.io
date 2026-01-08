@@ -2,6 +2,7 @@ import { Circle, Code } from 'lucide-react';
 import { FaAws, FaReact, FaPython, FaDocker, FaGitAlt, FaJs } from 'react-icons/fa';
 import { SiNextdotjs } from 'react-icons/si';
 import { Luxurious_Script } from 'next/font/google';
+import { motion } from 'framer-motion';
 
 const luxuriousScript = Luxurious_Script({
   subsets: ['latin'],
@@ -11,11 +12,11 @@ export default function Home() {
   return (
     <main className="max-w-1080 font-family-inter">
       {/* First Section */}
-      <div className="p-30 pb-0 relative h-screen overflow-hidden">
+      <div className="p-30 pb-0 relative h-screen overflow-hidden top-0 sticky bg-[#1E1E1E] text-white">
         {/* Nav Bar */}
-        <nav className="pl-20 pr-20 absolute top-0 left-0 w-full p-4 flex justify-between gap-4 z-10">
+        <nav className="pl-20 pr-20 absolute top-0 left-0 w-full p-4 flex justify-between gap-4">
           <button className=" hover:text-gray-400 cursor-pointer flex font-semibold">
-            <Circle size={24} fill='black'/>
+            <Circle size={20} fill='white'/>
             <h2 className="pl-2.5">Justin</h2>
           </button>
           {/* Links */}
@@ -52,7 +53,7 @@ export default function Home() {
               <div className="icon-container row-start-3 icon-rotate-5"><FaGitAlt size={40} color="#EB4D28" /></div>
               <div className="icon-container row-start-5 col-start-5 icon-rotate-6"><FaJs size={40} color="#F0DB4E" /></div>
               <div className="icon-container row-start-5 col-start-3 icon-rotate-7"><SiNextdotjs size={40} color="black" /></div>
-              <div className="icon-container row-start-5 bg-black icon-rotate-8"><FaReact size={40} color="white" /></div>
+              <div className="icon-container row-start-5 bg-black icon-rotate-8"><FaReact size={40} color="black" /></div>
             </div>  
             <div className="w-[17.5%] text-right h-full flex flex-col justify-between">
               <img className="w-full rounded-lg" src={"/images/image0.jpg"}></img>
@@ -81,10 +82,10 @@ export default function Home() {
 
 
       {/* Works */}
-      <div id='works' className='p-20 pb-0 relative'>
+      <div id='works' className='p-20 pb-0 relative bg-white'>
 
         {/* UX Interviewer */}
-        <div id='interviewer' className="grid grid-rows-4 grid-cols-6 h-full w-full gap-5 h-screen">
+        <div id='interviewer' className="grid grid-rows-4 grid-cols-6 h-full w-full gap-5 h-screen bg-white">
           <div className="row-span-2 col-span-3 rounded-lg flex flex-col justify-between">
             <div>
               <h2 className='text-3xl font-poppins tracking-tighter mb-5 font-semibold pt-5'>UX Interviewer</h2>
