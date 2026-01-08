@@ -13,3 +13,43 @@
 [00:34:14.133] Server  LOG     ✓ Compiled in 3.8s
 [00:34:53.409] Server  LOG     ✓ Compiled in 2.6s
 [00:35:54.706] Server  LOG     ✓ Compiled in 4.3s
+[00:42:04.614] Browser ERROR   A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+%s%s https://react.dev/link/hydration-mismatch 
+
+  ...
+    <HotReload globalError={[...]} webSocket={WebSocket} staticIndicatorState={{pathname:null, ...}}>
+      <AppDevOverlayErrorBoundary globalError={[...]}>
+        <ReplaySsrOnlyErrors>
+        <DevRootHTTPAccessFallbackBoundary>
+          <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackError>}>
+            <HTTPAccessFallbackErrorBoundary pathname="/" notFound={<NotAllowedRootHTTPFallbackError>} ...>
+              <RedirectBoundary>
+                <RedirectErrorBoundary router={{...}}>
+                  <Head>
+                  <__next_root_layout_boundary__>
+                    <SegmentViewNode type="layout" pagePath="layout.tsx">
+                      <SegmentTrieNode>
+                      <link>
+                      <script>
+                      <RootLayout>
+                        <html lang="en">
+                          <body
+                            className="geist_a71539c9-module__T19VSG__variable inter_5901b7c6-module__ec5Qua__classNam..."
+-                           cz-shortcut-listen="true"
+                          >
+                  ...
+
+[15:44:38.006] Server  LOG     ✓ Compiled in 9s
+[15:47:20.735] Server  LOG     ✓ Compiled in 4s
+[15:47:24.019] Server  LOG     ○ Compiling / ...
+[15:48:13.120] Server  LOG     ✓ Compiled in 7s
+[15:48:19.914] Server  LOG     ✓ Compiled in 6.3s
