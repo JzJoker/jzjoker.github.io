@@ -478,6 +478,10 @@
     background-color: var(--background);
     color: var(--foreground);
   }
+
+  html {
+    scroll-behavior: smooth;
+  }
 }
 
 @layer components;
@@ -787,10 +791,6 @@
     margin-left: calc(var(--spacing) * -2);
   }
 
-  .-ml-2\.5 {
-    margin-left: calc(var(--spacing) * -2.5);
-  }
-
   .-ml-5 {
     margin-left: calc(var(--spacing) * -5);
   }
@@ -869,14 +869,6 @@
 
   .h-8 {
     height: calc(var(--spacing) * 8);
-  }
-
-  .h-\[calc\(100\%-20px\)\] {
-    height: calc(100% - 20px);
-  }
-
-  .h-\[calc\(100\%-50px\)\] {
-    height: calc(100% - 50px);
   }
 
   .h-fit {
@@ -1153,6 +1145,10 @@
     overflow: visible;
   }
 
+  .scroll-smooth {
+    scroll-behavior: smooth;
+  }
+
   .rounded {
     border-radius: .25rem;
   }
@@ -1216,44 +1212,12 @@
     border-color: var(--color-white);
   }
 
-  .bg-\[\10 \|�\3 \] {
-    background-color:  | � ;
-  }
-
   .bg-\[\#62FF00\] {
     background-color: #62ff00;
   }
 
-  .bg-\[\#D3D3D3\] {
-    background-color: #d3d3d3;
-  }
-
   .bg-\[\#F0F0F0\] {
     background-color: #f0f0f0;
-  }
-
-  .bg-\[\#F8F8F8\] {
-    background-color: #f8f8f8;
-  }
-
-  .bg-\[\#F\] {
-    background-color: #F;
-  }
-
-  .bg-\[qz�\] {
-    background-color: qz�;
-  }
-
-  .bg-\[�y�\] {
-    background-color: �y�;
-  }
-
-  .bg-\[�z�\3 \] {
-    background-color: �z� ;
-  }
-
-  .bg-\[�z�\] {
-    background-color: �z�;
   }
 
   .bg-black {
@@ -1791,24 +1755,20 @@
     will-change: transform;
   }
 
+  .\[app-\:h�\] {
+    app-: h�;
+  }
+
   .\[backface-visibility\:hidden\] {
     backface-visibility: hidden;
   }
 
+  .\[key\:l\17 4ng\] {
+    key: l 4ng;
+  }
+
   .\[key\:Ā4ng\] {
     key: Ā4ng;
-  }
-
-  .\[key\:�\8 4ng\] {
-    key: � 4ng;
-  }
-
-  .\[key\:�Z4ng\] {
-    key: �Z4ng;
-  }
-
-  .\[key\:�\\4ng\] {
-    key: �\4 ng;
   }
 
   .\[metatype\:�\5 7\] {
@@ -1821,10 +1781,6 @@
 
   .\[name\:\4 \6 �\] {
     name:   �;
-  }
-
-  .\[name\:\18 \8 �ng\] {
-    name:   �ng;
   }
 
   .\[name\:2\6 �\] {

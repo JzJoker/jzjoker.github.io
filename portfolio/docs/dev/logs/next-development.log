@@ -53,3 +53,7 @@ It can also happen if the client has a browser extension installed which messes 
 [15:47:24.019] Server  LOG     ○ Compiling / ...
 [15:48:13.120] Server  LOG     ✓ Compiled in 7s
 [15:48:19.914] Server  LOG     ✓ Compiled in 6.3s
+[15:51:44.782] Server  LOG     ✓ Compiled in 40.6s
+[15:52:33.633] Server  LOG     ✓ Compiled in 30.2s
+[15:53:10.629] Server  LOG     ✓ Compiled in 29.7s
+[15:55:20.299] Server  LOG     ✓ Compiled in 42.8s
