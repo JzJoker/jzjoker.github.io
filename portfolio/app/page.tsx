@@ -49,12 +49,12 @@ export default function Home() {
               </EnterEffect>
 
               {/* Top-center */}
-              <EnterEffect x={0} y={-120} delay={0.1} className="icon-container col-start-3" rotate={10}>
+              <EnterEffect x={0} y={-120} delay={0.2} className="icon-container col-start-3" rotate={10}>
                 <FaAws size={40} color="black" />
               </EnterEffect>
 
               {/* Top-right */}
-              <EnterEffect x={100} y={-100} delay={0.2} className="icon-container col-start-5" rotate={-25}>
+              <EnterEffect x={100} y={-100} delay={0.4} className="icon-container col-start-5" rotate={-25}>
                 <FaPython size={40} color="#3776AB" />
               </EnterEffect>
 
@@ -69,35 +69,35 @@ export default function Home() {
               </div>
 
               {/* Middle-right */}
-              <EnterEffect x={120} y={0} delay={0.3} className="icon-container row-start-3 col-start-5" rotate={20}>
+              <EnterEffect x={120} y={0} delay={0.6} className="icon-container row-start-3 col-start-5" rotate={20}>
                 <FaDocker size={40} color="#29A2BF" />
               </EnterEffect>
 
               {/* Bottom-right */}
-              <EnterEffect x={100} y={100} delay={0.4} className="icon-container row-start-5 col-start-5" rotate={15}>
+              <EnterEffect x={100} y={100} delay={0.8} className="icon-container row-start-5 col-start-5" rotate={15}>
                 <FaJs size={40} color="#F0DB4E" />
               </EnterEffect>
 
               {/* Bottom-center */}
-              <EnterEffect x={0} y={120} delay={0.5} className="icon-container row-start-5 col-start-3" rotate={-30}>
+              <EnterEffect x={0} y={120} delay={1.2} className="icon-container row-start-5 col-start-3" rotate={-30}>
                 <SiNextdotjs size={40} color="black" />
               </EnterEffect>
 
               {/* Bottom-left */}
-              <EnterEffect x={-100} y={100} delay={0.6} className="icon-container row-start-5 col-start-1" rotate={5}>
+              <EnterEffect x={-100} y={100} delay={1.4} className="icon-container row-start-5 col-start-1" rotate={5}>
                 <FaReact size={40} color="black" />
               </EnterEffect>
 
               {/* Middle-left */}
-              <EnterEffect x={-120} y={0} delay={0.7} className="icon-container row-start-3 col-start-1" rotate={-10}>
+              <EnterEffect x={-120} y={0} delay={1.6} className="icon-container row-start-3 col-start-1" rotate={-10}>
                 <FaGitAlt size={40} color="#EB4D28" />
               </EnterEffect>
             </div>
             <div className="w-[17.5%] text-right h-full flex flex-col justify-between">
-              <FadeInOnScroll className="" delay={1.2} direction='right'><img className="w-full rounded-lg" src={"/images/image0.jpg"}></img></FadeInOnScroll>
+              <FadeInOnScroll className="" delay={1.8} direction='right'><img className="w-full rounded-lg" src={"/images/image0.jpg"}></img></FadeInOnScroll>
               
               <p className='text-right font-semibold'>
-                <FadeInOnScroll className='' delay={1.2}>
+                <FadeInOnScroll className='' delay={1.8}>
                   Hi, I'm <span className="text-blue-500">Justin</span>,<br />
                   A <span className="text-green-500">Full Stack Developer</span><br />
                   Based In<br />
