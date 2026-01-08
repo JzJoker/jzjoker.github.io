@@ -8,9 +8,10 @@ interface Props {
   delay?: number;
   className?: string;
   direction?: 'left' | 'right' | 'top' | 'bottom';
+  opacity?: number;
 }
 
-const FadeInOnScroll = ({ children, delay = 0, className="shadow-md border-1 border-gray w-full h-full", direction = 'bottom'}: Props) => {
+const FadeInOnScroll = ({ children, delay = 0, opacity = 0 , className="shadow-md border-1 border-gray w-full h-full", direction = 'bottom'}: Props) => {
   let initialX = 0;
   let initialY = 0;
 
@@ -30,7 +31,7 @@ const FadeInOnScroll = ({ children, delay = 0, className="shadow-md border-1 bor
   }
   return (
     <motion.div
-      initial={{ opacity: 0, x: initialX, y: initialY }}
+      initial={{ opacity: opacity, x: initialX, y: initialY }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.5 }}
       transition={{ duration: 0.6, ease: 'easeOut', delay }} 
