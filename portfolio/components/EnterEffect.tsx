@@ -41,14 +41,15 @@ const EnterEffect = ({ children, x = 150, y = -20, delay = 0, className, rotate 
           stiffness: 100,
           damping: 10,
           delay:0,
-        }
+        },
+        cursor: 'pointer',
       }}
       whileTap={{
-        y: 30,
+        y: 15,
         transition: {
           type: "spring",
           stiffness: 200,
-          damping: 20,
+          damping: .5,
         }
       }}
     >
