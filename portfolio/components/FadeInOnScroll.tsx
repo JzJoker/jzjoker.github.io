@@ -11,7 +11,7 @@ interface Props {
   opacity?: number;
 }
 
-const FadeInOnScroll = ({ children, delay = 1, opacity = 0 , className="shadow-md border-1 border-gray w-full h-full", direction = 'bottom'}: Props) => {
+const FadeInOnScroll = ({ children, delay = .2, opacity = 0 , className="shadow-md border-1 border-gray w-full h-full", direction = 'bottom'}: Props) => {
   let initialX = 0;
   let initialY = 0;
 
