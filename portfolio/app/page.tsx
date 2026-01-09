@@ -1,21 +1,26 @@
+"use client";
+
 import { Circle, Code } from 'lucide-react';
 import { FaAws, FaReact, FaPython, FaDocker, FaGitAlt, FaJs } from 'react-icons/fa';
 import { SiNextdotjs } from 'react-icons/si';
 import { Luxurious_Script } from 'next/font/google';
-import { motion } from 'framer-motion';
+import { useScroll } from 'framer-motion';
 import FadeInOnScroll from '../components/FadeInOnScroll';
 import EnterEffect from '@/components/EnterEffect';
-import TextEffect from '@/components/TextEffect';
+import ScrollEffectSection from '@/components/ScrollEffectSection';
 
 const luxuriousScript = Luxurious_Script({
   subsets: ['latin'],
   weight: '400',
 });
 export default function Home() {
+  const scrollY = useScroll();
+
   return (
     <main className="max-w-1080 font-family-inter">
       {/* First Section */}
-      <div className="p-30 pb-0 relative h-screen overflow-hidden top-0 sticky bg-[#1E1E1E] text-white">
+      <ScrollEffectSection>
+      <div className={`p-30 pb-0 relative h-screen overflow-hidden top-0 sticky bg-[#1E1E1E] text-white`}>
         {/* Nav Bar */}
         <nav className="pl-20 pr-20 absolute top-0 left-0 w-full p-4 flex justify-between gap-4">
           <button className=" hover:text-gray-400 cursor-pointer flex font-semibold">
@@ -121,7 +126,7 @@ export default function Home() {
           </div>
         </div>
       </div>
-
+      </ScrollEffectSection>
 
       {/* Works */}
       <div id='works' className='p-20 pb-0 pt-5 relative bg-white'>
