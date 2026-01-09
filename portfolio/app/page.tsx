@@ -44,23 +44,23 @@ export default function Home() {
           <div className="flex flex-row h-full justify-between">
             <div className="bg-none color-none grid grid-rows-5 grid-cols-5 justify-items-center items-center w-[80%] h-full">
               {/* Top-left */}
-              <EnterEffect x={-100} y={-100} delay={0} className="icon-container" rotate={-15}>
+              <EnterEffect x={-100} y={-100} delay={0.4} className="icon-container" rotate={-15}>
                 <FaReact size={40} color="#61DAFB" />
               </EnterEffect>
 
               {/* Top-center */}
-              <EnterEffect x={0} y={-120} delay={0.2} className="icon-container col-start-3" rotate={10}>
+              <EnterEffect x={0} y={-120} delay={0.6} className="icon-container col-start-3" rotate={10}>
                 <FaAws size={40} color="black" />
               </EnterEffect>
 
               {/* Top-right */}
-              <EnterEffect x={100} y={-100} delay={0.4} className="icon-container col-start-5" rotate={-25}>
+              <EnterEffect x={100} y={-100} delay={0.8} className="icon-container col-start-5" rotate={-25}>
                 <FaPython size={40} color="#3776AB" />
               </EnterEffect>
 
               {/* Center text */}
               <div className="text-8xl row-start-2 col-start-2 row-span-3 col-span-3 text-center">
-                <FadeInOnScroll className="">
+                <FadeInOnScroll className="" delay={0.4}>
                   <span className={`text-[200px] ${luxuriousScript.className}`}>J</span>
                   <span className="font-poppins italic tracking-tighter">ustin </span> 
                   <span className={`text-[200px] ${luxuriousScript.className}`}>Z</span>
@@ -69,35 +69,35 @@ export default function Home() {
               </div>
 
               {/* Middle-right */}
-              <EnterEffect x={120} y={0} delay={0.6} className="icon-container row-start-3 col-start-5" rotate={20}>
+              <EnterEffect x={120} y={0} delay={1.0} className="icon-container row-start-3 col-start-5" rotate={20}>
                 <FaDocker size={40} color="#29A2BF" />
               </EnterEffect>
 
               {/* Bottom-right */}
-              <EnterEffect x={100} y={100} delay={0.8} className="icon-container row-start-5 col-start-5" rotate={15}>
+              <EnterEffect x={100} y={100} delay={1.2} className="icon-container row-start-5 col-start-5" rotate={15}>
                 <FaJs size={40} color="#F0DB4E" />
               </EnterEffect>
 
               {/* Bottom-center */}
-              <EnterEffect x={0} y={120} delay={1.2} className="icon-container row-start-5 col-start-3" rotate={-30}>
+              <EnterEffect x={0} y={120} delay={1.4} className="icon-container row-start-5 col-start-3" rotate={-30}>
                 <SiNextdotjs size={40} color="black" />
               </EnterEffect>
 
               {/* Bottom-left */}
-              <EnterEffect x={-100} y={100} delay={1.4} className="icon-container row-start-5 col-start-1" rotate={5}>
+              <EnterEffect x={-100} y={100} delay={1.6} className="icon-container row-start-5 col-start-1" rotate={5}>
                 <FaReact size={40} color="black" />
               </EnterEffect>
 
               {/* Middle-left */}
-              <EnterEffect x={-120} y={0} delay={1.6} className="icon-container row-start-3 col-start-1" rotate={-10}>
+              <EnterEffect x={-120} y={0} delay={1.8} className="icon-container row-start-3 col-start-1" rotate={-10}>
                 <FaGitAlt size={40} color="#EB4D28" />
               </EnterEffect>
             </div>
             <div className="w-[17.5%] text-right h-full flex flex-col justify-between">
-              <FadeInOnScroll className="" delay={1.8} direction='right'><img className="w-full rounded-lg" src={"/images/image0.jpg"}></img></FadeInOnScroll>
+              <FadeInOnScroll className="" delay={1} direction='right'><img className="w-full rounded-lg" src={"/images/image0.jpg"}></img></FadeInOnScroll>
               
               <p className='text-right font-semibold'>
-                <FadeInOnScroll className='' delay={1.8}>
+                <FadeInOnScroll className='' delay={1}>
                   Hi, I'm <span className="text-blue-500">Justin</span>,<br />
                   A <span className="text-green-500">Full Stack Developer</span><br />
                   Based In<br />
