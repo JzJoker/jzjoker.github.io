@@ -66,10 +66,10 @@ export default function Home() {
               {/* Center text */}
               <div className="text-8xl row-start-2 col-start-2 row-span-3 col-span-3 text-center">
                 <FadeInOnScroll className="" delay={0.4}>
-                  <span className={`text-[200px] ${luxuriousScript.className}`}>J</span>
-                  <span className="font-poppins italic tracking-tighter">ustin </span> 
-                  <span className={`text-[200px] ${luxuriousScript.className}`}>Z</span>
-                  <span className="font-poppins italic tracking-tighter">hao</span>
+                  <span className={`text-[200px] ${luxuriousScript.className}`}></span>
+                  <span className="font-poppins  tracking-tighter">Justin </span> 
+                  <span className={`text-[200px] ${luxuriousScript.className}`}></span>
+                  <span className="font-poppins  tracking-tighter">Zhao</span>
                 </FadeInOnScroll>
               </div>
 
