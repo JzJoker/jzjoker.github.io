@@ -8,6 +8,8 @@ import { useScroll } from 'framer-motion';
 import FadeInOnScroll from '../components/FadeInOnScroll';
 import EnterEffect from '@/components/EnterEffect';
 import ScrollEffectSection from '@/components/ScrollEffectSection';
+import ScrollEffectText from '@/components/ScrollEffectText';
+import TextEffect from '@/components/TextEffect';
 
 const luxuriousScript = Luxurious_Script({
   subsets: ['latin'],
@@ -130,30 +132,35 @@ export default function Home() {
 
       {/* Works */}
       <div id='works' className='p-20 pb-0 pt-5 relative bg-white'>
-
+        <FadeInOnScroll className=''>
+          <div className='text-9xl p-30 pl-0 bold w-fit font-semibold'>CONCEIVE. ARCHITECT. BUILD.</div>
+        </FadeInOnScroll>
         {/* UX Interviewer */}
         <div id='interviewer' className="grid grid-rows-4 grid-cols-6 h-full w-full gap-5 h-screen bg-white">
           <div className="row-span-2 col-span-3 rounded-lg flex flex-col justify-between">
             <div>
-              <h2 className='text-3xl font-poppins tracking-tighter mb-5 font-semibold pt-5'>UX Interviewer</h2>
-              <p className='mr-30 font-light'>There are many interview prep resources for software engineers out there on the web—the most notorious being LeetCode; however, while software engineers can practice active recall for technical interiviews doing DSA problems, there is no real way to practice retrieval of UI/UX design principles in preperation for design interviews. So we decided to make it. The First Structured Interview Prep Platform for UI/UX Design.</p>
+              <FadeInOnScroll direction='top' className='text-3xl font-poppins tracking-tighter mb-5 font-semibold pt-5'>UX Interviewer</FadeInOnScroll>
+              <TextEffect className='mr-30 font-light' text="There are many interview prep resources for software engineers out there on the web—the most notorious being LeetCode; however, while software engineers can practice active recall for technical interiviews doing DSA problems, there is no real way to practice retrieval of UI/UX design principles in preperation for design interviews. So we decided to make it. The First Structured Interview Prep Platform for UI/UX Design."></TextEffect>
             </div>
-            <a href="" className='underline text-lg underline-offset-6'>Visit Case Study</a>
+
+            <a href="" className='underline text-lg underline-offset-6'><FadeInOnScroll className=''>Visit Case Study</FadeInOnScroll></a>
           </div>
-          <div className="row-span-1 col-span-3"><FadeInOnScroll><img src="/images/ux-interviewer/uxinterviewerbanner.png" alt="" /></FadeInOnScroll></div>
+          <div className="row-span-1 col-span-3"><FadeInOnScroll direction='right'><img src="/images/ux-interviewer/uxinterviewerbanner.png" alt="" className='w-full object-cover object-bottom' /></FadeInOnScroll></div>
           <div className="row-span-2 col-span-2"><FadeInOnScroll><img src="/images/ux-interviewer/home.png" alt="" className="w-full h-full object-cover " /></FadeInOnScroll></div>
           <div className="row-span-2 col-span-1 pb-10"><FadeInOnScroll><img src="/images/ux-interviewer/whiteboard.png" alt="" className="w-full h-full shadow-md object-cover object-[10%]" /></FadeInOnScroll></div>
-          <div className="row-span-2 col-span-2"><FadeInOnScroll><img src="/images/ux-interviewer/stats.png" alt="" className="w-full h-full object-cover " /></FadeInOnScroll></div>
-          <div className="row-span-1 col-span-1"><FadeInOnScroll><img src="/images/ux-interviewer/speech.png" alt="" className="object-cover w-full h-full " /></FadeInOnScroll></div>
+          <div className="row-span-2 col-span-2"><FadeInOnScroll direction='left'><img src="/images/ux-interviewer/stats.png" alt="" className="w-full h-full object-cover " /></FadeInOnScroll></div>
+          <div className="row-span-1 col-span-1"><FadeInOnScroll direction='top'><img src="/images/ux-interviewer/speech.png" alt="" className="object-cover w-full h-full " /></FadeInOnScroll></div>
           <div className="row-span-2 col-span-2 pb-10 pr-10"><FadeInOnScroll><img src="/images/ux-interviewer/home.png" alt="" className="w-full h-full shadow-md object-cover object-top" /></FadeInOnScroll></div>
-          <div className='col-span-2 bg-[#F0F0F0] -ml-10 p-5 h-fit'>
-            <div className='font-semibold '>Quick Links</div>
-            <ul className='list-none'>
-              <li className='my-1'><a href="" className='underline underline-offset-6 decoration-gray-500 font-light'>Case Study</a></li>
-              <li className='my-1'><a href="" className='underline underline-offset-6 decoration-gray-500 font-light'>GitHub Repo</a></li>
-              <li className='my-1'><a href="" className='underline underline-offset-6 decoration-gray-500 font-light'>Live Demo</a></li>
-            </ul>
-          </div>
+          <FadeInOnScroll className='col-span-2' direction='right'>
+            <div className=' bg-[#F0F0F0] -ml-10 p-5 h-fit'>
+              <div className='font-semibold '>Quick Links</div>
+              <ul className='list-none'>
+                <li className='my-1'><a href="" className='underline underline-offset-6 decoration-gray-500 font-light'>Case Study</a></li>
+                <li className='my-1'><a href="" className='underline underline-offset-6 decoration-gray-500 font-light'>GitHub Repo</a></li>
+                <li className='my-1'><a href="" className='underline underline-offset-6 decoration-gray-500 font-light'>Live Demo</a></li>
+              </ul>
+            </div>
+          </FadeInOnScroll>
         </div>
 
         {/* Writely */}
