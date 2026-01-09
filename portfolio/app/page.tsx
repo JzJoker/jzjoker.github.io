@@ -22,12 +22,11 @@ export default function Home() {
     <main className="max-w-1080 font-family-inter">
       {/* First Section */}
       <ScrollEffectSection>
-      <div className={`p-30 pb-0 relative h-screen overflow-hidden top-0 sticky bg-[#1E1E1E] text-white`}>
+      <div className={`p-30 pb-0 relative h-screen overflow-hidden top-0 sticky`}>
         {/* Nav Bar */}
         <nav className="pl-20 pr-20 absolute top-0 left-0 w-full p-4 flex justify-between gap-4">
           <button className=" hover:text-gray-400 cursor-pointer flex font-semibold">
-            <Circle size={20} fill='white'/>
-            <h2 className="pl-2.5">Justin</h2>
+            <h2 className="pl-2.5">JUSTIN</h2>
           </button>
           {/* Links */}
           <div>
@@ -55,7 +54,6 @@ export default function Home() {
                 <FaReact size={40} color="#61DAFB" />
               </EnterEffect>
 
-              {/* Top-center */}
               <EnterEffect x={0} y={-120} delay={0.6} className="icon-container col-start-3" rotate={10}>
                 <FaAws size={40} color="black" />
               </EnterEffect>
@@ -68,10 +66,10 @@ export default function Home() {
               {/* Center text */}
               <div className="text-8xl row-start-2 col-start-2 row-span-3 col-span-3 text-center">
                 <FadeInOnScroll className="" delay={0.4}>
-                  <span className={`text-[200px] ${luxuriousScript.className}`}></span>
-                  <span className="font-poppins  tracking-tighter">Justin </span> 
-                  <span className={`text-[200px] ${luxuriousScript.className}`}></span>
-                  <span className="font-poppins  tracking-tighter">Zhao</span>
+                  <span className={`text-[200px] ${luxuriousScript.className}`}>J</span>
+                  <span className="font-poppins italic tracking-tighter">ustin </span> 
+                  <span className={`text-[200px] ${luxuriousScript.className}`}>Z</span>
+                  <span className="font-poppins italic tracking-tighter">hao</span>
                 </FadeInOnScroll>
               </div>
 
@@ -131,16 +129,16 @@ export default function Home() {
       </ScrollEffectSection>
 
       {/* Works */}
-      <div id='works' className='p-20 pb-0 pt-5 relative bg-white'>
-        <FadeInOnScroll className=''>
+      <div id='works' className='p-20 pb-0 pt-5 relative bg-white w-full'>
+        <FadeInOnScroll className='' delay={0}>
           <div className='text-9xl p-30 pl-0 bold w-fit font-semibold'>CONCEIVE. ARCHITECT. BUILD.</div>
         </FadeInOnScroll>
         {/* UX Interviewer */}
-        <div id='interviewer' className="grid grid-rows-4 grid-cols-6 h-full w-full gap-5 h-screen bg-white">
+        <div id='interviewer' className="grid grid-rows-4 grid-cols-6 gap-5 h-screen bg-white m-auto">
           <div className="row-span-2 col-span-3 rounded-lg flex flex-col justify-between">
             <div>
               <FadeInOnScroll direction='top' className='text-3xl font-poppins tracking-tighter mb-5 font-semibold pt-5'>UX Interviewer</FadeInOnScroll>
-              <TextEffect className='mr-30 font-light' text="There are many interview prep resources for software engineers out there on the web—the most notorious being LeetCode; however, while software engineers can practice active recall for technical interiviews doing DSA problems, there is no real way to practice retrieval of UI/UX design principles in preperation for design interviews. So we decided to make it. The First Structured Interview Prep Platform for UI/UX Design."></TextEffect>
+              <FadeInOnScroll className='mr-30 font-light'>There are many interview prep resources for software engineers out there on the web—the most notorious being LeetCode; however, while software engineers can practice active recall for technical interiviews doing DSA problems, there is no real way to practice retrieval of UI/UX design principles in preperation for design interviews. So we decided to make it. The First Structured Interview Prep Platform for UI/UX Design.</FadeInOnScroll>
             </div>
 
             <a href="" className='underline text-lg underline-offset-6'><FadeInOnScroll className=''>Visit Case Study</FadeInOnScroll></a>
