@@ -11,7 +11,7 @@ interface Props {
   opacity?: number;
 }
 
-const FadeInOnScroll = ({ children, delay = 0, opacity = 0 , className="shadow-md border-1 border-gray w-full h-full", direction = 'bottom'}: Props) => {
+const FadeInOnScroll = ({ children, delay = 1, opacity = 0 , className="shadow-md border-1 border-gray w-full h-full", direction = 'bottom'}: Props) => {
   let initialX = 0;
   let initialY = 0;
 
@@ -32,7 +32,7 @@ const FadeInOnScroll = ({ children, delay = 0, opacity = 0 , className="shadow-m
   return (
     <motion.div
       initial={{ opacity: opacity, x: initialX, y: initialY }}
-      whileInView={{ opacity: 1, y: 0 }}
+      whileInView={{ opacity: 1, x: 0, y: 0 }}  // Add x: 0 here
       viewport={{ once: true, amount: 0.5 }}
       transition={{ duration: 0.6, ease: 'easeOut', delay }} 
       className={ className }
