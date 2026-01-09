@@ -129,7 +129,7 @@ export default function Home() {
       </ScrollEffectSection>
 
       {/* Works */}
-      <div id='works' className='p-20 pb-0 pt-5 relative bg-white w-full'>
+      <div id='works' className='p-[5%] relative bg-white w-full'>
         <FadeInOnScroll className='' delay={0}>
           <div className='text-9xl p-30 pl-0 bold w-fit font-semibold'>CONCEIVE. ARCHITECT. BUILD.</div>
         </FadeInOnScroll>
@@ -137,7 +137,7 @@ export default function Home() {
         <div id='interviewer' className="grid grid-rows-4 grid-cols-6 gap-5 h-screen bg-white m-auto">
           <div className="row-span-2 col-span-3 rounded-lg flex flex-col justify-between">
             <div>
-              <FadeInOnScroll direction='top' className='text-3xl font-poppins tracking-tighter mb-5 font-semibold pt-5'>UX Interviewer</FadeInOnScroll>
+              <FadeInOnScroll direction='top' className='text-5xl font-poppins tracking-tighter mb-5 font-semibold pt-5'>UX Interviewer</FadeInOnScroll>
               <FadeInOnScroll className='mr-30 font-light'>There are many interview prep resources for software engineers out there on the web—the most notorious being LeetCode; however, while software engineers can practice active recall for technical interiviews doing DSA problems, there is no real way to practice retrieval of UI/UX design principles in preperation for design interviews. So we decided to make it. The First Structured Interview Prep Platform for UI/UX Design.</FadeInOnScroll>
             </div>
 
