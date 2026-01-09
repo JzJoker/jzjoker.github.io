@@ -9,24 +9,24 @@ interface Props {
   className?: string;
 }
 
-const TextEffect = ({ text, delay = 0.4, className}: Props) => {
-  const letters = text.split('');
+const TextEffect = ({ text, delay = 0.05, className}: Props) => {
+  const words = text.split(' ');
 
   return (
-    <div className={`flex gap-0.5 overflow-hidden ${className}`}>
-      {letters.map((letter, index) => (
+    <div className={`flex flex-wrap gap-1 overflow-hidden ${className}`}>
+      {words.map((word, index) => (
         <motion.span
           key={index}
           initial={{ opacity: 0, y: 10, filter: 'blur(10px)', scale: 1 }}
           animate={{ opacity: 1, y: 0, filter: 'blur(0px)', scale: 1 }}
           transition={{
-            duration: 0.6,
+            duration: 0.3,
             ease: 'easeInOut',
-            delay: index * delay, 
+            delay: 1.5 + (index * delay), 
           }}
           style={{ display: 'inline-block' }}
         >
-          {letter === ' ' ? '\u00A0' : letter}
+          {word}
         </motion.span>
       ))}
     </div>
