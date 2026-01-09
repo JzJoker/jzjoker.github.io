@@ -47,7 +47,7 @@ const ScrollEffectSection = ({ children }: ScrollEffectSectionProps) => {
   return (
     <div
       ref={containerRef}
-      className="sticky top-0 h-screen w-full overflow-hidden relative bg-[#1E1E1E]"
+      className="sticky top-0 h-screen w-full overflow-hidden relative "
     >
       {/* Inner content wrapper — scales visually */}
       <div
