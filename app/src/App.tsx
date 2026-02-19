@@ -19,27 +19,33 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-background p-4 sm:p-6 lg:p-8">
-      <div className="max-w-6xl mx-auto">
-        {/* Bento Grid Layout */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 auto-rows-min">
-          {/* Hero Card - spans 2 columns and 2 rows */}
-          <HeroCard experience={selectedExperience} />
+    <div className="min-h-screen bg-background overflow-x-hidden">
+      {/* Bento Grid: padded content area */}
+      <div className="p-4 sm:p-6 lg:p-8">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 auto-rows-min">
+            {/* Hero Card - spans 2 columns and 2 rows */}
+            <HeroCard experience={selectedExperience} />
 
-          {/* Tech Stack Card */}
-          <TechStackCard experience={selectedExperience} />
+            {/* Tech Stack Card */}
+            <TechStackCard experience={selectedExperience} />
 
-          {/* Status & Experience Column */}
-          <div className="flex flex-col gap-4">
-            <StatusCard experience={selectedExperience} />
-            <ExperienceCard 
-              selectedExperience={selectedExperience}
-              onSelectExperience={handleSelectExperience}
-            />
+            {/* Status & Experience Column */}
+            <div className="flex flex-col gap-4">
+              <StatusCard experience={selectedExperience} />
+              <ExperienceCard 
+                selectedExperience={selectedExperience}
+                onSelectExperience={handleSelectExperience}
+              />
+            </div>
           </div>
+        </div>
+      </div>
 
-          {/* Project Cards - one per project; Metrics when not default */}
-          <div className="col-span-full grid grid-cols-1 md:grid-cols-2 gap-4">
+      {/* Project + Footer: same padding and max-width as content above */}
+      <div className="w-full px-4 sm:px-6 lg:px-8 box-border flex flex-col gap-4">
+        <div className="max-w-6xl mx-auto w-full flex flex-col gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full max-w-full min-w-0">
             {selectedExperience.projects.map((project, i) => (
               <ProjectCard
                 key={i}
@@ -51,8 +57,6 @@ function App() {
             ))}
             {!isDefault && <MetricsCard experience={selectedExperience} />}
           </div>
-
-          {/* Contact Footer */}
           <ContactFooter />
         </div>
       </div>
