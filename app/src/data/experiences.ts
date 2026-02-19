@@ -73,6 +73,12 @@ export const experiences: Record<string, Experience> = {
         imageUrl: '/images/interviewer-small.svg',
       },
       {
+        title: 'BALLIGHTS',
+        subtitle: '2026',
+        description: 'ML-POWERED BASKETBALL HIGHLIGHTS • PYTHON | YOLOV5 | PYTORCH',
+        imageUrl: '/images/ballights-small.svg'
+      },
+      {
         title: 'HOMELAB',
         subtitle: '2025',
         description: 'SELF-HOSTED SANDBOX ENVIRONMENT • UBUNTU SERVER | DOCKER',
@@ -82,11 +88,7 @@ export const experiences: Record<string, Experience> = {
         title: 'TC-TOOLS',
         subtitle: '2024',
         description: 'POST-IMAGE SETUP AUTOMATION • TYPESCRIPT | POWERSHELL',
-      },
-      {
-        title: 'DEPARTMENT-WIDE SITE REDESIGN',
-        subtitle: '2022-2023',
-        description: 'DEPARTMENT-WIDE SITE REDESIGN • DRUPAL | JAVASCRIPT | HTML | CSS',
+        imageUrl: '/images/tc-tools-small.svg'
       }
     ],
     metrics: [
