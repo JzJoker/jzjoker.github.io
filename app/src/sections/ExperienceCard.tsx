@@ -9,6 +9,18 @@ interface ExperienceItem {
   accentColor: string;
 }
 
+function shortenPeriod(period: string): string {
+  return period
+    .split('-')
+    .map((p) => {
+      const y = p.trim();
+      if (y.length === 4) return y.slice(-2);
+      if (y.length === 2) return y;
+      return p;
+    })
+    .join('-');
+}
+
 const experienceItems: ExperienceItem[] = [
   { id: 'vanguard', company: 'VANGUARD', period: '2024-25', icon: Briefcase, accentColor: '#dc2626' },
   { id: 'ritits', company: 'RIT ITS', period: '2024', icon: Monitor, accentColor: '#f97316' },
@@ -42,7 +54,7 @@ export function ExperienceCard({ selectedExperience, onSelectExperience }: Exper
               key={exp.id}
               onClick={() => onSelectExperience(exp.id)}
               className={`
-                flex items-center justify-between p-2 rounded-lg cursor-pointer
+                flex items-center justify-between gap-[10px] p-2 rounded-lg cursor-pointer
                 transition-all duration-200
                 ${isSelected ? 'text-white' : 'hover:bg-secondary/50'}
               `}
@@ -55,7 +67,8 @@ export function ExperienceCard({ selectedExperience, onSelectExperience }: Exper
                 <span className="text-sm font-medium">{exp.company}</span>
               </div>
               <span className={`text-xs ${isSelected ? 'text-white/80' : 'text-muted-foreground'}`}>
-                {exp.period}
+                <span className="sm:hidden">{shortenPeriod(exp.period)}</span>
+                <span className="hidden sm:inline">{exp.period}</span>
               </span>
             </li>
           );
