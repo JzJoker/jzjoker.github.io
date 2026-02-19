@@ -20,9 +20,10 @@ function App() {
 
   return (
     <div className="min-h-screen bg-background overflow-x-hidden">
-      {/* Bento Grid: padded content area */}
-      <div className="p-4 sm:p-6 lg:p-8">
-        <div className="max-w-6xl mx-auto">
+      {/* Single padded container: consistent outer padding and gap between sections at all breakpoints */}
+      <div className="p-4 sm:p-6 lg:p-8 flex flex-col gap-4 w-full box-border">
+        <div className="max-w-6xl mx-auto w-full flex flex-col gap-4">
+          {/* Bento Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 auto-rows-min">
             {/* Hero Card - spans 2 columns and 2 rows */}
             <HeroCard experience={selectedExperience} />
@@ -39,25 +40,23 @@ function App() {
               />
             </div>
           </div>
-        </div>
-      </div>
 
-      {/* Project + Footer: same padding and max-width as content above */}
-      <div className="w-full px-4 sm:px-6 lg:px-8 box-border flex flex-col gap-4">
-        <div className="max-w-6xl mx-auto w-full flex flex-col gap-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full max-w-full min-w-0">
-            {selectedExperience.projects.map((project, i) => (
-              <ProjectCard
-                key={i}
-                project={project}
-                projectIndex={i}
-                totalProjects={selectedExperience.projects.length}
-                experienceId={selectedExperience.id}
-              />
-            ))}
-            {!isDefault && <MetricsCard experience={selectedExperience} />}
+          {/* Projects + Footer: gap above matches project grid gap-4 */}
+          <div className="w-full flex flex-col gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full max-w-full min-w-0">
+              {selectedExperience.projects.map((project, i) => (
+                <ProjectCard
+                  key={i}
+                  project={project}
+                  projectIndex={i}
+                  totalProjects={selectedExperience.projects.length}
+                  experienceId={selectedExperience.id}
+                />
+              ))}
+              {!isDefault && <MetricsCard experience={selectedExperience} />}
+            </div>
+            <ContactFooter />
           </div>
-          <ContactFooter />
         </div>
       </div>
     </div>
