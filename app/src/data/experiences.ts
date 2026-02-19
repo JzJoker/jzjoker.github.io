@@ -24,6 +24,14 @@ export interface Metric {
   label: string;
 }
 
+export interface Project {
+  title: string;
+  subtitle: string;
+  description: string;
+  previewText?: string;
+  imageUrl?: string;
+}
+
 export interface Experience {
   id: string;
   company: string;
@@ -33,12 +41,7 @@ export interface Experience {
   timePeriod: string;
   accentColor: string;
   technologies: Technology[];
-  project: {
-    title: string;
-    subtitle: string;
-    description: string;
-    previewText?: string;
-  };
+  projects: Project[];
   metrics: Metric[];
   statusText: string;
   currentFocus?: string;
@@ -62,11 +65,30 @@ export const experiences: Record<string, Experience> = {
       { name: 'POSTGRES', icon: Server },
       { name: 'DOCKER', icon: Container },
     ],
-    project: {
-      title: 'UX INTERVIEWER',
-      subtitle: '2025-PRESENT',
-      description: 'UI/UX INTERVIEWING PREP • AWS | NEXT.JS',
-    },
+    projects: [
+      {
+        title: 'UX INTERVIEWER',
+        subtitle: '2025-PRESENT',
+        description: 'UI/UX INTERVIEWING PREP • AWS | NEXT.JS',
+        imageUrl: '/images/interviewer-small.svg',
+      },
+      {
+        title: 'HOMELAB',
+        subtitle: '2025',
+        description: 'SELF-HOSTED SANDBOX ENVIRONMENT • UBUNTU SERVER | DOCKER',
+        imageUrl: '/images/homelab-small.svg'
+      },
+      {
+        title: 'TC-TOOLS',
+        subtitle: '2024',
+        description: 'POST-IMAGE SETUP AUTOMATION • TYPESCRIPT | POWERSHELL',
+      },
+      {
+        title: 'DEPARTMENT-WIDE SITE REDESIGN',
+        subtitle: '2022-2023',
+        description: 'DEPARTMENT-WIDE SITE REDESIGN • DRUPAL | JAVASCRIPT | HTML | CSS',
+      }
+    ],
     metrics: [
       { value: '', label: '' },
     ],
@@ -89,12 +111,14 @@ export const experiences: Record<string, Experience> = {
       { name: 'TYPESCRIPT', icon: FileCode },
       { name: 'FIGMA', icon: Palette },
     ],
-    project: {
-      title: 'ScriptHub',
-      subtitle: 'PRODUCT OWNER',
-      description: 'REMOTE SCRIPT EXECUTION • ELECTRON | POWERSHELL',
-      previewText: 'LOCKED',
-    },
+    projects: [
+      {
+        title: 'ScriptHub',
+        subtitle: 'PRODUCT OWNER',
+        description: 'REMOTE SCRIPT EXECUTION • ELECTRON | POWERSHELL',
+        previewText: 'LOCKED',
+      },
+    ],
     metrics: [
       { value: '20%', label: 'Team Backlog\nCompleted' },
       { value: '35K+', label: 'Endpoint Tasks\nAutomated' },
@@ -116,11 +140,13 @@ export const experiences: Record<string, Experience> = {
       { name: 'POWERSHELL', icon: Terminal },
       { name: 'FIGMA', icon: Palette },
     ],
-    project: {
-      title: 'TC-TOOLS',
-      subtitle: 'PRODUCT OWNER',
-      description: 'POST-IMAGE SETUP AUTOMATION • TYPESCRIPT | POWERSHELL',
-    },
+    projects: [
+      {
+        title: 'TC-TOOLS',
+        subtitle: 'PRODUCT OWNER',
+        description: 'POST-IMAGE SETUP AUTOMATION • TYPESCRIPT | POWERSHELL',
+      },
+    ],
     metrics: [
       { value: '80%', label: 'Faster Data\nBackups' },
       { value: '100%', label: 'Department-\nWide Adoption' },
@@ -132,7 +158,7 @@ export const experiences: Record<string, Experience> = {
     company: 'RIT HR',
     period: '2022-2023',
     role: 'WEB DEVELOPER',
-    description: 'SITE RELIABILITY ENGINEER AT THE MALVERN CAMPUS.',
+    description: 'WEB AND MEDIA DEVELOPER FOR THE DEPARTMENT OF HUMAN RESOURCES @ RIT.',
     timePeriod: 'NOV 2022 - JUL 2023',
     accentColor: '#f97316', // orange-500
     technologies: [
@@ -142,11 +168,13 @@ export const experiences: Record<string, Experience> = {
       { name: 'CSS', icon: Palette },
       { name: 'FIGMA', icon: Palette },
     ],
-    project: {
-      title: 'DEPARTMENT-WIDE SITE REDESIGN',
-      subtitle: 'Web Developer',
-      description: 'POST-IMAGE SETUP AUTOMATION • TYPESCRIPT | POWERSHELL',
-    },
+    projects: [
+      {
+        title: 'DEPARTMENT-WIDE SITE REDESIGN',
+        subtitle: 'Web Developer',
+        description: 'POST-IMAGE SETUP AUTOMATION • TYPESCRIPT | POWERSHELL',
+      },
+    ],
     metrics: [
       { value: '25+', label: 'Pages Designed\n& Created' },
       { value: '100%', label: 'Department-\nSites Migrated' },

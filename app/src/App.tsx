@@ -38,20 +38,19 @@ function App() {
             />
           </div>
 
-          {/* Project Cards - Different layout for default vs experience */}
-          {isDefault ? (
-            // Default: Show two project cards
-            <div className="col-span-full grid grid-cols-1 md:grid-cols-2 gap-4">
-              <ProjectCard experience={selectedExperience} />
-              <ProjectCard experience={selectedExperience} isSecondProject />
-            </div>
-          ) : (
-            // Experience selected: Show Project + Metrics
-            <div className="col-span-full grid grid-cols-1 md:grid-cols-2 gap-4">
-              <ProjectCard experience={selectedExperience} />
-              <MetricsCard experience={selectedExperience} />
-            </div>
-          )}
+          {/* Project Cards - one per project; Metrics when not default */}
+          <div className="col-span-full grid grid-cols-1 md:grid-cols-2 gap-4">
+            {selectedExperience.projects.map((project, i) => (
+              <ProjectCard
+                key={i}
+                project={project}
+                projectIndex={i}
+                totalProjects={selectedExperience.projects.length}
+                experienceId={selectedExperience.id}
+              />
+            ))}
+            {!isDefault && <MetricsCard experience={selectedExperience} />}
+          </div>
 
           {/* Contact Footer */}
           <ContactFooter />
