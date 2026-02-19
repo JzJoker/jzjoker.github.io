@@ -1,8 +1,8 @@
 const socialLinks = [
-  { name: 'MEDIUM', href: '#' },
-  { name: 'LINKEDIN', href: '#' },
-  { name: 'GITHUB', href: '#' },
-  { name: 'EMAIL', href: '#' },
+  { name: 'MEDIUM', href: 'https://medium.com/@justinzhao1324', target: '_blank' },
+  { name: 'LINKEDIN', href: 'https://www.linkedin.com/in/justinzhao1/', target: '_blank' },
+  { name: 'GITHUB', href: 'https://github.com/JzJoker', target: '_blank' },
+  { name: 'EMAIL', href: 'mailto:justinzhao1324@gmail.com' },
 ];
 
 export function ContactFooter() {
@@ -23,6 +23,7 @@ export function ContactFooter() {
             key={link.name}
             href={link.href}
             className="text-xs text-muted-foreground hover:text-foreground transition-colors tracking-wider"
+            target={link.target}
           >
             {link.name}
           </a>
