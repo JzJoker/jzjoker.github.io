@@ -29,7 +29,7 @@ export function ProjectCard({ project, projectIndex, totalProjects, experienceId
         <p className="text-xs text-muted-foreground mb-4">{project.description}</p>
 
         {/* Project Preview Area */}
-        <div className="flex-1 bg-[#0B0B0B] bg-secondary/50 rounded-lg min-h-[80px] flex items-center justify-center overflow-hidden">
+        <div className="flex-1 bg-[#0B0B0B] rounded-lg min-h-[80px] flex items-center justify-center overflow-hidden">
           {project.imageUrl ? (
             <img
               src={project.imageUrl}
