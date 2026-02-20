@@ -10,9 +10,9 @@ const linkClass = 'text-xs text-muted-foreground hover:text-foreground transitio
 
 export function Navbar() {
   return (
-    <div className="bento-card col-span-full bg-card border border-border rounded-xl p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+    <div className="bento-card col-span-full bg-card border border-border rounded-xl p-4 sm:p-5 flex flex-col sm:flex-row items-center justify-center sm:justify-between gap-2 sm:gap-4">
       {/* Nav Links */}
-      <nav className="flex items-center gap-6">
+      <nav className="flex items-center justify-center gap-6">
         {navLinks.map((link) =>
           'to' in link && link.to ? (
             <Link key={link.name} to={link.to} className={linkClass}>
@@ -26,7 +26,7 @@ export function Navbar() {
         )}
       </nav>
       {/* Navigate Prompt */}
-      <div className="flex items-center gap-2">
+      <div className="hidden sm:flex items-center gap-2">
         <span className="text-muted-foreground">{''}</span>
         <span className="text-sm text-muted-foreground tracking-wider">
           
