@@ -1,3 +1,4 @@
+import { Link, useLocation } from 'react-router-dom';
 import { FadeWrapper } from '@/components/FadeWrapper';
 import type { Project } from '@/data/experiences';
 
@@ -8,12 +9,16 @@ interface ProjectCardProps {
   experienceId: string;
 }
 
+const cardClassName =
+  'bento-card bg-card border border-border rounded-xl p-5 flex flex-col h-full cursor-pointer block no-underline text-inherit';
+
 export function ProjectCard({ project, projectIndex, totalProjects, experienceId }: ProjectCardProps) {
+  const location = useLocation();
   const projectLabel = totalProjects > 1 ? `PROJECT #${projectIndex + 1}` : 'PROJECT';
   const contentKey = `${experienceId}-${projectIndex}`;
 
-  return (
-    <div className="bento-card bg-card border border-border rounded-xl p-5 flex flex-col h-full cursor-pointer">
+  const content = (
+    <>
       {/* Static header - no animation */}
       <div className="flex items-center justify-between mb-2">
         <span className="text-xs text-muted-foreground tracking-wider">
@@ -43,6 +48,20 @@ export function ProjectCard({ project, projectIndex, totalProjects, experienceId
           )}
         </div>
       </FadeWrapper>
-    </div>
+    </>
   );
+
+  if (project.slug) {
+    return (
+      <Link
+        to={`/projects/${project.slug}`}
+        state={{ from: location.pathname }}
+        className={cardClassName}
+      >
+        {content}
+      </Link>
+    );
+  }
+
+  return <div className={cardClassName}>{content}</div>;
 }

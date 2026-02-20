@@ -30,6 +30,7 @@ export interface Project {
   description: string;
   previewText?: string;
   imageUrl?: string;
+  slug?: string;
 }
 
 export interface Experience {
@@ -71,24 +72,28 @@ export const experiences: Record<string, Experience> = {
         subtitle: '2025-PRESENT',
         description: 'UI/UX INTERVIEWING PREP • AWS | NEXT.JS',
         imageUrl: '/images/interviewer-small.svg',
+        slug: 'ux-interviewer',
       },
       {
         title: 'BALLIGHTS',
         subtitle: '2026',
         description: 'ML-POWERED BASKETBALL HIGHLIGHTS • PYTHON | YOLOV5 | PYTORCH',
-        imageUrl: '/images/ballights-small.svg'
+        imageUrl: '/images/ballights-small.svg',
+        slug: 'ballights',
       },
       {
         title: 'HOMELAB',
         subtitle: '2025',
         description: 'SELF-HOSTED SANDBOX ENVIRONMENT • UBUNTU SERVER | DOCKER',
-        imageUrl: '/images/homelab-small.svg'
+        imageUrl: '/images/homelab-small.svg',
+        slug: 'homelab',
       },
       {
         title: 'TC-TOOLS',
         subtitle: '2024',
         description: 'POST-IMAGE SETUP AUTOMATION • TYPESCRIPT | POWERSHELL',
-        imageUrl: '/images/tc-tools-small.svg'
+        imageUrl: '/images/tc-tools-small.svg',
+        slug: 'tc-tools',
       }
     ],
     metrics: [
@@ -119,6 +124,7 @@ export const experiences: Record<string, Experience> = {
         subtitle: 'PRODUCT OWNER',
         description: 'REMOTE SCRIPT EXECUTION • ELECTRON | POWERSHELL',
         previewText: 'LOCKED',
+        slug: 'scripthub',
       },
     ],
     metrics: [
@@ -147,6 +153,7 @@ export const experiences: Record<string, Experience> = {
         title: 'TC-TOOLS',
         subtitle: 'PRODUCT OWNER',
         description: 'POST-IMAGE SETUP AUTOMATION • TYPESCRIPT | POWERSHELL',
+        slug: 'tc-tools',
       },
     ],
     metrics: [
@@ -175,6 +182,7 @@ export const experiences: Record<string, Experience> = {
         title: 'DEPARTMENT-WIDE SITE REDESIGN',
         subtitle: 'Web Developer',
         description: 'POST-IMAGE SETUP AUTOMATION • TYPESCRIPT | POWERSHELL',
+        slug: 'department-wide-site-redesign',
       },
     ],
     metrics: [
