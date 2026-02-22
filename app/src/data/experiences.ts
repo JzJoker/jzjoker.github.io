@@ -74,6 +74,15 @@ export const experiences: Record<string, Experience> = {
         imageUrl: '/images/interviewer-small.svg',
         slug: 'ux-interviewer',
       },
+      
+      {
+        title: 'HOMELAB',
+        subtitle: '2026-PRESENT',
+        description: 'SELF-HOSTED SANDBOX ENVIRONMENT • UBUNTU SERVER | DOCKER',
+        imageUrl: '/images/homelab-small.svg',
+        slug: 'homelab',
+      },
+
       {
         title: 'BALLIGHTS',
         subtitle: '2026',
@@ -81,13 +90,7 @@ export const experiences: Record<string, Experience> = {
         imageUrl: '/images/ballights-small.svg',
         slug: 'ballights',
       },
-      {
-        title: 'HOMELAB',
-        subtitle: '2025',
-        description: 'SELF-HOSTED SANDBOX ENVIRONMENT • UBUNTU SERVER | DOCKER',
-        imageUrl: '/images/homelab-small.svg',
-        slug: 'homelab',
-      },
+      
       {
         title: 'TC-TOOLS',
         subtitle: '2024',
