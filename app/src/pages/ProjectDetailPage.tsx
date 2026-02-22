@@ -17,6 +17,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
+import { HomelabNetworkDiagram } from '@/components/HomelabNetworkDiagram';
 
 function UnderConstructionPlaceholder({
   slug,
@@ -139,55 +140,68 @@ export function ProjectDetailPage() {
           ))}
         </div>
 
-        {/* Tech Stack Index */}
-        <section>
-          <h2 className="text-sm font-medium text-foreground tracking-wider text-center mb-4">
-            Tech Stack Index
-          </h2>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 items-start">
-            <div className="bento-card bg-card border border-border w-full">
-              <Table className="[&_th]:border-r [&_th]:border-border [&_th:last-child]:border-r-0 [&_td]:border-r [&_td]:border-border [&_td:last-child]:border-r-0">
-                <TableHeader>
-                  <TableRow>
-                    <TableHead className="text-muted-foreground">Layer</TableHead>
-                    <TableHead className="text-muted-foreground">Technology</TableHead>
-                    <TableHead className="text-muted-foreground">Purpose</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {techStack.map((row, i) => (
-                    <TableRow key={i}>
-                      <TableCell className="text-foreground">{row.layer}</TableCell>
-                      <TableCell className="text-foreground">{row.technology}</TableCell>
-                      <TableCell className="text-foreground whitespace-normal">
-                        {row.purpose}
-                      </TableCell>
+        {techStack && techStack.length > 0 && (
+          <section>
+            <h2 className="text-sm font-medium text-foreground tracking-wider text-center mb-4">
+              Tech Stack Index
+            </h2>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 items-start">
+              <div className="bento-card bg-card border border-border w-full">
+                <Table className="[&_th]:border-r [&_th]:border-border [&_th:last-child]:border-r-0 [&_td]:border-r [&_td]:border-border [&_td:last-child]:border-r-0">
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead className="text-muted-foreground">Layer</TableHead>
+                      <TableHead className="text-muted-foreground">Technology</TableHead>
+                      <TableHead className="text-muted-foreground">Purpose</TableHead>
                     </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
+                  </TableHeader>
+                  <TableBody>
+                    {techStack.map((row, i) => (
+                      <TableRow key={i}>
+                        <TableCell className="text-foreground">{row.layer}</TableCell>
+                        <TableCell className="text-foreground">{row.technology}</TableCell>
+                        <TableCell className="text-foreground whitespace-normal">
+                          {row.purpose}
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </div>
+              <div className="text-sm text-muted-foreground space-y-3">
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor
+                  incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                  exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                </p>
+                <p>
+                  Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                  fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.
+                </p>
+              </div>
             </div>
-            <div className="text-sm text-muted-foreground space-y-3">
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor
-                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-              </p>
-              <p>
-                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.
-              </p>
-            </div>
-          </div>
-        </section>
+          </section>
+        )}
 
-        {/* System Architecture */}
-        <section>
-          <h2 className="text-sm font-medium text-foreground tracking-wider text-center mb-4">
-            SYSTEM ARCHITECTURE
-          </h2>
-          <ArchitectureDiagram nodes={architecture.nodes} edges={architecture.edges} />
-        </section>
+        {architecture && (
+          <section>
+            <h2 className="text-sm font-medium text-foreground tracking-wider text-center mb-4">
+              SYSTEM ARCHITECTURE
+            </h2>
+            <ArchitectureDiagram nodes={architecture.nodes} edges={architecture.edges} />
+          </section>
+        )}
+
+        {slug === 'homelab' && (
+          <section>
+            <h2 className="text-sm font-medium text-foreground tracking-wider text-center mb-4">
+              HOMELAB — NETWORK DIAGRAM
+            </h2>
+            <div className="bento-card bg-card border border-border rounded-xl p-5 overflow-x-auto">
+              <HomelabNetworkDiagram />
+            </div>
+          </section>
+        )}
 
         {/* Conclusion */}
         <div className="flex flex-col gap-3">
