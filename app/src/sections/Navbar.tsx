@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 const navLinks = [
   { name: 'ALL PROJECTS', to: '/projects' as const },
-  { name: 'EXPERIENCE', href: '#experience' },
+  { name: 'EXPERIENCE', to: '/experience' as const },
   { name: 'INFO', href: '#info' },
 ];
 

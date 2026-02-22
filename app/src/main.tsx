@@ -5,6 +5,7 @@ import './index.css'
 import App from './App.tsx'
 import { ProjectsPage } from './pages/ProjectsPage.tsx'
 import { ProjectDetailPage } from './pages/ProjectDetailPage.tsx'
+import { ExperiencesPage } from './pages/ExperiencesPage.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -13,6 +14,7 @@ createRoot(document.getElementById('root')!).render(
         <Route path="/" element={<App />} />
         <Route path="/projects" element={<ProjectsPage />} />
         <Route path="/projects/:slug" element={<ProjectDetailPage />} />
+        <Route path="/experience" element={<ExperiencesPage />} />
       </Routes>
     </BrowserRouter>
   </StrictMode>,
