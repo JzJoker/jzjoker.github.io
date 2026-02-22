@@ -77,12 +77,12 @@ export const experiences: Record<string, Experience> = {
       
       {
         title: 'HOMELAB',
-        subtitle: '2025',
+        subtitle: '2026-PRESENT',
         description: 'SELF-HOSTED SANDBOX ENVIRONMENT • UBUNTU SERVER | DOCKER',
         imageUrl: '/images/homelab-small.svg',
         slug: 'homelab',
       },
-      
+
       {
         title: 'BALLIGHTS',
         subtitle: '2026',
