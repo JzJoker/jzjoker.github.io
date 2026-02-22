@@ -54,8 +54,8 @@ export const projectDetails: Record<string, ProjectDetailData> = {
       techStackSummary: 'Next.js • AWS',
     },
     introParagraphs: [
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.',
-      'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+      'There are many interview prep resources for software engineers out there on the web—the most notorious being LeetCode; however, while software engineers can practice active recall for technical interiviews doing DSA problems, there is no real way to practice retrieval of UI/UX design principles in preperation for design interviews.',
+      ' So we decided to make it. The First Structured Interview Prep Platform for UI/UX Design. Randomized case study problems and a scoring system to help you track your progress. Plus, realtime AI voice feedback to simulate a real interview and help you improve your design skills.',
     ],
     techStack: [
       { layer: 'Frontend', technology: 'React', purpose: 'Build UI' },
@@ -86,8 +86,7 @@ export const projectDetails: Record<string, ProjectDetailData> = {
       ],
     },
     conclusionParagraphs: [
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-      'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.',
+      
     ],
   },
   'homelab': {
