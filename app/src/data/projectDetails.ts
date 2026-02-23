@@ -104,7 +104,7 @@ export const projectDetails: Record<string, ProjectDetailData> = {
       'All services run in isolated Docker containers, making it easy to manage, update, and expand. The lab serves as both a learning environment for DevOps practices and a practical solution for self-hosted privacy tools.',
     ],
     conclusionParagraphs: [
-      'This homelab provides a hands-on environment for experimenting with containerization, networking, and self-hosted services while keeping all data private and under personal control.',
+      'Overall, this homelab provides a hands-on environment for experimenting with containerization, networking, and self-hosted services while keeping all data private and under personal control.',
       'Future plans include adding more services, experimenting with Proxmox for virtualization, and potentially expanding to additional hardware.',
     ],
   },

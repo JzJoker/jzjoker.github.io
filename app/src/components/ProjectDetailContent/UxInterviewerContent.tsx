@@ -277,9 +277,7 @@ export function UxInterviewerContent({ data }: UxInterviewerContentProps) {
               </p>
               <p>
                 When a user signs in with Cognito, the backend uses their ID token to obtain
-                temporary AWS credentials from the Identity Pool; those credentials are scoped to
-                that role, so they can only put/get/query the UX-Attempts table (via the policy
-                above).
+                temporary AWS credentials from the Identity Pool which have the aforementioned policy assigned to them.
               </p>
               <p>
                 To prevent users from modifying other users’ attempt data, we keep table permissions
