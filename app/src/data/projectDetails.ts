@@ -50,7 +50,7 @@ export const projectDetails: Record<string, ProjectDetailData> = {
       subtitle: 'The First Structured Interview Prep Platform for UI/UX Designers.',
       role: 'Full Stack Developer',
       duration: 'Nov 2025 - Present',
-      readTime: '06 Minutes',
+      readTime: '10 Minutes',
       techStackSummary: 'Next.js • AWS',
     },
     introParagraphs: [
