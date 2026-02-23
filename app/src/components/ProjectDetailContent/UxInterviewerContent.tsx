@@ -123,6 +123,9 @@ export function UxInterviewerContent({ data }: UxInterviewerContentProps) {
               <br />
               It is quite lengthy,
               so if you are interested in only certain aspects of the project, you can refer to the table of contents to skip around.
+              <br />
+              <br />
+              Also if you are interested in seeing the final product, you can also visit the live site <a href="https://ux-interviewer.vercel.app" className="text-foreground hover:text-primary transition-colors" target="_blank" rel="noopener noreferrer">here</a>.
             </p>
             <nav
               aria-label="Table of contents"
