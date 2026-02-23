@@ -40,7 +40,6 @@ export function ProjectPageHeader({
         ) : (
           <div className={`absolute inset-0 bg-[#0B0B0B] ${heroMinHeight}`} aria-hidden />
         )}
-        
       </div>
 
       {/* Title and subtitle: centered */}

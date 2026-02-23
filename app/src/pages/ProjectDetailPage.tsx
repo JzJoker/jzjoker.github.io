@@ -4,6 +4,7 @@ import { projectDetails } from '@/data/projectDetails';
 import { experiences } from '@/data/experiences';
 import { ProjectPageLayout } from '@/components/ProjectPageLayout';
 import { Navbar } from '@/sections/Navbar';
+import { ImageLightboxProvider } from '@/components/ImageLightbox';
 
 const validProjectSlugs = new Set(
   Object.values(experiences).flatMap((e) =>
@@ -110,40 +111,42 @@ export function ProjectDetailPage() {
 
   return (
     <>
-      <ProjectPageLayout
-        backHref={backHref}
-        title={header.title}
-        subtitle={header.subtitle}
-        role={header.role}
-        duration={header.duration}
-        readTime={header.readTime}
-        techStackSummary={header.techStackSummary}
-        heroImageUrl={header.heroImageUrl}
-        icon={header.icon}
-      >
-        <div className="flex flex-col gap-6">
-          {/* Intro */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {introParagraphs.map((p, i) => (
-              <p key={i} className="text-sm text-muted-foreground">
-                {p}
-              </p>
-            ))}
-          </div>
+      <ImageLightboxProvider>
+        <ProjectPageLayout
+          backHref={backHref}
+          title={header.title}
+          subtitle={header.subtitle}
+          role={header.role}
+          duration={header.duration}
+          readTime={header.readTime}
+          techStackSummary={header.techStackSummary}
+          heroImageUrl={header.heroImageUrl}
+          icon={header.icon}
+        >
+          <div className="flex flex-col gap-6">
+            {/* Intro */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {introParagraphs.map((p, i) => (
+                <p key={i} className="text-sm text-muted-foreground">
+                  {p}
+                </p>
+              ))}
+            </div>
 
-          {CustomContent && <CustomContent data={data!} />}
+            {CustomContent && <CustomContent data={data!} />}
 
-          {/* Conclusion */}
-          <div className="flex flex-col gap-3">
-            {conclusionParagraphs.map((p, i) => (
-              <p key={i} className="text-sm text-muted-foreground">
-                {p}
-              </p>
-            ))}
+            {/* Conclusion */}
+            <div className="flex flex-col gap-3">
+              {conclusionParagraphs.map((p, i) => (
+                <p key={i} className="text-sm text-muted-foreground">
+                  {p}
+                </p>
+              ))}
+            </div>
           </div>
-        </div>
-      </ProjectPageLayout>
-      {backToTopButton}
+        </ProjectPageLayout>
+        {backToTopButton}
+      </ImageLightboxProvider>
     </>
   );
 }

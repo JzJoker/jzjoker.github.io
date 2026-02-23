@@ -14,6 +14,7 @@ import {
   type CarouselApi,
 } from '@/components/ui/carousel';
 import { ArchitectureDiagram } from '@/components/ArchitectureDiagram';
+import { ClickableImage } from '@/components/ClickableImage';
 import type { ProjectDetailData } from '@/data/projectDetails';
 
 interface UxInterviewerContentProps {
@@ -75,7 +76,7 @@ function PaymentScreenshotsCarousel() {
         <CarouselContent>
           {paymentScreenshots.map((img, i) => (
             <CarouselItem key={i}>
-              <img
+              <ClickableImage
                 src={img.src}
                 alt={img.alt}
                 className="w-full h-auto rounded-lg border border-border"
@@ -230,12 +231,11 @@ export function UxInterviewerContent({ data }: UxInterviewerContentProps) {
 
         <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-6 lg:gap-8 items-start">
           <div className="flex flex-col gap-0">
-          <img
+          <ClickableImage
             src="/images/screenshots/ux-interviewer-login.png"
             alt="Login Page Screenshot"
             className="w-full h-auto rounded-lg border border-border"
           />
-          
           </div>
           <div className="text-sm text-muted-foreground space-y-3">
             <p>
@@ -363,7 +363,7 @@ export function UxInterviewerContent({ data }: UxInterviewerContentProps) {
           PROMPT GENERATION
         </h2>
           <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-4 lg:gap-6 items-start">
-            <img
+            <ClickableImage
               src="/images/screenshots/ux-interviewer-prompt.png"
               alt="Prompt Generation Page Screenshot"
               className="w-full h-auto rounded-lg border border-border"
@@ -408,7 +408,7 @@ export function UxInterviewerContent({ data }: UxInterviewerContentProps) {
               <br />
               We also use a system prompt to guide the LLM's response and ensure that the response is relevant to the case study question.
             </p>
-            <img
+            <ClickableImage
               src="/images/screenshots/ux-interviewer-diagramming.png"
               alt="Diagramming Page Screenshot"
               className="w-full h-auto rounded-lg border border-border"
@@ -451,7 +451,7 @@ export function UxInterviewerContent({ data }: UxInterviewerContentProps) {
           PAST ATTEMPTS AND PROGRESS TRACKING
         </h2>
           <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-4 lg:gap-6 items-start">
-            <img
+            <ClickableImage
               src="/images/screenshots/ux-interviewer-history.png"
               alt="Past Attempts Page Screenshot"
               className="w-full h-auto rounded-lg border border-border"
