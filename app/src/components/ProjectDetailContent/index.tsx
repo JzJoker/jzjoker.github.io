@@ -2,6 +2,7 @@ import type { ComponentType } from 'react';
 import type { ProjectDetailData } from '@/data/projectDetails';
 import { UxInterviewerContent } from './UxInterviewerContent';
 import { HomelabContent } from './HomelabContent';
+import { TcToolsContent } from './TcToolsContent';
 
 export interface ProjectDetailContentProps {
   data: ProjectDetailData;
@@ -16,4 +17,5 @@ export const projectDetailContent: Partial<
 > = {
   'ux-interviewer': UxInterviewerContent,
   homelab: HomelabContent,
+  'tc-tools': TcToolsContent,
 };

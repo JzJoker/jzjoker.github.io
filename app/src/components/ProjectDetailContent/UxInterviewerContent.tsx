@@ -268,8 +268,12 @@ export function UxInterviewerContent({ data }: UxInterviewerContentProps) {
                 items from the UX-Attempts table, and query the UX-Attempts table. 
               </p>
               <p>  
-                A policy like this, assigned to a user in Cognito, lets them access the UX-Attempts table and
-                perform only the actions specified in the policy.
+                A policy like this, if assigned to a user in Cognito, would let them access the UX-Attempts table and
+                perform the actions specified in the policy. 
+                <br />
+                <br />
+                However, that means they would be able to modify other users' attempt data.
+                Here's how we handle that:
               </p>
               <p>
                 When a user signs in with Cognito, the backend uses their ID token to obtain
@@ -487,7 +491,7 @@ export function UxInterviewerContent({ data }: UxInterviewerContentProps) {
               <br />
               <br />
               Payments are handled through stripe with 
-              our backend acting as a middleware to handle the payment process. Users can choose from three different plans: Free, Basic, and Pro. 
+              our backend acting as a middleware to handle the payment process. Users can choose from three different plans: Free, Pro, and Pro Yearly. 
               <br />
               <br />
               When a plan is selected, users are redirected to the stripe checkout page to complete the payment. This link is generated using the Stripe SDK, passing in the user's cognito ID and price ID.  
