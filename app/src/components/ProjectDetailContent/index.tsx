@@ -17,5 +17,5 @@ export const projectDetailContent: Partial<
 > = {
   'ux-interviewer': UxInterviewerContent,
   homelab: HomelabContent,
-  'tc-tools': TcToolsContent,
+  TCTools: TcToolsContent,
 };

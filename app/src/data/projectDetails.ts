@@ -108,9 +108,10 @@ export const projectDetails: Record<string, ProjectDetailData> = {
       'Future plans include adding more services, experimenting with Proxmox for virtualization, and potentially expanding to additional hardware.',
     ],
   },
-  'tc-tools': {
+  'TCTools': {
     header: {
-      title: 'TC-TOOLS',
+      heroImageUrl: '/images/tctools-banner.svg',
+      title: 'TCTools',
       subtitle: 'Post-Image Setup Automation for Lab and Department Machines.',
       role: 'Product Owner / Developer',
       duration: 'May 2024 - Aug 2024',
@@ -118,7 +119,7 @@ export const projectDetails: Record<string, ProjectDetailData> = {
       techStackSummary: 'TypeScript • PowerShell',
     },
     introParagraphs: [
-      'TC-Tools is a post-image setup automation suite built during my internship at RIT ITS. After reimaging lab and department machines, technicians needed a reliable way to configure software, policies, and backups without manual steps.',
+      'TCTools is a post-image setup automation suite built during my internship at RIT ITS. After reimaging lab and department machines, technicians needed a reliable way to configure software, policies, and backups without manual steps.',
       'The project combined TypeScript for a structured CLI and PowerShell for Windows configuration and scripting. It automated data backups, software installation, and policy application, cutting setup time and reducing human error.',
     ],
     conclusionParagraphs: [

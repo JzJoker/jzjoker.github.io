@@ -84,11 +84,11 @@ export const experiences: Record<string, Experience> = {
       },
       
       {
-        title: 'TC-TOOLS',
+        title: 'TCTools',
         subtitle: '2024',
         description: 'POST-IMAGE SETUP AUTOMATION • TYPESCRIPT | POWERSHELL',
-        imageUrl: '/images/tc-tools-alt.svg',
-        slug: 'tc-tools',
+        imageUrl: '/images/tctools-alt.svg',
+        slug: 'TCTools',
       },
 
       {
