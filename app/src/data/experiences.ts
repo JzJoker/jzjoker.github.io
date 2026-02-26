@@ -151,14 +151,7 @@ export const experiences: Record<string, Experience> = {
       { name: 'POWERSHELL', icon: Terminal },
       { name: 'FIGMA', icon: Palette },
     ],
-    projects: [
-      {
-        title: 'TC-TOOLS',
-        subtitle: 'PRODUCT OWNER',
-        description: 'POST-IMAGE SETUP AUTOMATION • TYPESCRIPT | POWERSHELL',
-        slug: 'tc-tools',
-      },
-    ],
+    projects: [],
     metrics: [
       { value: '80%', label: 'Faster Data\nBackups' },
       { value: '100%', label: 'Department-\nWide Adoption' },
