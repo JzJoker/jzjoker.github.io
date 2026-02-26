@@ -82,14 +82,6 @@ export const experiences: Record<string, Experience> = {
         imageUrl: '/images/homelab-small.svg',
         slug: 'homelab',
       },
-
-      {
-        title: 'BALLIGHTS',
-        subtitle: '2026',
-        description: 'ML-POWERED BASKETBALL HIGHLIGHTS • PYTHON | YOLOV5 | PYTORCH',
-        imageUrl: '/images/ballights-small.svg',
-        slug: 'ballights',
-      },
       
       {
         title: 'TC-TOOLS',
@@ -97,6 +89,14 @@ export const experiences: Record<string, Experience> = {
         description: 'POST-IMAGE SETUP AUTOMATION • TYPESCRIPT | POWERSHELL',
         imageUrl: '/images/tc-tools-alt.svg',
         slug: 'tc-tools',
+      },
+
+      {
+        title: 'BALLIGHTS',
+        subtitle: '2026',
+        description: 'ML-POWERED BASKETBALL HIGHLIGHTS • PYTHON | YOLOV5 | PYTORCH',
+        imageUrl: '/images/ballights-small.svg',
+        slug: 'ballights',
       }
     ],
     metrics: [
