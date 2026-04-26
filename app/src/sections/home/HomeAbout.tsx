@@ -52,7 +52,7 @@ export function HomeAbout() {
             <div className="pf-now-row">
               <span className="pf-now-row-key">Listening</span>
               <span className="pf-now-row-val">
-                Khruangbin radio
+                DIE 4 YOU radio
                 <span className="secondary">on repeat</span>
               </span>
             </div>
