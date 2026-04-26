@@ -129,7 +129,7 @@ export function ProjectDetailPage() {
         >
           <div className="flex flex-col gap-6">
             {/* Intro */}
-            <div className="reveal-stagger grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="reveal grid grid-cols-1 md:grid-cols-2 gap-4">
               {introParagraphs.map((p, i) => (
                 <p key={i} className="text-sm text-muted-foreground">
                   {p}
