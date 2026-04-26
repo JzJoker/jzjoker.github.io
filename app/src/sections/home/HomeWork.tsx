@@ -164,7 +164,7 @@ export function HomeWork() {
       <div className="pf-container-wide">
         <div className="pf-section-marker reveal">
           <span className="pf-section-marker-num">01</span>
-          <span>Selected work</span>
+          <span>Selected works</span>
           <span className="pf-section-marker-line" />
           <span className="pf-section-marker-meta">2024 — present</span>
         </div>
