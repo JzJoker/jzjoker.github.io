@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { HomeCmdK } from './HomeCmdK';
 
 interface HomeNavProps {
@@ -10,6 +10,7 @@ interface HomeNavProps {
 export function HomeNav({ hasMarquee = false }: HomeNavProps) {
   const [scrolled, setScrolled] = useState(false);
   const [cmdkOpen, setCmdkOpen] = useState(false);
+  const { pathname } = useLocation();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 30);
@@ -36,7 +37,11 @@ export function HomeNav({ hasMarquee = false }: HomeNavProps) {
         style={{ top: hasMarquee ? '32px' : '0' }}
       >
         <div className="pf-nav-inner">
-          <Link to="/" className="pf-nav-brand">
+          <Link
+            to="/"
+            className="pf-nav-brand"
+            onClick={() => { if (pathname === '/') window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+          >
             <span className="pf-nav-brand-mark">JZ</span>
             <span>Justin Zhao</span>
           </Link>
