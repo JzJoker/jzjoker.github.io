@@ -1,5 +1,3 @@
-import { Link } from 'react-router-dom';
-
 export function HomeHero() {
   return (
     <section className="pf-hero" id="hero">
