@@ -24,7 +24,7 @@ function UnderConstructionPlaceholder({
     .split('-')
     .map((w) => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase())
     .join(' ');
-  const backLabel = backHref === '/' ? 'HOME' : 'PROJECTS';
+  const backLabel = backHref === '/' ? 'Home' : 'Projects';
   return (
     <div className="min-h-screen bg-background overflow-x-hidden">
       <HomeNav />
@@ -32,9 +32,10 @@ function UnderConstructionPlaceholder({
         <div className="max-w-6xl mx-auto w-full flex flex-col gap-4">
           <Link
             to={backHref}
-            className="text-xs text-muted-foreground hover:text-foreground transition-colors tracking-wider self-start"
+            className="inline-flex items-center gap-2 text-[11px] tracking-[0.08em] uppercase text-muted-foreground hover:text-accent transition-colors self-start group"
           >
-            &lt; {backLabel}
+            <span className="transition-transform group-hover:-translate-x-1">←</span>
+            Back to {backLabel}
           </Link>
           <div className="bento-card bg-card border border-border rounded-xl p-12 flex flex-col items-center justify-center gap-4 text-center">
             <p className="text-sm text-muted-foreground tracking-wider uppercase">

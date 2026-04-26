@@ -139,7 +139,7 @@ function WorkCard({ num, year, status, title, tagline, stack, impact, alt, visua
           </div>
         </div>
         <div className="pf-work-card-footer">
-          <Link to={`/projects/${slug}`} className="pf-work-card-link">
+          <Link to={`/projects/${slug}`} state={{ from: '/' }} className="pf-work-card-link">
             Read case study
             <span className="pf-arrow">↗</span>
           </Link>
