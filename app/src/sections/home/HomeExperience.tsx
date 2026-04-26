@@ -10,17 +10,17 @@ interface ExperienceEntry {
 const entries: ExperienceEntry[] = [
   {
     current: true,
-    date: '2025 — present',
-    role: 'Independent',
-    company: <>Building <span className="accent">UX Interviewer</span> · Open to collabs</>,
-    desc: 'Working full-time on UX Interviewer while taking on select consulting engagements. Focused on AI-augmented productivity tools for designers and engineers.',
-    tags: ['AI', 'Next.js', 'AWS', 'Founder'],
+    date: '2026 — present',
+    role: 'Incoming Cloud Engineer Intern',
+    company: <><span className="accent">Megazone Cloud</span> · Rochester, NY</>,
+    desc: 'Incoming cloud engineer at a leading AWS Premier Partner. Focused on cloud architecture, migrations, and managed services for enterprise clients.',
+    tags: ['AWS', 'Cloud', 'Terraform', 'Solutions Architecture'],
   },
   {
     date: '2024 — 2025',
-    role: 'Site Reliability Engineer',
+    role: 'Site Reliability Engineer Intern',
     company: <><span className="accent">Vanguard</span> · Malvern, PA</>,
-    desc: 'SRE on the endpoint engineering team. Built ScriptHub, an internal Electron app for remote script execution, automating 35K+ endpoint tasks. Completed 20% of team backlog independently.',
+    desc: 'SRE on the Workplace Site Reliability Engineering Team. Built ScriptHub, an internal Electron app for remote script execution. Completed 20% of team backlog independently.',
     tags: ['AWS', 'Electron', 'Python', 'PowerShell', 'TypeScript'],
   },
   {
