@@ -1,9 +1,10 @@
 import { useParams, useLocation, Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import { useReveal } from '@/hooks/useReveal';
 import { projectDetails } from '@/data/projectDetails';
 import { experiences } from '@/data/experiences';
 import { ProjectPageLayout } from '@/components/ProjectPageLayout';
-import { Navbar } from '@/sections/Navbar';
+import { HomeNav } from '@/sections/home/HomeNav';
 import { ImageLightboxProvider } from '@/components/ImageLightbox';
 
 const validProjectSlugs = new Set(
@@ -24,17 +25,18 @@ function UnderConstructionPlaceholder({
     .split('-')
     .map((w) => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase())
     .join(' ');
-  const backLabel = backHref === '/' ? 'HOME' : 'PROJECTS';
+  const backLabel = backHref === '/' ? 'Home' : 'Projects';
   return (
     <div className="min-h-screen bg-background overflow-x-hidden">
-      <div className="p-4 sm:p-6 lg:p-8 flex flex-col gap-4 w-full box-border">
+      <HomeNav />
+      <div className="pt-20 px-4 pb-4 sm:px-6 sm:pb-6 lg:px-8 lg:pb-8 flex flex-col gap-4 w-full box-border">
         <div className="max-w-6xl mx-auto w-full flex flex-col gap-4">
-          <Navbar />
           <Link
             to={backHref}
-            className="text-xs text-muted-foreground hover:text-foreground transition-colors tracking-wider self-start"
+            className="inline-flex items-center gap-2 text-[11px] tracking-[0.08em] uppercase text-muted-foreground hover:text-accent transition-colors self-start group"
           >
-            &lt; {backLabel}
+            <span className="transition-transform group-hover:-translate-x-1">←</span>
+            Back to {backLabel}
           </Link>
           <div className="bento-card bg-card border border-border rounded-xl p-12 flex flex-col items-center justify-center gap-4 text-center">
             <p className="text-sm text-muted-foreground tracking-wider uppercase">
@@ -106,6 +108,8 @@ export function ProjectDetailPage() {
     );
   }
 
+  useReveal();
+
   const { header, introParagraphs, conclusionParagraphs } = data!;
   const CustomContent = slug ? projectDetailContent[slug] : undefined;
 
@@ -125,7 +129,7 @@ export function ProjectDetailPage() {
         >
           <div className="flex flex-col gap-6">
             {/* Intro */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="reveal grid grid-cols-1 md:grid-cols-2 gap-4">
               {introParagraphs.map((p, i) => (
                 <p key={i} className="text-sm text-muted-foreground">
                   {p}
@@ -133,10 +137,14 @@ export function ProjectDetailPage() {
               ))}
             </div>
 
-            {CustomContent && <CustomContent data={data!} />}
+            {CustomContent && (
+              <div className="reveal">
+                <CustomContent data={data!} />
+              </div>
+            )}
 
             {/* Conclusion */}
-            <div className="flex flex-col gap-3">
+            <div className="reveal-stagger flex flex-col gap-3">
               {conclusionParagraphs.map((p, i) => (
                 <p key={i} className="text-sm text-muted-foreground">
                   {p}

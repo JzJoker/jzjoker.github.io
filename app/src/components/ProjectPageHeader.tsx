@@ -43,7 +43,7 @@ export function ProjectPageHeader({
       </div>
 
       {/* Title and subtitle: centered */}
-      <div className="text-center space-y-1">
+      <div className="reveal text-center space-y-1">
         <h1 className="text-2xl sm:text-3xl font-bold uppercase tracking-tight text-foreground">
           {title}
         </h1>
@@ -53,7 +53,7 @@ export function ProjectPageHeader({
       </div>
 
       {/* Metadata card: 4 columns */}
-      <div className="bento-card bg-card border border-border rounded-xl overflow-hidden">
+      <div className="reveal bento-card bg-card border border-border rounded-xl overflow-hidden">
         <div className="flex flex-wrap">
           <div className="px-5 py-4 flex-1 min-w-[120px]">
             <span className="text-xs text-muted-foreground tracking-wider uppercase block">
