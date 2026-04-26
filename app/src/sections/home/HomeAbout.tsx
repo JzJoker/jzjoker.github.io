@@ -66,7 +66,7 @@ export function HomeAbout() {
             <div className="pf-now-row">
               <span className="pf-now-row-key">Open to</span>
               <span className="pf-now-row-val" style={{ color: 'var(--accent)' }}>
-                Select consulting
+                Coffee chats
               </span>
             </div>
             <div className="pf-now-row">
