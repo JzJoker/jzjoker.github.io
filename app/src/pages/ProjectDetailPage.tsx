@@ -1,5 +1,6 @@
 import { useParams, useLocation, Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import { useReveal } from '@/hooks/useReveal';
 import { projectDetails } from '@/data/projectDetails';
 import { experiences } from '@/data/experiences';
 import { ProjectPageLayout } from '@/components/ProjectPageLayout';
@@ -107,6 +108,8 @@ export function ProjectDetailPage() {
     );
   }
 
+  useReveal();
+
   const { header, introParagraphs, conclusionParagraphs } = data!;
   const CustomContent = slug ? projectDetailContent[slug] : undefined;
 
@@ -126,7 +129,7 @@ export function ProjectDetailPage() {
         >
           <div className="flex flex-col gap-6">
             {/* Intro */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="reveal-stagger grid grid-cols-1 md:grid-cols-2 gap-4">
               {introParagraphs.map((p, i) => (
                 <p key={i} className="text-sm text-muted-foreground">
                   {p}
@@ -134,10 +137,14 @@ export function ProjectDetailPage() {
               ))}
             </div>
 
-            {CustomContent && <CustomContent data={data!} />}
+            {CustomContent && (
+              <div className="reveal">
+                <CustomContent data={data!} />
+              </div>
+            )}
 
             {/* Conclusion */}
-            <div className="flex flex-col gap-3">
+            <div className="reveal-stagger flex flex-col gap-3">
               {conclusionParagraphs.map((p, i) => (
                 <p key={i} className="text-sm text-muted-foreground">
                   {p}

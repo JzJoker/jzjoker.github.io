@@ -3,6 +3,7 @@ import type { ReactNode } from 'react';
 import { HomeNav } from '@/sections/home/HomeNav';
 import { ProjectPageHeader } from '@/components/ProjectPageHeader';
 import type { ProjectPageHeaderProps } from '@/components/ProjectPageHeader';
+import { useReveal } from '@/hooks/useReveal';
 
 interface ProjectPageLayoutProps extends ProjectPageHeaderProps {
   children: ReactNode;
@@ -15,6 +16,7 @@ export function ProjectPageLayout({
   backHref = '/projects',
   ...headerProps
 }: ProjectPageLayoutProps) {
+  useReveal();
   const backLabel = backHref === '/' ? 'Home' : 'Projects';
   return (
     <div className="min-h-screen bg-background overflow-x-hidden">
@@ -23,12 +25,14 @@ export function ProjectPageLayout({
         <div className="max-w-6xl mx-auto w-full flex flex-col gap-4">
           <Link
             to={backHref}
-            className="inline-flex items-center gap-2 text-[11px] tracking-[0.08em] uppercase text-muted-foreground hover:text-accent transition-colors self-start group"
+            className="reveal inline-flex items-center gap-2 text-[11px] tracking-[0.08em] uppercase text-muted-foreground hover:text-accent transition-colors self-start group"
           >
             <span className="transition-transform group-hover:-translate-x-1">←</span>
             Back to {backLabel}
           </Link>
-          <ProjectPageHeader {...headerProps} />
+          <div className="reveal">
+            <ProjectPageHeader {...headerProps} />
+          </div>
           {children}
         </div>
       </div>
