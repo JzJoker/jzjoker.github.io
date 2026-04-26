@@ -23,9 +23,7 @@ export function HomeHero() {
 
             <p className="pf-hero-subtitle">
               <strong>Full-stack engineer</strong> based in New York City. I build
-              high-performance interfaces and the cloud infrastructure that runs them —
-              currently shipping <strong>UX Interviewer</strong>, an AI-driven prep tool
-              for design interviews.
+              high-performance interfaces and the cloud infrastructure that runs them.
             </p>
 
             <div className="pf-hero-cta-row">
