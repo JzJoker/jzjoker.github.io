@@ -48,7 +48,7 @@ export function HomeHero() {
             <div className="pf-hero-stat-detail">across 4 years</div>
           </div>
           <div className="pf-hero-stat">
-            <div className="pf-hero-stat-value">3</div>
+            <div className="pf-hero-stat-value">5+</div>
             <div className="pf-hero-stat-label">Years in industry</div>
             <div className="pf-hero-stat-detail">Vanguard, RIT</div>
           </div>
