@@ -9,7 +9,9 @@ import { ExperiencesPage } from './pages/ExperiencesPage.tsx'
 
 function ScrollToTop() {
   const { pathname } = useLocation();
-  useLayoutEffect(() => { window.scrollTo(0, 0); }, [pathname]);
+  useLayoutEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }, [pathname]);
   return null;
 }
 
