@@ -196,7 +196,7 @@ export function HomeWork() {
               stack={['Docker', 'Ubuntu', 'Tailscale', 'nginx', 'Pi-hole']}
               impact={[
                 { value: '142d', label: 'Uptime' },
-                { value: '11', label: 'Services' },
+                { value: '7', label: 'Services' },
               ]}
               visual={<HomelabVisual />}
               slug="homelab"
