@@ -177,7 +177,7 @@ export function HomeWork() {
               status="In production"
               title={<>UX <em>Interviewer</em></>}
               tagline="An AI-powered interview prep tool that simulates real product-design loops. Real-time scoring, STAR feedback, and a transcript that grades itself. Built for the next wave of designers entering big tech."
-              stack={['Next.js', 'TypeScript', 'AWS Bedrock', 'DynamoDB', 'Tailwind']}
+              stack={['Next.js', 'TypeScript', 'AWS Cognito', 'DynamoDB', 'ElevenLabs']}
               impact={[
                 { value: '94%', label: 'Completion' },
               ]}
@@ -193,7 +193,7 @@ export function HomeWork() {
               status="Self-hosted"
               title={<>Home<em>lab</em></>}
               tagline="A self-hosted sandbox running on a Ubuntu mini-rack in my apartment. Plex, Jellyfin, Pi-hole, nginx reverse proxy, automated backups — all containerized. My escape hatch from the cloud."
-              stack={['Docker', 'Ubuntu', 'nginx', 'Cloudflare Tunnel', 'Terraform']}
+              stack={['Docker', 'Ubuntu', 'Tailscale', 'nginx', 'Pi-hole']}
               impact={[
                 { value: '142d', label: 'Uptime' },
                 { value: '11', label: 'Services' },
