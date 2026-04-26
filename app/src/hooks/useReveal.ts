@@ -33,15 +33,10 @@ export function useReveal() {
     const mo = new MutationObserver(observeAll);
     mo.observe(document.body, { childList: true, subtree: true });
 
-    const safety = setTimeout(() => {
-      document.querySelectorAll('.reveal, .reveal-stagger').forEach((el) => {
-        if (!el.classList.contains('in')) el.classList.add('in');
-      });
-    }, 3000);
+    // no safety timeout — rely solely on IntersectionObserver
 
     return () => {
       clearTimeout(t);
-      clearTimeout(safety);
       observer.disconnect();
       mo.disconnect();
     };
