@@ -46,7 +46,7 @@ export function HomeContact() {
         </div>
 
         <div className="pf-footer-bottom">
-          <span>© 2026 Justin Zhao · Made in NYC</span>
+          <span>© 2026 Justin Zhao · Based in NYC</span>
           <span>
             Press <kbd className="pf-footer-kbd">⌘K</kbd> for shortcuts
           </span>
