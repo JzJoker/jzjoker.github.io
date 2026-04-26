@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { TopMarquee } from './sections/home/TopMarquee';
 import { HomeNav } from './sections/home/HomeNav';
 import { HomeHero } from './sections/home/HomeHero';
@@ -7,7 +7,6 @@ import { HomeExperience } from './sections/home/HomeExperience';
 import { HomeStack } from './sections/home/HomeStack';
 import { HomeAbout } from './sections/home/HomeAbout';
 import { HomeContact } from './sections/home/HomeContact';
-import { HomeCmdK } from './sections/home/HomeCmdK';
 
 function useReveal() {
   useEffect(() => {
@@ -58,20 +57,7 @@ function useReveal() {
 }
 
 function App() {
-  const [cmdkOpen, setCmdkOpen] = useState(false);
   useReveal();
-
-  useEffect(() => {
-    const handler = (e: KeyboardEvent) => {
-      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
-        e.preventDefault();
-        setCmdkOpen((o) => !o);
-      }
-      if (e.key === 'Escape') setCmdkOpen(false);
-    };
-    window.addEventListener('keydown', handler);
-    return () => window.removeEventListener('keydown', handler);
-  }, []);
 
   return (
     <div
@@ -89,7 +75,7 @@ function App() {
       <div className="grid-bg" aria-hidden="true" />
 
       <TopMarquee />
-      <HomeNav onCmdkOpen={() => setCmdkOpen(true)} />
+      <HomeNav hasMarquee />
 
       <main>
         <HomeHero />
@@ -99,8 +85,6 @@ function App() {
         <HomeAbout />
         <HomeContact />
       </main>
-
-      <HomeCmdK open={cmdkOpen} onClose={() => setCmdkOpen(false)} />
     </div>
   );
 }
