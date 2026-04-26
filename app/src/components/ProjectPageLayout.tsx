@@ -30,9 +30,7 @@ export function ProjectPageLayout({
             <span className="transition-transform group-hover:-translate-x-1">←</span>
             Back to {backLabel}
           </Link>
-          <div className="reveal">
-            <ProjectPageHeader {...headerProps} />
-          </div>
+          <ProjectPageHeader {...headerProps} />
           {children}
         </div>
       </div>
