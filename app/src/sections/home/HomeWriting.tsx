@@ -74,7 +74,7 @@ export function HomeWriting() {
     fetch(
       `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(
         'https://medium.com/feed/@justinzhao1324',
-      )}&count=20`,
+      )}`,
     )
       .then((r) => r.json())
       .then((data) => {
