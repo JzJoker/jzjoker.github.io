@@ -45,7 +45,7 @@ const ALL: ArchiveProject[] = [
     num: '04',
     name: 'TCTools',
     desc: 'Post-image setup automation suite that streamlined device provisioning across an enterprise fleet.',
-    tags: ['TypeScript', 'PowerShell'],
+    tags: ['C#', 'PowerShell', 'WPF'],
     year: '2024',
     cat: 'Internal',
     slug: 'TCTools',
