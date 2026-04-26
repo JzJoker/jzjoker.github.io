@@ -27,7 +27,7 @@ const entries: ExperienceEntry[] = [
     date: '2024',
     role: 'Software Development Intern',
     company: <><span className="accent">RIT ITS</span> · Rochester, NY</>,
-    desc: 'Built post-image setup automation tools (TCTools) that achieved 80% faster data backups and 100% department-wide adoption. Led design and development across WPF and TypeScript.',
+    desc: 'Built post-image setup automation tools (TCTools) that achieved 80% faster data backups and 100% department-wide adoption. Led design and development across WPF, C#, and PowerShell.',
     tags: ['TypeScript', 'C#', 'PowerShell', 'WPF', 'Figma'],
   },
   {
