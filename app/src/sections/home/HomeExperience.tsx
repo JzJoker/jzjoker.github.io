@@ -34,7 +34,7 @@ const entries: ExperienceEntry[] = [
     date: '2022 — 2023',
     role: 'Web Developer',
     company: <><span className="accent">RIT HR</span> · Rochester, NY</>,
-    desc: 'Web and media developer for the Department of Human Resources. Designed and created 25+ pages, migrated 100% of department sites to a new CMS platform.',
+    desc: 'Web and media developer for the Department of Human Resources. Designed and created 25+ pages, migrated from Drupal 7 to Drupal 11 with new design system.',
     tags: ['Drupal', 'JavaScript', 'HTML', 'CSS', 'Figma'],
   },
 ];
