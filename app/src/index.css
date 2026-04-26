@@ -497,5 +497,6 @@
   .pf-writing-grid { grid-template-columns: 1fr; }
   .pf-about-grid { grid-template-columns: 1fr; gap: 48px; }
   .pf-contact-grid { grid-template-columns: 1fr; gap: 32px; }
+  .pf-footer-bottom { flex-direction: column; align-items: flex-start; gap: 8px; }
   .pf-nav-links { display: none; }
 }
