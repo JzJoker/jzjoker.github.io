@@ -1,6 +1,6 @@
 export function TopMarquee() {
   const items = [
-    { text: 'Available for select work', accent: false },
+    { text: 'Available for coffee chats', accent: false },
     { text: '◆', bullet: true },
     { text: 'Currently building UX Interviewer', accent: true },
     { text: '◆', bullet: true },

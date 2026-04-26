@@ -70,10 +70,10 @@ export function HomeAbout() {
               </span>
             </div>
             <div className="pf-now-row">
-              <span className="pf-now-row-key">Closed to</span>
+              <span className="pf-now-row-key">Arch nemesis</span>
               <span className="pf-now-row-val">
-                Recruiter spam
-                <span className="secondary">please</span>
+                Shiny object syndrome
+                <span className="secondary">not enough hours</span>
               </span>
             </div>
           </div>
