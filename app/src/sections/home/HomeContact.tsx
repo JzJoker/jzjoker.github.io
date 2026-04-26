@@ -3,7 +3,7 @@ export function HomeContact() {
     <section className="pf-contact" id="contact">
       <div className="pf-container">
         <div className="pf-section-marker reveal">
-          <span className="pf-section-marker-num">05</span>
+          <span className="pf-section-marker-num">06</span>
           <span>Get in touch</span>
           <span className="pf-section-marker-line" />
           <span className="pf-section-marker-meta">→ initiate contact</span>

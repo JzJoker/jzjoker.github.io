@@ -3,7 +3,7 @@ export function HomeAbout() {
     <section className="pf-about" id="about">
       <div className="pf-container">
         <div className="pf-section-marker reveal">
-          <span className="pf-section-marker-num">04</span>
+          <span className="pf-section-marker-num">05</span>
           <span>About · Now</span>
           <span className="pf-section-marker-line" />
           <span className="pf-section-marker-meta">last updated April 2026</span>

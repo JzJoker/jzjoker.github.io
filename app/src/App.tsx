@@ -5,6 +5,7 @@ import { HomeHero } from './sections/home/HomeHero';
 import { HomeWork } from './sections/home/HomeWork';
 import { HomeExperience } from './sections/home/HomeExperience';
 import { HomeStack } from './sections/home/HomeStack';
+import { HomeWriting } from './sections/home/HomeWriting';
 import { HomeAbout } from './sections/home/HomeAbout';
 import { HomeContact } from './sections/home/HomeContact';
 
@@ -82,6 +83,7 @@ function App() {
         <HomeWork />
         <HomeExperience />
         <HomeStack />
+        <HomeWriting />
         <HomeAbout />
         <HomeContact />
       </main>

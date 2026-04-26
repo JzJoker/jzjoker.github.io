@@ -385,6 +385,23 @@
 .pf-stack-cell-cat { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--fg-3); margin-top: auto; }
 .pf-stack-cell-years { font-size: 11px; color: var(--fg-2); }
 
+/* ---- Writing ---- */
+.pf-writing { padding: 140px 0; border-top: 1px solid var(--line); }
+.pf-writing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 48px; }
+.pf-post-card { border: 1px solid var(--line); border-radius: 6px; padding: 32px; display: flex; flex-direction: column; gap: 20px; background: var(--bg-1); min-height: 280px; text-decoration: none; color: inherit; transition: border-color 0.2s, transform 0.2s; }
+.pf-post-card:hover { border-color: var(--line-2); transform: translateY(-2px); }
+.pf-post-meta { display: flex; justify-content: space-between; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--fg-3); }
+.pf-post-title { font-family: var(--serif); font-size: 28px; line-height: 1.1; letter-spacing: -0.01em; color: var(--fg); }
+.pf-post-excerpt { font-size: 13px; color: var(--fg-2); line-height: 1.6; }
+.pf-post-footer { margin-top: auto; display: flex; justify-content: space-between; align-items: center; font-size: 11px; color: var(--fg-3); letter-spacing: 0.06em; text-transform: uppercase; }
+.pf-post-read { color: var(--accent); }
+.pf-post-card-skeleton { pointer-events: none; }
+.pf-skeleton { background: var(--line); border-radius: 3px; animation: pf-shimmer 1.4s infinite; }
+.pf-skeleton-sm { height: 10px; width: 40%; }
+.pf-skeleton-title { height: 56px; width: 90%; }
+.pf-skeleton-md { height: 12px; width: 100%; }
+@keyframes pf-shimmer { 0%,100% { opacity: 0.4; } 50% { opacity: 0.8; } }
+
 /* ---- About + Now ---- */
 .pf-about { padding: 140px 0; border-top: 1px solid var(--line); }
 .pf-about-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 80px; align-items: start; }
@@ -477,6 +494,7 @@
   .pf-timeline-list { padding-left: 32px; }
   .pf-timeline-item::before { left: -38px; }
   .pf-stack-grid { grid-template-columns: repeat(2, 1fr); }
+  .pf-writing-grid { grid-template-columns: 1fr; }
   .pf-about-grid { grid-template-columns: 1fr; gap: 48px; }
   .pf-contact-grid { grid-template-columns: 1fr; gap: 32px; }
   .pf-nav-links { display: none; }
