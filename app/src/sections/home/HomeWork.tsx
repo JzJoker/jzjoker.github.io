@@ -56,12 +56,12 @@ function UXIVisual() {
 
 function HomelabVisual() {
   const services = [
-    { name: 'docker.svc',  status: 'running', cpu: '12%', color: '#8aff80' },
-    { name: 'plex.media',  status: 'running', cpu: '34%', color: '#8aff80' },
-    { name: 'pihole.dns',  status: 'running', cpu: '02%', color: '#8aff80' },
-    { name: 'jellyfin.tv', status: 'running', cpu: '08%', color: '#8aff80' },
-    { name: 'nginx.proxy', status: 'running', cpu: '01%', color: '#8aff80' },
-    { name: 'backup.cron', status: 'idle',    cpu: '00%', color: '#ffb454' },
+    { name: 'portainer',   status: 'running', cpu: '02%', color: '#8aff80' },
+    { name: 'nginx-pm',    status: 'running', cpu: '01%', color: '#8aff80' },
+    { name: 'uptime-kuma', status: 'running', cpu: '03%', color: '#8aff80' },
+    { name: 'netdata',     status: 'running', cpu: '11%', color: '#8aff80' },
+    { name: 'homepage',    status: 'running', cpu: '01%', color: '#8aff80' },
+    { name: 'tailscale',   status: 'idle',    cpu: '00%', color: '#ffb454' },
   ];
 
   return (
@@ -179,7 +179,6 @@ export function HomeWork() {
               tagline="An AI-powered interview prep tool that simulates real product-design loops. Real-time scoring, STAR feedback, and a transcript that grades itself. Built for the next wave of designers entering big tech."
               stack={['Next.js', 'TypeScript', 'AWS Bedrock', 'DynamoDB', 'Tailwind']}
               impact={[
-                { value: '2.4k', label: 'Beta users' },
                 { value: '94%', label: 'Completion' },
               ]}
               visual={<UXIVisual />}
