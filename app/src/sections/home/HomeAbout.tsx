@@ -59,8 +59,8 @@ export function HomeAbout() {
             <div className="pf-now-row">
               <span className="pf-now-row-key">Learning</span>
               <span className="pf-now-row-val">
-                Rust async runtimes
-                <span className="secondary">slowly</span>
+                Solutions architecture
+                <span className="secondary">AWS SAA prep</span>
               </span>
             </div>
             <div className="pf-now-row">
