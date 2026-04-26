@@ -42,7 +42,12 @@ export function HomeHero() {
 
         <div className="pf-hero-stats reveal-stagger">
           <div className="pf-hero-stat">
-            <div className="pf-hero-stat-value">6</div>
+            <div className="pf-hero-stat-value">2x</div>
+            <div className="pf-hero-stat-label">Hackathon winner</div>
+            <div className="pf-hero-stat-detail">HackPrinceton, ClayHacks</div>
+          </div>
+          <div className="pf-hero-stat">
+            <div className="pf-hero-stat-value">7</div>
             <div className="pf-hero-stat-label">Projects shipped</div>
             <div className="pf-hero-stat-detail">across 4 years</div>
           </div>
@@ -55,11 +60,6 @@ export function HomeHero() {
             <div className="pf-hero-stat-value">∞</div>
             <div className="pf-hero-stat-label">Coffee consumed</div>
             <div className="pf-hero-stat-detail">measured in liters</div>
-          </div>
-          <div className="pf-hero-stat">
-            <div className="pf-hero-stat-value">3</div>
-            <div className="pf-hero-stat-label">Companies</div>
-            <div className="pf-hero-stat-detail">Vanguard · RIT ITS · RIT HR</div>
           </div>
         </div>
       </div>
