@@ -45,8 +45,8 @@ export function HomeAbout() {
             <div className="pf-now-row">
               <span className="pf-now-row-key">Reading</span>
               <span className="pf-now-row-val">
-                DDIA · Kleppmann
-                <span className="secondary">ch. 7 of 12</span>
+                The Courage to be Disliked
+                <span className="secondary">Kishimi &amp; Koga</span>
               </span>
             </div>
             <div className="pf-now-row">

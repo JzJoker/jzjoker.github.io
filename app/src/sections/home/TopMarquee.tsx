@@ -8,7 +8,7 @@ export function TopMarquee() {
     { text: '◆', bullet: true },
     { text: 'Based in NYC', accent: false },
     { text: '◆', bullet: true },
-    { text: 'Reading: Designing Data-Intensive Applications', accent: true },
+    { text: 'Reading: The Courage to be Disliked', accent: true },
     { text: '◆', bullet: true },
   ];
 
