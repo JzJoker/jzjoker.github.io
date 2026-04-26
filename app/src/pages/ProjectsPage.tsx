@@ -62,7 +62,7 @@ const ALL: ArchiveProject[] = [
   {
     num: '06',
     name: 'Department-Wide Site Redesign',
-    desc: 'Redesigned and migrated 25+ pages for RIT Human Resources, modernizing the CMS and improving accessibility.',
+    desc: 'Designed and created 25+ pages for the Department of Human Resources, migrated from Drupal 7 to Drupal 11 with new design system.',
     tags: ['Drupal', 'JavaScript', 'CSS'],
     year: '2022',
     cat: 'Work',
