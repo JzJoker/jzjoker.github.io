@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { HomeNav } from '@/sections/home/HomeNav';
+import { useReveal } from '@/hooks/useReveal';
 
 interface ArchiveProject {
   num: string;
@@ -72,6 +73,7 @@ const ALL: ArchiveProject[] = [
 const CATS = ['All', 'Product', 'Infra', 'Internal', 'Toy', 'Work'];
 
 export function ProjectsPage() {
+  useReveal();
   const [filter, setFilter] = useState('All');
   const filtered = filter === 'All' ? ALL : ALL.filter((p) => p.cat === filter);
 
@@ -85,7 +87,7 @@ export function ProjectsPage() {
             {/* Back link */}
             <Link
               to="/"
-              className="inline-flex items-center gap-2 text-[11px] tracking-[0.08em] uppercase text-muted-foreground hover:text-accent transition-colors mb-12 group"
+              className="reveal inline-flex items-center gap-2 text-[11px] tracking-[0.08em] uppercase text-muted-foreground hover:text-accent transition-colors mb-12 group"
             >
               <span className="transition-transform group-hover:-translate-x-1">←</span>
               Back to home
@@ -93,7 +95,7 @@ export function ProjectsPage() {
 
             {/* Headline */}
             <h1
-              className="mb-6 leading-none tracking-[-0.03em] text-foreground"
+              className="reveal mb-6 leading-none tracking-[-0.03em] text-foreground"
               style={{
                 fontFamily: '"Instrument Serif", Georgia, serif',
                 fontSize: 'clamp(56px, 9vw, 120px)',
@@ -112,13 +114,13 @@ export function ProjectsPage() {
             </h1>
 
             {/* Subtitle */}
-            <p className="text-sm text-muted-foreground max-w-xl mb-16 leading-relaxed">
+            <p className="reveal text-sm text-muted-foreground max-w-xl mb-16 leading-relaxed">
               Six projects spanning client work, side projects, and weekends-with-too-much-coffee
               experiments. Filter by category — or read the whole archive.
             </p>
 
             {/* Filters */}
-            <div className="flex gap-2 flex-wrap mb-8 pb-6 border-b border-border items-center">
+            <div className="reveal flex gap-2 flex-wrap mb-8 pb-6 border-b border-border items-center">
               {CATS.map((c) => (
                 <button
                   key={c}
@@ -142,7 +144,7 @@ export function ProjectsPage() {
             </div>
 
             {/* Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="reveal-stagger grid grid-cols-1 md:grid-cols-2 gap-6">
               {filtered.length === 0 && (
                 <div
                   className="col-span-full py-20 text-center text-muted-foreground text-sm"
