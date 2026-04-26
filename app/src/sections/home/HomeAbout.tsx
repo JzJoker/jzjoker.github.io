@@ -12,17 +12,18 @@ export function HomeAbout() {
         <div className="pf-about-grid">
           <div className="pf-about-prose reveal">
             <p>
-              I'm Justin — an engineer who likes the parts of the stack that <em>feel</em> things.
-              Sweating microcopy. Tuning a query plan. Naming a variable for the third time.
+              I'm Justin — an engineer who likes building products with <em>impact</em> on real
+              consumers. Crafting the perfect user flow. Optimizing the database. Caring about the
+              details most people scroll past.
             </p>
             <p>
-              I grew up writing video-game mods, studied at <strong>RIT</strong>, shipped reliability
-              tools at <strong>Vanguard</strong>, and now live in <strong>New York</strong> building
-              things that make other builders faster.
+              I grew up making websites &amp; building PCs, shipped site reliability tools at{' '}
+              <strong>Vanguard</strong>, and currently study at <strong>RIT</strong>, building things that
+              my friends and I get overly-hyped about.
             </p>
             <p>
-              When I'm not at a keyboard I'm probably on a long walk, in a ramen shop, or arguing
-              with a friend about whether the pour-over actually tastes different.
+              When I'm not locked in at a cafe I'm probably on a long walk, in a rock climbing gym,
+              or arguing with my friend about whether he is balding or not.
             </p>
           </div>
 
