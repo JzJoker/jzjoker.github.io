@@ -66,11 +66,35 @@ function SkeletonCard() {
   );
 }
 
+const CACHE_KEY = 'pf_medium_posts';
+const CACHE_TTL = 60 * 60 * 1000; // 1 hour
+
+function readCache(): Post[] | null {
+  try {
+    const raw = localStorage.getItem(CACHE_KEY);
+    if (!raw) return null;
+    const { ts, posts } = JSON.parse(raw);
+    if (Date.now() - ts > CACHE_TTL) return null;
+    return posts as Post[];
+  } catch {
+    return null;
+  }
+}
+
+function writeCache(posts: Post[]) {
+  try {
+    localStorage.setItem(CACHE_KEY, JSON.stringify({ ts: Date.now(), posts }));
+  } catch {}
+}
+
 export function HomeWriting() {
-  const [posts, setPosts] = useState<Post[]>([]);
-  const [loading, setLoading] = useState(true);
+  const cached = readCache();
+  const [posts, setPosts] = useState<Post[]>(cached ?? []);
+  const [loading, setLoading] = useState(cached === null);
 
   useEffect(() => {
+    if (cached !== null) return; // fresh cache hit — skip fetch
+
     fetch(
       `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(
         'https://medium.com/feed/@justinzhao1324',
@@ -89,11 +113,13 @@ export function HomeWriting() {
             readTime: estimateReadTime(String(item.content ?? item.description ?? '')),
             excerpt: extractExcerpt(String(item.description ?? item.content ?? '')),
           }));
+          writeCache(parsed);
           setPosts(parsed);
         }
       })
       .catch(() => {})
       .finally(() => setLoading(false));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
