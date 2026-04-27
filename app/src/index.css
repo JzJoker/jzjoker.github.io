@@ -316,9 +316,11 @@
 .pf-work-card {
   display: grid; grid-template-columns: 1fr 1.2fr; gap: 0;
   background: var(--bg-1); border: 1px solid var(--line); border-radius: 8px;
-  overflow: hidden; transition: border-color 0.3s;
+  overflow: hidden; transition: border-color 0.3s; position: relative; cursor: pointer;
 }
 .pf-work-card:hover { border-color: var(--line-2); }
+.pf-work-card:hover .pf-work-card-link { color: var(--accent); }
+.pf-work-card:hover .pf-work-card-link .pf-arrow { transform: translate(3px,-3px); }
 .pf-work-card-alt { grid-template-columns: 1.2fr 1fr; }
 .pf-work-card-alt .pf-work-card-info { order: 2; }
 .pf-work-card-alt .pf-work-card-visual { order: 1; }
@@ -344,6 +346,9 @@
 }
 .pf-work-card-link:hover { color: var(--accent); }
 .pf-work-card-link:hover .pf-arrow { transform: translate(3px,-3px); }
+.pf-work-card-stretched-link::after {
+  content: ''; position: absolute; inset: 0; z-index: 1;
+}
 .pf-arrow { display: inline-block; transition: transform 0.2s; }
 .pf-work-card-impact { display: flex; gap: 24px; text-align: right; }
 .pf-work-card-impact-item { display: flex; flex-direction: column; }
