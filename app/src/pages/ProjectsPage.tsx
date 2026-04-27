@@ -78,8 +78,9 @@ export function ProjectsPage() {
   const filtered = filter === 'All' ? ALL : ALL.filter((p) => p.cat === filter);
 
   return (
-    <div className="min-h-screen bg-background overflow-x-hidden">
+    <div className="min-h-screen overflow-x-hidden" style={{ background: 'var(--bg)', color: 'var(--fg)' }}>
       <div className="grid-bg" aria-hidden="true" />
+      <div aria-hidden="true" style={{ position: 'fixed', top: '-200px', right: '-200px', width: '800px', height: '800px', background: 'radial-gradient(circle, rgba(212,255,90,0.08) 0%, transparent 60%)', pointerEvents: 'none', zIndex: 0 }} />
       <HomeNav />
       <div className="pt-20 px-4 pb-4 sm:px-6 sm:pb-6 lg:px-8 lg:pb-8 flex flex-col gap-4 w-full box-border">
         <div className="max-w-6xl mx-auto w-full flex flex-col gap-4">
