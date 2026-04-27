@@ -19,7 +19,8 @@ export function ProjectPageLayout({
   useReveal();
   const backLabel = backHref === '/' ? 'Home' : 'Projects';
   return (
-    <div className="min-h-screen bg-background overflow-x-hidden">
+    <div className="min-h-screen overflow-x-hidden" style={{ background: 'var(--bg)', color: 'var(--fg)', fontFamily: 'var(--mono)', fontSize: '14px', lineHeight: '1.55' }}>
+      <div className="grid-bg" aria-hidden="true" />
       <HomeNav />
       <div className="pt-20 px-4 pb-4 sm:px-6 sm:pb-6 lg:px-8 lg:pb-8 flex flex-col gap-4 w-full box-border">
         <div className="max-w-6xl mx-auto w-full flex flex-col gap-4">

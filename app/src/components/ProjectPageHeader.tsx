@@ -6,7 +6,7 @@ export interface ProjectPageHeaderProps {
   /** Tagline inside the hero card (e.g. "INTERVIEW PREP FOR UX DESIGNERS"). */
   heroTagline?: string;
   icon?: ReactNode;
-  title: string;
+  title: ReactNode;
   subtitle: string;
   role: string;
   duration: string;
@@ -43,44 +43,33 @@ export function ProjectPageHeader({
       </div>
 
       {/* Title and subtitle: centered */}
-      <div className="reveal text-center space-y-1">
-        <h1 className="text-2xl sm:text-3xl font-bold uppercase tracking-tight text-foreground">
+      <div className="reveal" style={{ textAlign: 'center', marginBottom: '8px' }}>
+        <h1 className="pf-work-card-title" style={{ fontSize: 'clamp(40px, 6vw, 72px)', marginBottom: '12px' }}>
           {title}
         </h1>
-        <p className="text-sm text-muted-foreground tracking-wider max-w-2xl mx-auto">
+        <p style={{ fontFamily: 'var(--mono)', fontSize: '13px', color: 'var(--fg-2)', letterSpacing: '0.04em', maxWidth: '560px', margin: '0 auto', lineHeight: 1.6 }}>
           {subtitle}
         </p>
       </div>
 
       {/* Metadata card: 4 columns */}
-      <div className="reveal bento-card bg-card border border-border rounded-xl overflow-hidden">
-        <div className="flex flex-wrap">
-          <div className="px-5 py-4 flex-1 min-w-[120px]">
-            <span className="text-xs text-muted-foreground tracking-wider uppercase block">
-              Role
-            </span>
-            <span className="text-sm text-foreground font-medium mt-0.5 block">{role}</span>
-          </div>
-          <div className="px-5 py-4 flex-1 min-w-[120px]">
-            <span className="text-xs text-muted-foreground tracking-wider uppercase block">
-              Duration
-            </span>
-            <span className="text-sm text-foreground font-medium mt-0.5 block">{duration}</span>
-          </div>
-          <div className="px-5 py-4 flex-1 min-w-[120px]">
-            <span className="text-xs text-muted-foreground tracking-wider uppercase block">
-              Read Time
-            </span>
-            <span className="text-sm text-foreground font-medium mt-0.5 block">{readTime}</span>
-          </div>
-          <div className="px-5 py-4 flex-1 min-w-[120px]">
-            <span className="text-xs text-muted-foreground tracking-wider uppercase block">
-              Tech Stack
-            </span>
-            <span className="text-sm text-foreground font-medium mt-0.5 block">
-              {techStackSummary}
-            </span>
-          </div>
+      <div className="reveal" style={{ background: 'var(--bg-1)', border: '1px solid var(--line)', borderRadius: '6px', overflow: 'hidden' }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+          {[
+            { label: 'Role', value: role },
+            { label: 'Duration', value: duration },
+            { label: 'Read Time', value: readTime },
+            { label: 'Tech Stack', value: techStackSummary },
+          ].map((item, i, arr) => (
+            <div key={i} style={{ padding: '16px 20px', flex: '1', minWidth: '120px', borderRight: i < arr.length - 1 ? '1px solid var(--line)' : undefined }}>
+              <span style={{ display: 'block', fontSize: '9px', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--fg-3)', marginBottom: '6px' }}>
+                {item.label}
+              </span>
+              <span style={{ display: 'block', fontSize: '12px', color: 'var(--fg)', fontFamily: 'var(--mono)' }}>
+                {item.value}
+              </span>
+            </div>
+          ))}
         </div>
       </div>
     </div>

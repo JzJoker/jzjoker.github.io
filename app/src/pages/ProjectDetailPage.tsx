@@ -131,7 +131,7 @@ export function ProjectDetailPage() {
             {/* Intro */}
             <div className="reveal grid grid-cols-1 md:grid-cols-2 gap-4">
               {introParagraphs.map((p, i) => (
-                <p key={i} className="text-sm text-muted-foreground">
+                <p key={i} style={{ fontSize: '13px', color: 'var(--fg-2)', lineHeight: 1.7, fontFamily: 'var(--mono)' }}>
                   {p}
                 </p>
               ))}
@@ -146,7 +146,7 @@ export function ProjectDetailPage() {
             {/* Conclusion */}
             <div className="reveal-stagger flex flex-col gap-3">
               {conclusionParagraphs.map((p, i) => (
-                <p key={i} className="text-sm text-muted-foreground">
+                <p key={i} style={{ fontSize: '13px', color: 'var(--fg-2)', lineHeight: 1.7, fontFamily: 'var(--mono)' }}>
                   {p}
                 </p>
               ))}

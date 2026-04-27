@@ -3,7 +3,7 @@ import type { ReactNode } from 'react';
 export interface ProjectDetailHeader {
   /** Optional hero image for the large white card. If omitted, a placeholder is shown. */
   heroImageUrl?: string;
-  title: string;
+  title: ReactNode;
   subtitle: string;
   role: string;
   duration: string;
@@ -46,7 +46,7 @@ export const projectDetails: Record<string, ProjectDetailData> = {
   'ux-interviewer': {
     header: {
       heroImageUrl: '/images/interviewer-banner.png',
-      title: 'UX-INTERVIEWER',
+      title: <>UX <em>Interviewer</em></>,
       subtitle: 'The First Structured Interview Prep Platform for UI/UX Designers.',
       role: 'Full Stack Developer',
       duration: 'Nov 2025 - Present',
@@ -86,13 +86,13 @@ export const projectDetails: Record<string, ProjectDetailData> = {
       ],
     },
     conclusionParagraphs: [
-      
+
     ],
   },
   'homelab': {
     header: {
       heroImageUrl: '/images/homelab-banner.svg',
-      title: 'HOMELAB',
+      title: <>Home<em>lab</em></>,
       subtitle: 'A Self-Hosted Sandbox Environment for Learning and Privacy.',
       role: 'Hobbyist',
       duration: 'Jan 2026 - Present',
@@ -111,7 +111,7 @@ export const projectDetails: Record<string, ProjectDetailData> = {
   'TCTools': {
     header: {
       heroImageUrl: '/images/tctools-banner.svg',
-      title: 'TCTools',
+      title: <>TC<em>Tools</em></>,
       subtitle: 'Post-Image Setup Automation for Lab and Department Machines.',
       role: 'Product Owner / Developer',
       duration: 'May 2024 - Aug 2024',
