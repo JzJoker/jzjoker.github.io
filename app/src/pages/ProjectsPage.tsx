@@ -79,6 +79,7 @@ export function ProjectsPage() {
 
   return (
     <div className="min-h-screen bg-background overflow-x-hidden">
+      <div className="grid-bg" aria-hidden="true" />
       <HomeNav />
       <div className="pt-20 px-4 pb-4 sm:px-6 sm:pb-6 lg:px-8 lg:pb-8 flex flex-col gap-4 w-full box-border">
         <div className="max-w-6xl mx-auto w-full flex flex-col gap-4">
@@ -100,7 +101,7 @@ export function ProjectsPage() {
                 fontFamily: '"Instrument Serif", Georgia, serif',
                 fontSize: 'clamp(56px, 9vw, 120px)',
                 lineHeight: 0.95,
-                whiteSpace: 'nowrap',
+                whiteSpace: 'normal',
               }}
             >
               Every{' '}
@@ -120,23 +121,25 @@ export function ProjectsPage() {
             </p>
 
             {/* Filters */}
-            <div className="reveal flex gap-2 flex-wrap mb-8 pb-6 border-b border-border items-center">
-              {CATS.map((c) => (
-                <button
-                  key={c}
-                  onClick={() => setFilter(c)}
-                  className={`text-[11px] tracking-[0.08em] uppercase px-3.5 py-2 rounded border transition-all cursor-pointer ${
-                    filter === c
-                      ? 'bg-accent text-black border-accent'
-                      : 'text-muted-foreground border-border hover:text-foreground hover:border-muted-foreground'
-                  }`}
-                  style={{ fontFamily: '"JetBrains Mono", monospace' }}
-                >
-                  {c}
-                </button>
-              ))}
+            <div className="reveal flex flex-col gap-3 mb-8 pb-6 border-b border-border sm:flex-row sm:items-center sm:flex-wrap">
+              <div className="flex gap-2 flex-wrap">
+                {CATS.map((c) => (
+                  <button
+                    key={c}
+                    onClick={() => setFilter(c)}
+                    className={`text-[11px] tracking-[0.08em] uppercase px-3.5 py-2 rounded border transition-all cursor-pointer ${
+                      filter === c
+                        ? 'bg-accent text-black border-accent'
+                        : 'text-muted-foreground border-border hover:text-foreground hover:border-muted-foreground'
+                    }`}
+                    style={{ fontFamily: '"JetBrains Mono", monospace' }}
+                  >
+                    {c}
+                  </button>
+                ))}
+              </div>
               <span
-                className="ml-auto text-[11px] tracking-[0.08em] uppercase text-muted-foreground self-center"
+                className="text-[11px] tracking-[0.08em] uppercase text-muted-foreground sm:ml-auto"
                 style={{ fontFamily: '"JetBrains Mono", monospace' }}
               >
                 {filtered.length} {filtered.length === 1 ? 'project' : 'projects'}
