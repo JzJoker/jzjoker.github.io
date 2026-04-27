@@ -115,7 +115,7 @@ export function ProjectsPage() {
 
             {/* Subtitle */}
             <p className="reveal text-sm text-muted-foreground max-w-xl mb-16 leading-relaxed">
-              Six projects spanning client work, side projects, and weekends-with-too-much-coffee
+              Six projects spanning professional work, side projects, and weekends-with-too-much-coffee
               experiments. Filter by category — or read the whole archive.
             </p>
 
