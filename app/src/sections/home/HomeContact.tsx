@@ -25,7 +25,7 @@ export function HomeContact() {
           <div>
             <div className="pf-contact-block-label">Elsewhere</div>
             <div className="pf-contact-socials">
-              <a href="https://github.com/JzJoker" className="pf-contact-social">
+              <a href="https://github.com/JzJoker/" className="pf-contact-social">
                 <span>GitHub</span>
                 <span className="handle">@JzJoker</span>
               </a>
