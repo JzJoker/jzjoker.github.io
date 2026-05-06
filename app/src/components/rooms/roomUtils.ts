@@ -183,9 +183,22 @@ export function createRoomScene(mount: HTMLDivElement): RoomScene {
   // ── orbit / pan controls ──
   const target = new THREE.Vector3(0, 1.0, 0);
   const offset = new THREE.Vector3(9.5, 8.5, 9.5);
-  const radius = offset.length();
+  let radius = offset.length();
   let theta = Math.atan2(offset.x, offset.z);
   let phi = Math.acos(offset.y / radius);
+
+  const setCameraPosition = (x: number, y: number, z: number) => {
+    const off = new THREE.Vector3(x - target.x, y - target.y, z - target.z);
+    radius = off.length();
+    theta = Math.atan2(off.x, off.z);
+    phi = Math.acos(Math.max(-1, Math.min(1, off.y / radius)));
+    updateCamera();
+  };
+
+  const setTarget = (x: number, y: number, z: number) => {
+    target.set(x, y, z);
+    updateCamera();
+  };
 
   const updateCamera = () => {
     const sp = Math.sin(phi);
@@ -289,7 +302,7 @@ export function createRoomScene(mount: HTMLDivElement): RoomScene {
     });
   };
 
-  return { scene, renderer, camera, room, warmLight, enableShadows, startAnimate, setupControls, setupResize, dispose };
+  return { scene, renderer, camera, room, warmLight, enableShadows, startAnimate, setupControls, setupResize, dispose, setCameraPosition, setTarget };
 }
 
 // ─── reusable furniture helpers ────────────────────────────────────────────

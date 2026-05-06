@@ -9,7 +9,8 @@ export function ClassroomRoom() {
     const mount = mountRef.current;
     if (!mount) return;
 
-    const { room, warmLight, renderer, enableShadows, startAnimate, setupControls, setupResize, dispose } = createRoomScene(mount);
+    const { room, warmLight, renderer, enableShadows, startAnimate, setupControls, setupResize, dispose, setTarget } = createRoomScene(mount);
+    setTarget(0.7, 1.0, -0.7);
     const M = makeM;
 
     // ── student desk ──
@@ -128,6 +129,11 @@ export function ClassroomRoom() {
     leafS.position.set(1.75, 1.87, -2.8);
     room.add(leafS);
 
+    // ── overhead fill light (no visible fixture) ──
+    const overheadLight = new THREE.PointLight(0xd0dce8, 1.8, 8, 1.5);
+    overheadLight.position.set(-0.5, 3.2, -2.0);
+    room.add(overheadLight);
+
     // animate
     const stopAnimate = startAnimate((t) => {
       warmLight.intensity = 2.0 + Math.sin(t * 4.5) * 0.07 + Math.sin(t * 12.1) * 0.03;
@@ -146,6 +152,10 @@ function RoomMount({ mountRef }: { mountRef: React.RefObject<HTMLDivElement | nu
   return (
     <div style={{ position: 'relative', width: '100%' }}>
       <div ref={mountRef} style={{ width: '100%', aspectRatio: '1 / 1', overflow: 'hidden', background: 'transparent' }} />
+      <div style={{ position: 'absolute', bottom: 12, right: 14, fontFamily: 'var(--mono)', fontSize: 10, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--fg-3)', pointerEvents: 'none', opacity: 0.7, textAlign: 'right', lineHeight: 1.5 }}>
+        drag · orbit<br />
+        ⇧ drag · pan
+      </div>
     </div>
   );
 }
