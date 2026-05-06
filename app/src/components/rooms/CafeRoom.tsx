@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
-import { createRoomScene, buildCharacter, buildCafeChair, buildPlant, buildMug, makeM, warmEmissive, coolEmissive } from './roomUtils';
+import { createRoomScene, buildCharacter, buildCafeChair, buildPlant, makeM, warmEmissive, coolEmissive } from './roomUtils';
 
 export function CafeRoom() {
   const mountRef = useRef<HTMLDivElement>(null);
@@ -9,8 +9,9 @@ export function CafeRoom() {
     const mount = mountRef.current;
     if (!mount) return;
 
-    const { room, warmLight, renderer, enableShadows, startAnimate, setupControls, setupResize, dispose, setCameraPosition } = createRoomScene(mount);
+    const { room, warmLight, enableShadows, startAnimate, setupControls, setupResize, dispose, setCameraPosition, setTarget } = createRoomScene(mount);
     setCameraPosition(12.0, 7.2, 11.0);
+    setTarget(0, 0.3, 0);
     const M = makeM;
 
     // ── round bistro table ──
