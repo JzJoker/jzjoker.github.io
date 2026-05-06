@@ -14,7 +14,6 @@ export function ClassroomRoom() {
     const M = makeM;
 
     // ── student desk ──
-    const deskG = new THREE.Group();
     const deskMat = M('#333333', { r: 0.80 });
     const legMat = M('#252525', { r: 0.85 });
 
