@@ -1,6 +1,24 @@
-import { RoomCanvas } from '../../components/rooms/RoomCanvas';
+import { useState } from 'react';
+import { RoomCanvas, ROOMS } from '../../components/rooms/RoomCanvas';
+import type { RoomId } from '../../components/rooms/RoomCanvas';
+
+const btnBase: React.CSSProperties = {
+  fontFamily: 'var(--mono)',
+  fontSize: 9,
+  letterSpacing: '0.12em',
+  textTransform: 'uppercase',
+  padding: '3px 9px',
+  borderRadius: 3,
+  border: '1px solid transparent',
+  background: 'transparent',
+  cursor: 'pointer',
+  transition: 'all 0.15s',
+  lineHeight: 1,
+};
 
 export function HomeHero() {
+  const [room, setRoom] = useState<RoomId>('bedroom');
+
   return (
     <section className="pf-hero" id="hero">
       <div className="pf-hero-glow" />
@@ -38,9 +56,32 @@ export function HomeHero() {
               </div>
             </div>
           </div>
+
           <div className="pf-hero-3d-wrap reveal">
-            <RoomCanvas />
+            <RoomCanvas active={room} />
           </div>
+        </div>
+
+        {/* switcher lives outside pf-hero-3d-wrap so canvas CSS rules can't block it */}
+        <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 4, marginTop: 10, paddingRight: 2, position: 'relative', zIndex: 3 }}>
+          {ROOMS.map(({ id, label }) => {
+            const isActive = id === room;
+            return (
+              <button
+                key={id}
+                onClick={() => setRoom(id)}
+                style={{
+                  ...btnBase,
+                  borderColor: isActive ? 'var(--fg-3)' : 'transparent',
+                  background: isActive ? 'rgba(255,255,255,0.05)' : 'transparent',
+                  color: isActive ? 'var(--fg-2)' : 'var(--fg-3)',
+                  opacity: isActive ? 1 : 0.55,
+                }}
+              >
+                {label}
+              </button>
+            );
+          })}
         </div>
 
         <div className="pf-hero-stats reveal-stagger">
