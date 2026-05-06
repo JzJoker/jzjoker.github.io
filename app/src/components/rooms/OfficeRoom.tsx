@@ -9,7 +9,7 @@ export function OfficeRoom() {
     const mount = mountRef.current;
     if (!mount) return;
 
-    const { room, warmLight, renderer, enableShadows, startAnimate, setupControls, setupResize, dispose } = createRoomScene(mount);
+    const { room, warmLight, enableShadows, startAnimate, setupControls, setupResize, dispose } = createRoomScene(mount);
     const M = makeM;
 
     // ── wide desk (extended to cover accessories) ──
@@ -58,6 +58,19 @@ export function OfficeRoom() {
     enableShadows(mon2G);
     room.add(mon2G);
 
+
+    // ── keyboard ──
+    const kbG = new THREE.Group();
+    // body
+    kbG.add(mesh(new THREE.BoxGeometry(0.58, 0.014, 0.22), M('#1e1e1e', { r: 0.7 }), 0, 0.007, 0));
+    // key rows (4 thin raised strips)
+    [-0.07, -0.02, 0.03, 0.08].forEach((rz) => {
+      kbG.add(mesh(new THREE.BoxGeometry(0.52, 0.006, 0.036), M('#252525', { r: 0.8 }), 0, 0.017, rz));
+    });
+    // small trackpad
+    kbG.add(mesh(new THREE.BoxGeometry(0.16, 0.004, 0.10), M('#1a1a1a', { r: 0.4 }), 0, 0.016, 0.082));
+    kbG.position.set(-1.3, 0.827, -2.42);
+    room.add(kbG);
 
     // ── pen cup + pens ──
     const penCup = new THREE.Mesh(new THREE.CylinderGeometry(0.056, 0.050, 0.12, 12), M('#2a2a2a', { r: 0.9 }));
@@ -109,7 +122,7 @@ export function OfficeRoom() {
       cabG.add(mesh(new THREE.BoxGeometry(0.61, 0.018, 0.41), M('#141414', { r: 0.9 }), 0, 0.70 + dy, 0));
       cabG.add(mesh(new THREE.BoxGeometry(0.14, 0.03, 0.018), M('#2e2e2e', { r: 0.5 }), 0, 0.70 + dy - 0.11, 0.21));
     });
-    cabG.position.set(1.10, 0, -2.6);
+    cabG.position.set(-3.50, 0, -2.6);
     enableShadows(cabG);
     room.add(cabG);
 
