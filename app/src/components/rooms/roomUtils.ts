@@ -60,8 +60,6 @@ export function buildCharacter(pose: Pose): THREE.Group {
     // forearms down to keyboard
     add(new THREE.BoxGeometry(0.09, 0.30, 0.09), skin, -0.22, 0.86, -0.22, -1.25);
     add(new THREE.BoxGeometry(0.09, 0.30, 0.09), skin,  0.22, 0.86, -0.22, -1.25);
-    add(new THREE.BoxGeometry(0.10, 0.04, 0.12), skin, -0.18, 0.82, -0.36);
-    add(new THREE.BoxGeometry(0.10, 0.04, 0.12), skin,  0.18, 0.82, -0.36);
     // head
     add(new THREE.BoxGeometry(0.10, 0.08, 0.10), skin, 0, 1.30, -0.04);
     add(new THREE.BoxGeometry(0.26, 0.28, 0.26), skin, 0, 1.46, -0.06, -0.15);
@@ -74,11 +72,9 @@ export function buildCharacter(pose: Pose): THREE.Group {
     // left arm resting on table
     add(new THREE.BoxGeometry(0.10, 0.32, 0.10), shirt, -0.26, 1.00, 0.0, -0.5);
     add(new THREE.BoxGeometry(0.09, 0.30, 0.09), skin,  -0.22, 0.84, -0.24, -1.3);
-    add(new THREE.BoxGeometry(0.10, 0.04, 0.12), skin,  -0.18, 0.80, -0.38);
     // right arm raised — holding cup
     add(new THREE.BoxGeometry(0.10, 0.32, 0.10), shirt, 0.26, 1.05, 0.0, -1.2, 0, -0.2);
     add(new THREE.BoxGeometry(0.09, 0.28, 0.09), skin,  0.26, 1.22, -0.18, -0.4);
-    add(new THREE.BoxGeometry(0.10, 0.04, 0.10), skin,  0.26, 1.36, -0.22);
     // tiny cup in raised hand
     const cupHeld = new THREE.Mesh(new THREE.CylinderGeometry(0.04, 0.032, 0.07, 8), makeM('#2a2a2a', { r: 0.9 }));
     cupHeld.position.set(0.26, 1.43, -0.22);
@@ -106,6 +102,8 @@ export interface RoomScene {
   setupControls: () => () => void;
   setupResize: () => () => void;
   dispose: () => void;
+  setCameraPosition: (x: number, y: number, z: number) => void;
+  setTarget: (x: number, y: number, z: number) => void;
 }
 
 export function createRoomScene(mount: HTMLDivElement): RoomScene {

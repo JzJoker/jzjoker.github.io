@@ -290,12 +290,6 @@ export function Room3D() {
     forearmR.position.set(0.22, 0.86, -0.22);
     forearmR.rotation.x = -1.25;
     person.add(forearmR);
-    const handL = new THREE.Mesh(new THREE.BoxGeometry(0.10, 0.04, 0.12), skinMat);
-    handL.position.set(-0.18, 0.82, -0.36);
-    person.add(handL);
-    const handR = new THREE.Mesh(new THREE.BoxGeometry(0.10, 0.04, 0.12), skinMat);
-    handR.position.set(0.18, 0.82, -0.36);
-    person.add(handR);
     const neck = new THREE.Mesh(new THREE.BoxGeometry(0.10, 0.08, 0.10), skinMat);
     neck.position.set(0, 1.30, -0.04);
     person.add(neck);
