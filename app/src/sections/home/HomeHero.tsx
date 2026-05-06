@@ -1,4 +1,4 @@
-import { Room3D } from '../../components/Room3D';
+import { RoomCanvas } from '../../components/rooms/RoomCanvas';
 
 export function HomeHero() {
   return (
@@ -39,7 +39,7 @@ export function HomeHero() {
             </div>
           </div>
           <div className="pf-hero-3d-wrap reveal">
-            <Room3D />
+            <RoomCanvas />
           </div>
         </div>
 
