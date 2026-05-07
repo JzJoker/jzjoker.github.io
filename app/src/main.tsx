@@ -1,7 +1,7 @@
 import { StrictMode, useLayoutEffect } from 'react'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
-import { Analytics } from '@vercel/analytics/react'
+import { inject } from '@vercel/analytics'
 import './index.css'
 import App from './App.tsx'
 import { ProjectsPage } from './pages/ProjectsPage.tsx'
@@ -16,6 +16,8 @@ function ScrollToTop() {
   return null;
 }
 
+inject();
+
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <BrowserRouter>
@@ -26,7 +28,6 @@ createRoot(document.getElementById('root')!).render(
         <Route path="/projects/:slug" element={<ProjectDetailPage />} />
         <Route path="/experience" element={<ExperiencesPage />} />
       </Routes>
-      <Analytics />
     </BrowserRouter>
   </StrictMode>,
 )
