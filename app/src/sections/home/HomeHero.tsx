@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { RoomCanvas, ROOMS } from '../../components/rooms/RoomCanvas';
 import type { RoomId } from '../../components/rooms/RoomCanvas';
-import { useCalendarRoom, getCachedRoom } from '../../hooks/useCalendarRoom';
+import { useCalendarRoom } from '../../hooks/useCalendarRoom';
 
 const ROOM_STATUS: Record<string, string> = {
   bedroom:   'at home',
@@ -25,7 +25,7 @@ const btnBase: React.CSSProperties = {
 };
 
 export function HomeHero() {
-  const [room, setRoom] = useState<RoomId>(() => getCachedRoom() ?? 'bedroom');
+  const [room, setRoom] = useState<RoomId>('bedroom');
   const [isManual, setIsManual] = useState(false);
   const calendarRoom = useCalendarRoom();
 
