@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { RoomCanvas, ROOMS } from '../../components/rooms/RoomCanvas';
 import type { RoomId } from '../../components/rooms/RoomCanvas';
 import { useCalendarRoom } from '../../hooks/useCalendarRoom';
@@ -26,12 +26,12 @@ const btnBase: React.CSSProperties = {
 
 export function HomeHero() {
   const [room, setRoom] = useState<RoomId>('bedroom');
-  const userOverride = useRef(false);
+  const [isManual, setIsManual] = useState(false);
   const calendarRoom = useCalendarRoom();
 
   useEffect(() => {
-    if (calendarRoom && !userOverride.current) setRoom(calendarRoom);
-  }, [calendarRoom]);
+    if (calendarRoom && !isManual) setRoom(calendarRoom);
+  }, [calendarRoom, isManual]);
 
   return (
     <section className="pf-hero" id="hero">
@@ -71,11 +71,13 @@ export function HomeHero() {
             </div>
           </div>
 
-          <div className="pf-hero-3d-wrap reveal" style={{ position: 'relative' }}>
+          <div className="pf-hero-3d-wrap reveal">
             <RoomCanvas active={room} />
-            <div style={{ position: 'absolute', bottom: 12, left: 14, fontFamily: 'var(--mono)', fontSize: 10, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--fg-3)', pointerEvents: 'none', opacity: 0.7, lineHeight: 1.5 }}>
-              Currently {ROOM_STATUS[room]}
-            </div>
+            <span style={{ position: 'absolute', bottom: 12, left: 14, zIndex: 10, fontFamily: 'var(--mono)', fontSize: 10, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--fg-2)', pointerEvents: 'none', opacity: 0.9, lineHeight: 1.5 }}>
+              {isManual
+                ? `Viewing ${ROOMS.find((r) => r.id === room)?.label} scene`
+                : `Currently ${ROOM_STATUS[room]}`}
+            </span>
           </div>
         </div>
 
@@ -86,7 +88,7 @@ export function HomeHero() {
             return (
               <button
                 key={id}
-                onClick={() => { userOverride.current = true; setRoom(id); }}
+                onClick={() => { setIsManual(true); setRoom(id); }}
                 style={{
                   ...btnBase,
                   borderColor: isActive ? 'var(--fg-3)' : 'transparent',
