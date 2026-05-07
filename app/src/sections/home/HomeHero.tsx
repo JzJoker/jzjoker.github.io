@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { RoomCanvas, ROOMS } from '../../components/rooms/RoomCanvas';
 import type { RoomId } from '../../components/rooms/RoomCanvas';
+import { useCalendarRoom } from '../../hooks/useCalendarRoom';
 
 const btnBase: React.CSSProperties = {
   fontFamily: 'var(--mono)',
@@ -18,6 +19,12 @@ const btnBase: React.CSSProperties = {
 
 export function HomeHero() {
   const [room, setRoom] = useState<RoomId>('bedroom');
+  const userOverride = useRef(false);
+  const calendarRoom = useCalendarRoom();
+
+  useEffect(() => {
+    if (calendarRoom && !userOverride.current) setRoom(calendarRoom);
+  }, [calendarRoom]);
 
   return (
     <section className="pf-hero" id="hero">
@@ -69,7 +76,7 @@ export function HomeHero() {
             return (
               <button
                 key={id}
-                onClick={() => setRoom(id)}
+                onClick={() => { userOverride.current = true; setRoom(id); }}
                 style={{
                   ...btnBase,
                   borderColor: isActive ? 'var(--fg-3)' : 'transparent',
