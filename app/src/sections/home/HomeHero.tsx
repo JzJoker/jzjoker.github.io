@@ -3,6 +3,13 @@ import { RoomCanvas, ROOMS } from '../../components/rooms/RoomCanvas';
 import type { RoomId } from '../../components/rooms/RoomCanvas';
 import { useCalendarRoom } from '../../hooks/useCalendarRoom';
 
+const ROOM_STATUS: Record<string, string> = {
+  bedroom:   'at home',
+  office:    'in the office',
+  cafe:      'at a café',
+  classroom: 'in class',
+};
+
 const btnBase: React.CSSProperties = {
   fontFamily: 'var(--mono)',
   fontSize: 9,
@@ -64,8 +71,11 @@ export function HomeHero() {
             </div>
           </div>
 
-          <div className="pf-hero-3d-wrap reveal">
+          <div className="pf-hero-3d-wrap reveal" style={{ position: 'relative' }}>
             <RoomCanvas active={room} />
+            <div style={{ position: 'absolute', bottom: 12, left: 14, fontFamily: 'var(--mono)', fontSize: 10, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--fg-3)', pointerEvents: 'none', opacity: 0.7, lineHeight: 1.5 }}>
+              Currently {ROOM_STATUS[room]}
+            </div>
           </div>
         </div>
 
