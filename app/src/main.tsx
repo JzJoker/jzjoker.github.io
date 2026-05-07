@@ -1,6 +1,7 @@
 import { StrictMode, useLayoutEffect } from 'react'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
+import { Analytics } from '@vercel/analytics/react'
 import './index.css'
 import App from './App.tsx'
 import { ProjectsPage } from './pages/ProjectsPage.tsx'
@@ -25,6 +26,7 @@ createRoot(document.getElementById('root')!).render(
         <Route path="/projects/:slug" element={<ProjectDetailPage />} />
         <Route path="/experience" element={<ExperiencesPage />} />
       </Routes>
+      <Analytics />
     </BrowserRouter>
   </StrictMode>,
 )
