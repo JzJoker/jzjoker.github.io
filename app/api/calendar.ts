@@ -32,6 +32,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.json({ room: DEFAULT_ROOM });
   }
 
+  const debug = req.query.debug === '1';
+
   try {
     const token = await getAccessToken();
     const authHeader = { Authorization: `Bearer ${token}` };
@@ -49,9 +51,18 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const timeMin = now.toISOString();
     const timeMax = new Date(now.getTime() + 1000).toISOString(); // 1s future
 
+    if (debug) {
+      return res.json({
+        calendars: listData.items?.map((c) => c.summary),
+        now: now.toISOString(),
+        timeMin,
+        timeMax,
+      });
+    }
+
     // Check each mapped calendar for a current event
     for (const [calName, roomId] of Object.entries(CALENDAR_ROOM_MAP)) {
-      const cal = listData.items?.find((c) => c.summary === calName);
+      const cal = listData.items?.find((c) => c.summary.toLowerCase() === calName.toLowerCase());
       if (!cal) continue;
 
       const eventsRes = await fetch(
@@ -73,7 +84,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     }
 
     return res.json({ room: DEFAULT_ROOM });
-  } catch {
-    return res.json({ room: DEFAULT_ROOM });
+  } catch (e) {
+    return res.json({ room: DEFAULT_ROOM, error: String(e) });
   }
 }
