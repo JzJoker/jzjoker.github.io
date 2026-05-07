@@ -514,7 +514,7 @@
   .pf-work-card-info { padding: 32px; min-height: auto; }
   .pf-work-card-visual { min-height: 320px; }
   .pf-hero-grid { grid-template-columns: 1fr; }
-  .pf-hero-3d-wrap { max-height: 400px; }
+  .pf-hero-3d-wrap { min-height: unset; max-height: 400px; }
   .pf-hero-stats { grid-template-columns: repeat(2, 1fr); }
   .pf-timeline { grid-template-columns: 1fr; gap: 24px; }
   .pf-timeline::before { left: 6px; }
