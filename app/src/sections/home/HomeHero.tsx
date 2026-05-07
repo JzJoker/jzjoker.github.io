@@ -25,9 +25,9 @@ const btnBase: React.CSSProperties = {
 };
 
 export function HomeHero() {
-  const [room, setRoom] = useState<RoomId>('bedroom');
   const [isManual, setIsManual] = useState(false);
   const calendarRoom = useCalendarRoom();
+  const [room, setRoom] = useState<RoomId | null>(null);
 
   useEffect(() => {
     if (calendarRoom && !isManual) setRoom(calendarRoom);
@@ -72,11 +72,13 @@ export function HomeHero() {
           </div>
 
           <div className="pf-hero-3d-wrap reveal">
-            <RoomCanvas active={room} />
+            {room && <RoomCanvas active={room} />}
             <span style={{ position: 'absolute', bottom: 12, left: 14, zIndex: 10, fontFamily: 'var(--mono)', fontSize: 10, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--fg-2)', pointerEvents: 'none', opacity: 0.9, lineHeight: 1.5 }}>
-              {isManual
-                ? `Viewing ${ROOMS.find((r) => r.id === room)?.label} scene`
-                : `Currently ${ROOM_STATUS[room]}`}
+              {!room
+                ? 'Currently loading...'
+                : isManual
+                  ? `Viewing ${ROOMS.find((r) => r.id === room)?.label} scene`
+                  : `Currently ${ROOM_STATUS[room]}`}
             </span>
           </div>
         </div>

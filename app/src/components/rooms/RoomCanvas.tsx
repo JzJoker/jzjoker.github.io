@@ -21,7 +21,7 @@ export function RoomCanvas({ active }: { active: RoomId }) {
       fallback={
         <div style={{ width: '100%', aspectRatio: '1 / 1', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
           <span style={{ fontFamily: 'var(--mono)', fontSize: 10, color: 'var(--fg-3)', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
-            loading
+            rendering
           </span>
         </div>
       }
