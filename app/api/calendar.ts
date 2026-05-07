@@ -44,8 +44,10 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const listData = await listRes.json() as { items: { id: string; summary: string }[] };
 
     const now = new Date();
+    // timeMin filters on event END (must end after now = still ongoing)
+    // timeMax filters on event START (must start before now = already started)
     const timeMin = now.toISOString();
-    const timeMax = new Date(now.getTime() + 60_000).toISOString(); // +1 minute window
+    const timeMax = new Date(now.getTime() + 1000).toISOString(); // 1s future
 
     // Check each mapped calendar for a current event
     for (const [calName, roomId] of Object.entries(CALENDAR_ROOM_MAP)) {
