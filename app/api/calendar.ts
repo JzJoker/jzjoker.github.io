@@ -43,22 +43,18 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       'https://www.googleapis.com/calendar/v3/users/me/calendarList',
       { headers: authHeader },
     );
-    const listData = await listRes.json() as { items: { id: string; summary: string }[] };
+    const listRaw = await listRes.json();
+    const listData = listRaw as { items: { id: string; summary: string }[] };
+
+    if (debug) {
+      return res.json({ status: listRes.status, listRaw });
+    }
 
     const now = new Date();
     // timeMin filters on event END (must end after now = still ongoing)
     // timeMax filters on event START (must start before now = already started)
     const timeMin = now.toISOString();
     const timeMax = new Date(now.getTime() + 1000).toISOString(); // 1s future
-
-    if (debug) {
-      return res.json({
-        calendars: listData.items?.map((c) => c.summary),
-        now: now.toISOString(),
-        timeMin,
-        timeMax,
-      });
-    }
 
     // Check each mapped calendar for a current event
     for (const [calName, roomId] of Object.entries(CALENDAR_ROOM_MAP)) {

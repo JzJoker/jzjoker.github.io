@@ -71,7 +71,7 @@ export function HomeHero() {
             </div>
           </div>
 
-          <div className="pf-hero-3d-wrap reveal">
+          <div className="pf-hero-3d-wrap reveal scale-120">
             {room && <RoomCanvas active={room} />}
             <span style={{ position: 'absolute', bottom: 12, left: 14, zIndex: 10, fontFamily: 'var(--mono)', fontSize: 10, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--fg-2)', pointerEvents: 'none', opacity: 0.9, lineHeight: 1.5 }}>
               {!room
