@@ -2,6 +2,7 @@ import { TopMarquee } from './sections/home/TopMarquee';
 import { useReveal } from './hooks/useReveal';
 import { HomeNav } from './sections/home/HomeNav';
 import { HomeHero } from './sections/home/HomeHero';
+import { HomeAwards } from './sections/home/HomeAwards';
 import { HomeWork } from './sections/home/HomeWork';
 import { HomeExperience } from './sections/home/HomeExperience';
 import { HomeStack } from './sections/home/HomeStack';
@@ -33,6 +34,7 @@ function App() {
 
       <main>
         <HomeHero />
+        <HomeAwards />
         <HomeWork />
         <HomeExperience />
         <HomeStack />
