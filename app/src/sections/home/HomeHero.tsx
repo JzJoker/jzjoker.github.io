@@ -107,9 +107,9 @@ export function HomeHero() {
 
         <div className="pf-hero-stats reveal-stagger">
           <div className="pf-hero-stat">
-            <div className="pf-hero-stat-value">2x</div>
+            <div className="pf-hero-stat-value">3x</div>
             <div className="pf-hero-stat-label">Hackathon winner</div>
-            <div className="pf-hero-stat-detail">HackPrinceton, ClayHacks</div>
+            <div className="pf-hero-stat-detail">UncommonHacks, HackPrinceton, ClayHacks</div>
           </div>
           <div className="pf-hero-stat">
             <div className="pf-hero-stat-value">5+</div>
