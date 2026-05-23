@@ -20,6 +20,7 @@ const cmdkItems: CmdKItem[] = [
   { section: 'Actions',  icon: '✉', label: 'Email Justin',     shortcut: '⌘ E', action: 'mailto',    target: 'hello@justinzhao.dev' },
   { section: 'Actions',  icon: '↗', label: 'Open GitHub',      shortcut: '⌘ G', action: 'extlink',   target: 'https://github.com/JzJoker' },
   { section: 'Actions',  icon: '↗', label: 'Open LinkedIn',    shortcut: '⌘ L', action: 'extlink',   target: 'https://linkedin.com/in/justinzhao1' },
+  { section: 'Actions',  icon: '↗', label: 'Open Devpost',     shortcut: '⌘ D', action: 'extlink',   target: 'https://devpost.com/JzJoker' },
   { section: 'Easter eggs', icon: '☕', label: 'Pour me a coffee',             shortcut: 'easter', action: 'easter', target: 'coffee' },
   { section: 'Easter eggs', icon: '🎵', label: "What I'm listening to",       shortcut: 'easter', action: 'easter', target: 'music' },
   { section: 'Easter eggs', icon: '⚡', label: 'sudo make me a sandwich',     shortcut: 'easter', action: 'easter', target: 'sandwich' },
