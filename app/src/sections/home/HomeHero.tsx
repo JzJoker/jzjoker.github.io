@@ -4,10 +4,11 @@ import type { RoomId } from '../../components/rooms/RoomCanvas';
 import { useCalendarRoom } from '../../hooks/useCalendarRoom';
 
 const ROOM_STATUS: Record<string, string> = {
-  bedroom:   'at home',
-  office:    'in the office',
-  cafe:      'at a café',
-  classroom: 'in class',
+  bedroom:    'at home',
+  office:     'in the office',
+  cafe:       'at a café',
+  classroom:  'in class',
+  networking: 'at a networking event',
 };
 
 const btnBase: React.CSSProperties = {

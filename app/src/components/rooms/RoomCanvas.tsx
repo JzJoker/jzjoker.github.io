@@ -1,17 +1,19 @@
 import { lazy, Suspense } from 'react';
 
-const BedroomRoom   = lazy(() => import('../Room3D').then((m) => ({ default: m.Room3D })));
-const OfficeRoom    = lazy(() => import('./OfficeRoom').then((m) => ({ default: m.OfficeRoom })));
-const CafeRoom      = lazy(() => import('./CafeRoom').then((m) => ({ default: m.CafeRoom })));
-const ClassroomRoom = lazy(() => import('./ClassroomRoom').then((m) => ({ default: m.ClassroomRoom })));
+const BedroomRoom      = lazy(() => import('../Room3D').then((m) => ({ default: m.Room3D })));
+const OfficeRoom       = lazy(() => import('./OfficeRoom').then((m) => ({ default: m.OfficeRoom })));
+const CafeRoom         = lazy(() => import('./CafeRoom').then((m) => ({ default: m.CafeRoom })));
+const ClassroomRoom    = lazy(() => import('./ClassroomRoom').then((m) => ({ default: m.ClassroomRoom })));
+const NetworkingRoom   = lazy(() => import('./NetworkingRoom').then((m) => ({ default: m.NetworkingRoom })));
 
-export type RoomId = 'bedroom' | 'office' | 'cafe' | 'classroom';
+export type RoomId = 'bedroom' | 'office' | 'cafe' | 'classroom' | 'networking';
 
 export const ROOMS: { id: RoomId; label: string }[] = [
-  { id: 'bedroom',   label: 'home'   },
-  { id: 'office',    label: 'office' },
-  { id: 'cafe',      label: 'café'   },
-  { id: 'classroom', label: 'study'  },
+  { id: 'bedroom',    label: 'home'    },
+  { id: 'office',     label: 'office'  },
+  { id: 'cafe',       label: 'café'    },
+  { id: 'classroom',  label: 'study'   },
+  { id: 'networking', label: 'event'   },
 ];
 
 /** Renders only the active room canvas — no switcher UI. */
@@ -26,10 +28,11 @@ export function RoomCanvas({ active }: { active: RoomId }) {
         </div>
       }
     >
-      {active === 'bedroom'   && <BedroomRoom />}
-      {active === 'office'    && <OfficeRoom />}
-      {active === 'cafe'      && <CafeRoom />}
-      {active === 'classroom' && <ClassroomRoom />}
+      {active === 'bedroom'    && <BedroomRoom />}
+      {active === 'office'     && <OfficeRoom />}
+      {active === 'cafe'       && <CafeRoom />}
+      {active === 'classroom'  && <ClassroomRoom />}
+      {active === 'networking' && <NetworkingRoom />}
     </Suspense>
   );
 }
