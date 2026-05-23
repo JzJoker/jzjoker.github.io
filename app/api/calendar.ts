@@ -1,9 +1,11 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 
 const CALENDAR_ROOM_MAP: Record<string, string> = {
-  Classes: 'classroom',
-  Work: 'office',
-  Cafe: 'cafe',
+  Classes:    'classroom',
+  Work:       'office',
+  Cafe:       'cafe',
+  Networking: 'networking',
+  Event:      'networking',
 };
 
 const DEFAULT_ROOM = 'bedroom';
