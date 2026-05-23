@@ -35,7 +35,7 @@ export function HomeContact() {
               </a>
 	      <a href="https://devpost.com/JzJoker" className="pf-contact-social">
                 <span>Devpost</span>
-                <span className="handle">/in/justinzhao1</span>
+                <span className="handle">JzJoker</span>
               </a>
               <a href="https://medium.com/@justinzhao1324" className="pf-contact-social">
                 <span>Medium</span>
