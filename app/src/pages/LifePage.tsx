@@ -194,7 +194,7 @@ export function LifePage() {
                 {gh.data === null ? (
                   <div className="text-[11px] text-muted-foreground">Loading…</div>
                 ) : (
-                  <Heatmap data={gh.data} colorAccent="#d4ff5a" />
+                  <Heatmap data={gh.data} colorAccent="#d4ff5a" unitLabel="contributions" />
                 )}
               </Card>
 
@@ -210,7 +210,7 @@ export function LifePage() {
                 {lc.data === null ? (
                   <div className="text-[11px] text-muted-foreground">Loading…</div>
                 ) : (
-                  <Heatmap data={lc.data} colorAccent="#ffa116" />
+                  <Heatmap data={lc.data} colorAccent="#ffa116" unitLabel="problems" />
                 )}
               </Card>
 
@@ -219,7 +219,7 @@ export function LifePage() {
                 subtitle="Check-ins — manually logged."
                 meta={`${crunch.total} sessions`}
               >
-                <Heatmap data={crunch.data} colorAccent="#ff2d55" />
+                <Heatmap data={crunch.data} colorAccent="#ff2d55" unitLabel="check-ins" />
               </Card>
 
               <Card

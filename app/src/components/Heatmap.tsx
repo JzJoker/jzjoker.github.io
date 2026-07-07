@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useMemo, useRef, useState } from 'react';
 
 export interface HeatmapDay {
   date: string; // YYYY-MM-DD
@@ -11,6 +11,7 @@ interface HeatmapProps {
   colorAccent?: string; // hex or rgb; defaults to accent lime
   emptyColor?: string;
   label?: string;
+  unitLabel?: string; // e.g. "contributions", "problems"
 }
 
 const MONTH_LABELS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -26,20 +27,41 @@ function hexToRgb(hex: string): [number, number, number] {
   return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
 }
 
+function formatDate(iso: string): string {
+  const [y, m, d] = iso.split('-').map(Number);
+  const date = new Date(Date.UTC(y, m - 1, d));
+  return date.toLocaleDateString(undefined, {
+    weekday: 'short',
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric',
+    timeZone: 'UTC',
+  });
+}
+
+interface Hover {
+  day: HeatmapDay;
+  x: number;
+  y: number;
+}
+
 export function Heatmap({
   data,
   weeks = 53,
   colorAccent = '#d4ff5a',
   emptyColor = 'rgba(255,255,255,0.05)',
   label,
+  unitLabel = 'contributions',
 }: HeatmapProps) {
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const [hover, setHover] = useState<Hover | null>(null);
+
   const { grid, months, max } = useMemo(() => {
     const map = new Map<string, number>();
     for (const d of data) map.set(d.date, d.count);
 
     const today = new Date();
     today.setUTCHours(0, 0, 0, 0);
-    // End on the most recent Saturday (>= today), start weeks*7 days back Sunday
     const endDay = new Date(today);
     endDay.setUTCDate(endDay.getUTCDate() + (6 - endDay.getUTCDay()));
     const start = new Date(endDay);
@@ -91,8 +113,20 @@ export function Heatmap({
   const width = weeks * (cellSize + gap);
   const height = 7 * (cellSize + gap) + 18;
 
+  const handleEnter = (day: HeatmapDay, e: React.MouseEvent<SVGRectElement>) => {
+    const wrapper = wrapperRef.current;
+    if (!wrapper) return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    const wrapperRect = wrapper.getBoundingClientRect();
+    setHover({
+      day,
+      x: rect.left - wrapperRect.left + rect.width / 2,
+      y: rect.top - wrapperRect.top,
+    });
+  };
+
   return (
-    <div className="w-full">
+    <div ref={wrapperRef} className="w-full" style={{ position: 'relative' }}>
       {label && (
         <div className="text-[10px] tracking-[0.12em] uppercase text-muted-foreground mb-2">
           {label}
@@ -127,14 +161,43 @@ export function Heatmap({
                   rx={2}
                   ry={2}
                   fill={cellColor(day.count)}
-                >
-                  <title>{`${day.date} — ${day.count}`}</title>
-                </rect>
+                  onMouseEnter={(e) => handleEnter(day, e)}
+                  onMouseLeave={() => setHover(null)}
+                  style={{ cursor: 'pointer' }}
+                />
               );
             }),
           )}
         </svg>
       </div>
+      {hover && (
+        <div
+          role="tooltip"
+          style={{
+            position: 'absolute',
+            left: hover.x,
+            top: hover.y - 8,
+            transform: 'translate(-50%, -100%)',
+            pointerEvents: 'none',
+            background: 'rgba(10,10,12,0.96)',
+            border: '1px solid rgba(255,255,255,0.12)',
+            borderRadius: 6,
+            padding: '6px 10px',
+            fontFamily: '"JetBrains Mono", monospace',
+            fontSize: 11,
+            lineHeight: 1.35,
+            color: 'rgba(255,255,255,0.92)',
+            whiteSpace: 'nowrap',
+            zIndex: 20,
+            boxShadow: '0 8px 24px rgba(0,0,0,0.4)',
+          }}
+        >
+          <div style={{ color: colorAccent }}>
+            {hover.day.count} {unitLabel}
+          </div>
+          <div style={{ color: 'rgba(255,255,255,0.55)' }}>{formatDate(hover.day.date)}</div>
+        </div>
+      )}
     </div>
   );
 }
