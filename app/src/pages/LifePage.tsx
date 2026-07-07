@@ -77,6 +77,30 @@ function useCrunchHeatmap() {
   return { data, total: CRUNCH_CHECKINS.length };
 }
 
+interface Duo {
+  name: string | null;
+  streak: number;
+  totalXp: number;
+  language: string;
+  streakStart: string | null;
+  streakEnd: string | null;
+  courseXp: number;
+}
+
+function useDuolingo() {
+  const [data, setData] = useState<Duo | null>(null);
+  useEffect(() => {
+    fetch('/api/duolingo')
+      .then((r) => r.json())
+      .then((j: Duo & { error?: string }) => {
+        if (j.error) setData(null);
+        else setData(j);
+      })
+      .catch(() => setData(null));
+  }, []);
+  return data;
+}
+
 function useTopRepos() {
   const [repos, setRepos] = useState<Repo[] | null>(null);
   useEffect(() => {
@@ -134,6 +158,7 @@ export function LifePage() {
   const gh = useGitHubHeatmap();
   const lc = useLeetCodeHeatmap();
   const crunch = useCrunchHeatmap();
+  const duo = useDuolingo();
   const repos = useTopRepos();
 
   return (
@@ -211,6 +236,56 @@ export function LifePage() {
                   <div className="text-[11px] text-muted-foreground">Loading…</div>
                 ) : (
                   <Heatmap data={lc.data} colorAccent="#ffa116" unitLabel="problems" />
+                )}
+              </Card>
+
+              <Card
+                title="Duolingo"
+                subtitle={
+                  duo
+                    ? `@justinzhao869949 · learning ${duo.language}`
+                    : '@justinzhao869949'
+                }
+                meta={duo ? `${duo.totalXp.toLocaleString()} XP` : undefined}
+              >
+                {duo === null ? (
+                  <div className="text-[11px] text-muted-foreground">Loading…</div>
+                ) : (
+                  <div className="flex items-baseline gap-8 flex-wrap">
+                    <div>
+                      <div
+                        className="text-accent leading-none"
+                        style={{
+                          fontFamily: '"Instrument Serif", Georgia, serif',
+                          fontSize: '72px',
+                          letterSpacing: '-0.03em',
+                        }}
+                      >
+                        {duo.streak}
+                      </div>
+                      <div className="text-[10px] tracking-[0.12em] uppercase text-muted-foreground mt-1">
+                        day streak
+                      </div>
+                    </div>
+                    {duo.streakStart && duo.streakEnd && (
+                      <div>
+                        <div className="text-[13px] text-foreground">
+                          {duo.streakStart} → {duo.streakEnd}
+                        </div>
+                        <div className="text-[10px] tracking-[0.12em] uppercase text-muted-foreground mt-1">
+                          current run
+                        </div>
+                      </div>
+                    )}
+                    <div>
+                      <div className="text-[13px] text-foreground">
+                        {duo.courseXp.toLocaleString()} XP
+                      </div>
+                      <div className="text-[10px] tracking-[0.12em] uppercase text-muted-foreground mt-1">
+                        in {duo.language}
+                      </div>
+                    </div>
+                  </div>
                 )}
               </Card>
 
