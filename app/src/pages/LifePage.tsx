@@ -4,6 +4,7 @@ import { HomeNav } from '@/sections/home/HomeNav';
 import { useReveal } from '@/hooks/useReveal';
 import { Heatmap, type HeatmapDay } from '@/components/Heatmap';
 import { CRUNCH_CHECKINS } from '@/data/crunch';
+import { NEETCODE_ACTIVITY } from '@/data/neetcode';
 
 interface Repo {
   name: string;
@@ -38,14 +39,33 @@ function useLeetCodeHeatmap() {
   const [activeDays, setActiveDays] = useState<number>(0);
   const [streak, setStreak] = useState<number>(0);
   useEffect(() => {
+    const merge = (lc: HeatmapDay[]): { days: HeatmapDay[]; active: number } => {
+      const map = new Map<string, number>();
+      for (const [date, count] of Object.entries(NEETCODE_ACTIVITY)) {
+        if (count > 0) map.set(date, count);
+      }
+      for (const d of lc) {
+        map.set(d.date, Math.max(map.get(d.date) ?? 0, d.count));
+      }
+      const days = Array.from(map, ([date, count]) => ({ date, count })).sort((a, b) =>
+        a.date.localeCompare(b.date),
+      );
+      return { days, active: days.filter((d) => d.count > 0).length };
+    };
+
     fetch('/api/leetcode')
       .then((r) => r.json())
       .then((j: { contributions: HeatmapDay[]; totalActiveDays?: number; streak?: number }) => {
-        setData(j.contributions ?? []);
-        setActiveDays(j.totalActiveDays ?? 0);
+        const { days, active } = merge(j.contributions ?? []);
+        setData(days);
+        setActiveDays(active);
         setStreak(j.streak ?? 0);
       })
-      .catch(() => setData([]));
+      .catch(() => {
+        const { days, active } = merge([]);
+        setData(days);
+        setActiveDays(active);
+      });
   }, []);
   return { data, activeDays, streak };
 }
@@ -180,7 +200,7 @@ export function LifePage() {
 
               <Card
                 title="LeetCode"
-                subtitle={`@justinzhao1324 · submissions this year`}
+                subtitle="@justinzhao1324 · problems solved (incl. NeetCode history)"
                 meta={
                   lc.data === null
                     ? undefined
