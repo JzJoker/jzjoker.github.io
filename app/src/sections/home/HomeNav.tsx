@@ -52,6 +52,7 @@ export function HomeNav({ hasMarquee = false }: HomeNavProps) {
             <a className="pf-nav-link" href={hasMarquee ? '#writing' : '/#writing'}>Writing</a>
             <a className="pf-nav-link" href={hasMarquee ? '#about' : '/#about'}>About</a>
             <Link className="pf-nav-link" to="/projects">All Projects</Link>
+            <Link className="pf-nav-link" to="/life">Life</Link>
           </div>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>

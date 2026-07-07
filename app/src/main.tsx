@@ -7,6 +7,7 @@ import App from './App.tsx'
 import { ProjectsPage } from './pages/ProjectsPage.tsx'
 import { ProjectDetailPage } from './pages/ProjectDetailPage.tsx'
 import { ExperiencesPage } from './pages/ExperiencesPage.tsx'
+import { LifePage } from './pages/LifePage.tsx'
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -27,6 +28,7 @@ createRoot(document.getElementById('root')!).render(
         <Route path="/projects" element={<ProjectsPage />} />
         <Route path="/projects/:slug" element={<ProjectDetailPage />} />
         <Route path="/experience" element={<ExperiencesPage />} />
+        <Route path="/life" element={<LifePage />} />
       </Routes>
     </BrowserRouter>
   </StrictMode>,
