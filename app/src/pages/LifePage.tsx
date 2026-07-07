@@ -117,16 +117,22 @@ function Card({
   subtitle,
   meta,
   children,
+  fullWidth,
 }: {
   title: string;
   subtitle?: string;
   meta?: string;
   children: React.ReactNode;
+  fullWidth?: boolean;
 }) {
   return (
-    <div className="reveal border border-border bg-card rounded-xl p-6 sm:p-8 flex flex-col gap-4">
-      <div className="flex items-start justify-between gap-4">
-        <div>
+    <div
+      className={`reveal border border-border bg-card rounded-xl p-6 sm:p-8 flex flex-col gap-4${
+        fullWidth ? ' lg:col-span-2' : ''
+      }`}
+    >
+      <div className="flex flex-col gap-1">
+        <div className="flex items-start justify-between gap-4">
           <h2
             className="text-foreground"
             style={{
@@ -138,14 +144,14 @@ function Card({
           >
             {title}
           </h2>
-          {subtitle && (
-            <p className="text-[12px] text-muted-foreground mt-1">{subtitle}</p>
+          {meta && (
+            <span className="text-[10px] tracking-[0.12em] uppercase text-muted-foreground whitespace-nowrap">
+              {meta}
+            </span>
           )}
         </div>
-        {meta && (
-          <span className="text-[10px] tracking-[0.12em] uppercase text-muted-foreground whitespace-nowrap">
-            {meta}
-          </span>
+        {subtitle && (
+          <p className="text-[12px] text-muted-foreground w-full">{subtitle}</p>
         )}
       </div>
       {children}
@@ -210,7 +216,7 @@ export function LifePage() {
               Code, reps, and problems solved — the shape of the year so far.
             </p>
 
-            <div className="reveal-stagger grid grid-cols-1 gap-6">
+            <div className="reveal-stagger grid grid-cols-1 lg:grid-cols-2 gap-6">
               <Card
                 title="GitHub"
                 subtitle="Public commits, issues, PRs — last 12 months."
@@ -237,6 +243,14 @@ export function LifePage() {
                 ) : (
                   <Heatmap data={lc.data} colorAccent="#ffa116" unitLabel="problems" />
                 )}
+              </Card>
+
+              <Card
+                title="Crunch Fitness"
+                subtitle="Check-ins — manually logged."
+                meta={`${crunch.total} sessions`}
+              >
+                <Heatmap data={crunch.data} colorAccent="#ff2d55" unitLabel="check-ins" />
               </Card>
 
               <Card
@@ -290,14 +304,7 @@ export function LifePage() {
               </Card>
 
               <Card
-                title="Crunch Fitness"
-                subtitle="Check-ins — manually logged."
-                meta={`${crunch.total} sessions`}
-              >
-                <Heatmap data={crunch.data} colorAccent="#ff2d55" unitLabel="check-ins" />
-              </Card>
-
-              <Card
+                fullWidth
                 title="Current projects"
                 subtitle="Top repos ranked by commits in the last 30 days."
               >
