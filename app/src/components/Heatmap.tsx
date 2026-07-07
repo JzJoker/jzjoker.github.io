@@ -98,8 +98,8 @@ export function Heatmap({
           {label}
         </div>
       )}
-      <div className="overflow-x-auto">
-        <svg width={width} height={height} style={{ display: 'block' }}>
+      <div className="overflow-x-auto" style={{ direction: 'rtl' }}>
+        <svg width={width} height={height} style={{ display: 'block', direction: 'ltr' }}>
           {months.map((m) => (
             <text
               key={`${m.col}-${m.label}`}
