@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { HomeNav } from '@/sections/home/HomeNav';
 import { useReveal } from '@/hooks/useReveal';
 import { Heatmap, type HeatmapDay } from '@/components/Heatmap';
-import { CRUNCH_CHECKINS } from '@/data/crunch';
 import { NEETCODE_ACTIVITY } from '@/data/neetcode';
 
 interface Repo {
@@ -71,10 +70,17 @@ function useLeetCodeHeatmap() {
 }
 
 function useCrunchHeatmap() {
+  const [checkins, setCheckins] = useState<string[] | null>(null);
+  useEffect(() => {
+    fetch('/api/crunch')
+      .then((r) => r.json())
+      .then((j: { checkins: string[] }) => setCheckins(j.checkins ?? []))
+      .catch(() => setCheckins([]));
+  }, []);
   const counts = new Map<string, number>();
-  for (const d of CRUNCH_CHECKINS) counts.set(d, (counts.get(d) ?? 0) + 1);
+  for (const d of checkins ?? []) counts.set(d, (counts.get(d) ?? 0) + 1);
   const data: HeatmapDay[] = Array.from(counts, ([date, count]) => ({ date, count }));
-  return { data, total: CRUNCH_CHECKINS.length };
+  return { data, total: checkins?.length ?? 0, loading: checkins === null };
 }
 
 interface Duo {
@@ -247,10 +253,14 @@ export function LifePage() {
 
               <Card
                 title="Crunch Fitness"
-                subtitle="Check-ins — manually logged."
-                meta={`${crunch.total} sessions`}
+                subtitle="Check-ins — synced from Google Sheets."
+                meta={crunch.loading ? undefined : `${crunch.total} sessions`}
               >
-                <Heatmap data={crunch.data} colorAccent="#ff2d55" unitLabel="check-ins" />
+                {crunch.loading ? (
+                  <div className="text-[11px] text-muted-foreground">Loading…</div>
+                ) : (
+                  <Heatmap data={crunch.data} colorAccent="#ff2d55" unitLabel="check-ins" />
+                )}
               </Card>
 
               <Card
