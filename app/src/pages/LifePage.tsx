@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ThemeToggle } from '@/components/ThemeToggle';
+import { Navbar } from '@/components/Navbar';
 import { SectionNav } from '@/components/SectionNav';
 import { SectionHeading } from '@/components/SectionHeading';
 import { Heatmap, type HeatmapDay } from '@/components/Heatmap';
@@ -142,7 +142,7 @@ export function LifePage() {
 
   return (
     <>
-      <ThemeToggle />
+      <Navbar />
       <SectionNav items={lifeSections} />
       <div className="mx-auto max-w-[var(--page-max)]">
       <main className="max-w-[900px] px-8 md:px-12 py-24 md:py-32 flex flex-col gap-24">

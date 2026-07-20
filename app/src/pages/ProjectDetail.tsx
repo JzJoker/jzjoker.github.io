@@ -1,6 +1,6 @@
 import { Link, useParams } from 'react-router-dom';
 import { useEffect, useMemo } from 'react';
-import { ThemeToggle } from '@/components/ThemeToggle';
+import { Navbar } from '@/components/Navbar';
 import { SectionNav, type SectionItem } from '@/components/SectionNav';
 import { SectionHeading } from '@/components/SectionHeading';
 import { ExternalLink } from '@/components/ExternalLink';
@@ -25,7 +25,7 @@ export function ProjectDetailPage() {
   if (!project) {
     return (
       <>
-        <ThemeToggle />
+        <Navbar />
         <div className="mx-auto max-w-[var(--page-max)]">
           <main className="max-w-[900px] px-8 md:px-12 py-24 md:py-32 flex flex-col gap-6">
             <p className="text-xs font-mono uppercase tracking-widest text-neutral-400">404</p>
@@ -78,7 +78,7 @@ export function ProjectDetailPage() {
 
   return (
     <>
-      <ThemeToggle />
+      <Navbar />
       <SectionNav items={navItems} />
       <div className="mx-auto max-w-[var(--page-max)]">
       <main className="max-w-[900px] px-8 md:px-12 py-24 md:py-32 flex flex-col gap-16">

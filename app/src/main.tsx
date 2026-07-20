@@ -6,6 +6,7 @@ import './index.css';
 import App from './App.tsx';
 import { ProjectDetailPage } from './pages/ProjectDetail.tsx';
 import { LifePage } from './pages/LifePage.tsx';
+import { BlogPage } from './pages/BlogPage.tsx';
 
 function ScrollToHash() {
   const { hash, pathname } = useLocation();
@@ -31,6 +32,7 @@ createRoot(document.getElementById('root')!).render(
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="/work/:slug" element={<ProjectDetailPage />} />
+        <Route path="/blog" element={<BlogPage />} />
         <Route path="/life" element={<LifePage />} />
       </Routes>
     </BrowserRouter>

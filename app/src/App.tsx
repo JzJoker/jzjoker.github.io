@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ThemeToggle } from '@/components/ThemeToggle';
+import { Navbar } from '@/components/Navbar';
 import { SectionNav } from '@/components/SectionNav';
 import { SectionHeading } from '@/components/SectionHeading';
 import { ExternalLink } from '@/components/ExternalLink';
@@ -159,7 +159,7 @@ function App() {
 
   return (
     <>
-      <ThemeToggle />
+      <Navbar />
       <SectionNav items={homeSections} />
 
       <div className="mx-auto max-w-[var(--page-max)]">
