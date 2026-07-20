@@ -8,6 +8,7 @@
   --muted-text: #737373;
   --border-color: #e5e5e5;
   --accent-color: #2563eb;
+  --page-max: 1280px;
 }
 
 .dark {

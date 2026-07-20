@@ -218,6 +218,7 @@ function App() {
       <ThemeToggle />
       <SectionNav items={homeSections} />
 
+      <div className="mx-auto max-w-[var(--page-max)]">
       <main className="max-w-[900px] px-8 md:px-12 py-24 md:py-32 flex flex-col gap-24">
         <section id="hero" className="space-y-6">
           <div className="space-y-1">
@@ -347,6 +348,7 @@ function App() {
           </div>
         </section>
       </main>
+      </div>
 
       <div
         id="preview-panel"

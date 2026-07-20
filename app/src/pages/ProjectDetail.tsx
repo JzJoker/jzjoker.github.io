@@ -30,16 +30,18 @@ export function ProjectDetailPage() {
     return (
       <>
         <ThemeToggle />
-        <main className="max-w-[900px] px-8 md:px-12 py-24 md:py-32 flex flex-col gap-6">
-          <p className="text-xs font-mono uppercase tracking-widest text-neutral-400">404</p>
-          <h1 className="text-xl md:text-2xl font-medium tracking-tight">Project not found</h1>
-          <Link
-            to="/"
-            className="text-sm font-medium hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-          >
-            ← Back home
-          </Link>
-        </main>
+        <div className="mx-auto max-w-[var(--page-max)]">
+          <main className="max-w-[900px] px-8 md:px-12 py-24 md:py-32 flex flex-col gap-6">
+            <p className="text-xs font-mono uppercase tracking-widest text-neutral-400">404</p>
+            <h1 className="text-xl md:text-2xl font-medium tracking-tight">Project not found</h1>
+            <Link
+              to="/"
+              className="text-sm font-medium hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+            >
+              ← Back home
+            </Link>
+          </main>
+        </div>
       </>
     );
   }
@@ -64,6 +66,7 @@ export function ProjectDetailPage() {
     <>
       <ThemeToggle />
       <SectionNav items={navItems} />
+      <div className="mx-auto max-w-[var(--page-max)]">
       <main className="max-w-[900px] px-8 md:px-12 py-24 md:py-32 flex flex-col gap-16">
         <Link
           to="/#projects"
@@ -225,6 +228,7 @@ export function ProjectDetailPage() {
           </Link>
         </section>
       </main>
+      </div>
     </>
   );
 }

@@ -149,6 +149,7 @@ export function LifePage() {
     <>
       <ThemeToggle />
       <SectionNav items={lifeSections} />
+      <div className="mx-auto max-w-[var(--page-max)]">
       <main className="max-w-[900px] px-8 md:px-12 py-24 md:py-32 flex flex-col gap-24">
         <Link
           to="/"
@@ -302,6 +303,7 @@ export function LifePage() {
           )}
         </section>
       </main>
+      </div>
     </>
   );
 }
