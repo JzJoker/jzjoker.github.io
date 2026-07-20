@@ -2,19 +2,15 @@ import { Link, useParams } from 'react-router-dom';
 import { useEffect, useMemo } from 'react';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { SectionNav, type SectionItem } from '@/components/SectionNav';
-import { getProject, projects } from '@/data/projectDetails';
+import { SectionHeading } from '@/components/SectionHeading';
+import { ExternalLink } from '@/components/ExternalLink';
+import { featuredProjects, getProject } from '@/data/projectDetails';
 
 function Tag({ children }: { children: React.ReactNode }) {
   return (
-    <span className="font-mono text-[10px] border border-neutral-200 dark:border-neutral-800 px-2 py-0.5 text-neutral-500 uppercase">
+    <span className="font-mono text-[10px] tracking-widest border border-neutral-200 dark:border-neutral-800 px-2 py-0.5 text-neutral-500 uppercase">
       {children}
     </span>
-  );
-}
-
-function SectionHeading({ children }: { children: React.ReactNode }) {
-  return (
-    <h2 className="text-xs font-mono uppercase tracking-widest text-neutral-400">{children}</h2>
   );
 }
 
@@ -33,7 +29,9 @@ export function ProjectDetailPage() {
         <div className="mx-auto max-w-[var(--page-max)]">
           <main className="max-w-[900px] px-8 md:px-12 py-24 md:py-32 flex flex-col gap-6">
             <p className="text-xs font-mono uppercase tracking-widest text-neutral-400">404</p>
-            <h1 className="text-xl md:text-2xl font-medium tracking-tight">Project not found</h1>
+            <h1 className="text-4xl md:text-5xl font-medium tracking-tight leading-[1.05]">
+              Project not found
+            </h1>
             <Link
               to="/"
               className="text-sm font-medium hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
@@ -46,8 +44,23 @@ export function ProjectDetailPage() {
     );
   }
 
-  const currentIndex = projects.findIndex((p) => p.slug === project.slug);
-  const nextProject = projects[(currentIndex + 1) % projects.length];
+  const currentFeaturedIndex = featuredProjects.findIndex((p) => p.slug === project.slug);
+  const nextProject =
+    currentFeaturedIndex === -1
+      ? featuredProjects[0]
+      : featuredProjects[(currentFeaturedIndex + 1) % featuredProjects.length];
+  const currentPath = `/work/${project.slug}`;
+
+  const typedLinks = (
+    [
+      project.repoUrl && { label: 'GitHub', href: project.repoUrl },
+      project.liveUrl && { label: 'Live', href: project.liveUrl },
+      project.devpostUrl && { label: 'Devpost', href: project.devpostUrl },
+      project.blogUrl && { label: 'Blog', href: project.blogUrl },
+    ].filter(Boolean) as { label: string; href: string }[]
+  ).filter((l) => l.href !== currentPath);
+
+  const allLinks = [...typedLinks, ...(project.links ?? [])];
 
   const navItems: SectionItem[] = useMemo(() => {
     const items: SectionItem[] = [
@@ -57,9 +70,10 @@ export function ProjectDetailPage() {
     if (project.techStack?.length) items.push({ id: 'stack', label: 'Stack' });
     if (project.screenshots?.length) items.push({ id: 'gallery', label: 'Gallery' });
     if (project.conclusion?.length) items.push({ id: 'notes', label: 'Notes' });
-    if (project.links?.length) items.push({ id: 'links', label: 'Links' });
+    if (allLinks.length) items.push({ id: 'links', label: 'Links' });
     items.push({ id: 'next', label: 'Next' });
     return items;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [project]);
 
   return (
@@ -75,31 +89,46 @@ export function ProjectDetailPage() {
           ← Work
         </Link>
 
-        <section id="header" className="space-y-6">
-          <div className="space-y-2">
-            <h1 className="text-xl md:text-2xl font-medium tracking-tight">{project.title}</h1>
-            <p className="text-neutral-500 dark:text-neutral-400">{project.subtitle}</p>
+        <section id="header" className="space-y-8">
+          <div className="space-y-3">
+            <h1 className="text-4xl md:text-5xl font-medium tracking-tight leading-[1.05]">
+              {project.title}
+            </h1>
+            <p className="text-lg text-neutral-500 dark:text-neutral-400 leading-snug max-w-[62ch]">
+              {project.subtitle}
+            </p>
           </div>
 
-          <div className="flex flex-wrap gap-2">
-            {project.tags.map((t) => (
-              <Tag key={t}>{t}</Tag>
-            ))}
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
+            <div className="flex flex-wrap gap-2">
+              {project.tags.map((t) => (
+                <Tag key={t}>{t}</Tag>
+              ))}
+            </div>
+            {typedLinks.length > 0 && (
+              <div className="flex flex-wrap gap-4">
+                {typedLinks.map((l) => (
+                  <ExternalLink key={l.href} href={l.href} label={l.label} />
+                ))}
+              </div>
+            )}
           </div>
 
           <dl className="grid grid-cols-2 md:grid-cols-3 gap-x-8 gap-y-4 pt-2 border-t border-neutral-200 dark:border-neutral-800">
-            <div className="space-y-1 pt-4">
+            <div className="space-y-1.5 pt-4">
               <dt className="text-xs font-mono uppercase tracking-widest text-neutral-400">Role</dt>
               <dd className="text-sm">{project.role}</dd>
             </div>
-            <div className="space-y-1 pt-4">
+            <div className="space-y-1.5 pt-4">
               <dt className="text-xs font-mono uppercase tracking-widest text-neutral-400">
                 Duration
               </dt>
               <dd className="text-sm">{project.duration}</dd>
             </div>
-            <div className="space-y-1 pt-4 col-span-2 md:col-span-1">
-              <dt className="text-xs font-mono uppercase tracking-widest text-neutral-400">Stack</dt>
+            <div className="space-y-1.5 pt-4 col-span-2 md:col-span-1">
+              <dt className="text-xs font-mono uppercase tracking-widest text-neutral-400">
+                Stack
+              </dt>
               <dd className="text-sm">{project.techSummary}</dd>
             </div>
           </dl>
@@ -121,7 +150,7 @@ export function ProjectDetailPage() {
             {project.intro.map((p, i) => (
               <p
                 key={i}
-                className="text-neutral-600 dark:text-neutral-300 leading-relaxed max-w-[720px]"
+                className="text-base text-neutral-600 dark:text-neutral-300 leading-relaxed max-w-[62ch]"
               >
                 {p}
               </p>
@@ -181,7 +210,7 @@ export function ProjectDetailPage() {
               {project.conclusion.map((p, i) => (
                 <p
                   key={i}
-                  className="text-neutral-600 dark:text-neutral-300 leading-relaxed max-w-[720px]"
+                  className="text-base text-neutral-600 dark:text-neutral-300 leading-relaxed max-w-[62ch]"
                 >
                   {p}
                 </p>
@@ -190,20 +219,12 @@ export function ProjectDetailPage() {
           </section>
         )}
 
-        {project.links && project.links.length > 0 && (
+        {allLinks.length > 0 && (
           <section id="links" className="space-y-6">
             <SectionHeading>Links</SectionHeading>
-            <div className="flex flex-wrap gap-8">
-              {project.links.map((l) => (
-                <a
-                  key={l.href}
-                  href={l.href}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="text-sm font-medium hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-                >
-                  {l.label} →
-                </a>
+            <div className="flex flex-wrap gap-6">
+              {allLinks.map((l) => (
+                <ExternalLink key={l.href} href={l.href} label={l.label} size="md" />
               ))}
             </div>
           </section>
@@ -214,11 +235,11 @@ export function ProjectDetailPage() {
             to={`/work/${nextProject.slug}`}
             className="group flex justify-between items-baseline gap-4"
           >
-            <div className="space-y-1">
+            <div className="space-y-1.5">
               <p className="text-xs font-mono uppercase tracking-widest text-neutral-400">
                 Next project
               </p>
-              <p className="text-lg font-medium group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+              <p className="text-2xl md:text-3xl font-medium tracking-tight leading-none group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                 {nextProject.title}
               </p>
             </div>

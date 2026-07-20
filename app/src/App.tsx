@@ -2,13 +2,14 @@ import { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { SectionNav } from '@/components/SectionNav';
-import { projects, type ProjectDetail } from '@/data/projectDetails';
+import { SectionHeading } from '@/components/SectionHeading';
+import { ExternalLink } from '@/components/ExternalLink';
+import { featuredProjects, type ProjectDetail } from '@/data/projectDetails';
 
 const homeSections = [
   { id: 'hero', label: 'Intro' },
   { id: 'projects', label: 'Work' },
-  { id: 'experience', label: 'Experience' },
-  { id: 'hackathons', label: 'Awards' },
+  { id: 'experience', label: 'Teams' },
   { id: 'elsewhere', label: 'Elsewhere' },
   { id: 'contact', label: 'Contact' },
 ];
@@ -17,14 +18,6 @@ interface RoleItem {
   role: string;
   detail: string;
   period: string;
-}
-
-interface AwardItem {
-  title: string;
-  subtitle: string;
-  description: string;
-  year: string;
-  image: string;
 }
 
 const experience: RoleItem[] = [
@@ -42,30 +35,6 @@ const experience: RoleItem[] = [
     role: 'Web Developer @ RIT HR',
     detail: 'Led a department-wide Drupal site redesign; migrated every HR site under one system.',
     period: '2022 — 2023',
-  },
-];
-
-const awards: AwardItem[] = [
-  {
-    title: 'HackPrinceton',
-    subtitle: 'Weekend hackathon at Princeton University.',
-    description: 'Shipped a working prototype in 36 hours alongside a small team.',
-    year: '2024',
-    image: '/images/awards/hackprinceton.jpg',
-  },
-  {
-    title: 'ClayHacks',
-    subtitle: 'RIT-hosted student hackathon.',
-    description: 'Built and demoed a full-stack project end-to-end during the weekend event.',
-    year: '2023',
-    image: '/images/awards/clayhacks.jpg',
-  },
-  {
-    title: 'UncommonHacks',
-    subtitle: 'Student hackathon at the University of Chicago.',
-    description: 'Traveled to compete; delivered a working project within the event window.',
-    year: '2023',
-    image: '/images/awards/uncommonhacks.jpg',
   },
 ];
 
@@ -93,7 +62,7 @@ interface PreviewState {
 
 function Tag({ children }: { children: React.ReactNode }) {
   return (
-    <span className="font-mono text-[10px] border border-neutral-200 dark:border-neutral-800 px-2 py-0.5 text-neutral-500 uppercase">
+    <span className="font-mono text-[10px] tracking-widest border border-neutral-200 dark:border-neutral-800 px-2 py-0.5 text-neutral-500 uppercase">
       {children}
     </span>
   );
@@ -110,65 +79,41 @@ function ProjectRow({
   onMove: (e: React.MouseEvent) => void;
   onLeave: () => void;
 }) {
+  const hasLinks =
+    project.repoUrl || project.liveUrl || project.blogUrl || project.devpostUrl;
+
   return (
-    <Link
-      to={`/work/${project.slug}`}
-      className="project-row group py-8 md:py-10 block cursor-pointer transition-all duration-300 no-underline text-inherit"
+    <div
+      className="project-row group py-3 md:py-4 transition-all duration-300"
       onMouseEnter={onEnter}
       onMouseMove={onMove}
       onMouseLeave={onLeave}
     >
       <div className="flex flex-col md:flex-row md:items-baseline justify-between gap-4">
-        <div className="space-y-1">
-          <h3 className="text-lg font-medium group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-            {project.title}
-          </h3>
-          <p className="text-neutral-500 dark:text-neutral-400">{project.subtitle}</p>
+        <div className="space-y-1.5">
+          <div className="flex items-baseline gap-3 flex-wrap">
+            <h3 className="text-lg font-bold tracking-tight leading-snug">{project.title}</h3>
+            <span className="text-xs font-mono text-neutral-400 whitespace-nowrap">
+              {project.duration}
+            </span>
+          </div>
+          <p className="text-sm text-neutral-500 dark:text-neutral-400 leading-snug">
+            {project.subtitle}
+          </p>
+          {hasLinks && (
+            <div className="flex flex-wrap gap-4 pt-2">
+              {project.repoUrl && <ExternalLink href={project.repoUrl} label="GitHub" />}
+              {project.liveUrl && <ExternalLink href={project.liveUrl} label="Live" />}
+              {project.devpostUrl && <ExternalLink href={project.devpostUrl} label="Devpost" />}
+              {project.blogUrl && <ExternalLink href={project.blogUrl} label="Blog" />}
+            </div>
+          )}
         </div>
         <div className="flex flex-wrap gap-2">
           {project.tags.map((t) => (
             <Tag key={t}>{t}</Tag>
           ))}
         </div>
-      </div>
-    </Link>
-  );
-}
-
-function AwardRow({
-  item,
-  onEnter,
-  onMove,
-  onLeave,
-  isActive,
-  onMobileToggle,
-}: {
-  item: AwardItem;
-  onEnter: () => void;
-  onMove: (e: React.MouseEvent) => void;
-  onLeave: () => void;
-  isActive: boolean;
-  onMobileToggle: () => void;
-}) {
-  return (
-    <div
-      className={`project-row group py-8 md:py-10 cursor-default transition-all duration-300${
-        isActive ? ' active' : ''
-      }`}
-      onMouseEnter={onEnter}
-      onMouseMove={onMove}
-      onMouseLeave={onLeave}
-      onClick={onMobileToggle}
-    >
-      <div className="flex justify-between items-start">
-        <div className="space-y-1">
-          <p className="font-medium">{item.title}</p>
-          <p className="text-sm text-neutral-500 dark:text-neutral-400">{item.subtitle}</p>
-        </div>
-        <p className="text-xs font-mono text-neutral-400">{item.year}</p>
-      </div>
-      <div className="mobile-expand md:hidden text-sm text-neutral-500 dark:text-neutral-400 leading-relaxed">
-        {item.description}
       </div>
     </div>
   );
@@ -183,7 +128,6 @@ function App() {
     y: 0,
     visible: false,
   });
-  const [activeRow, setActiveRow] = useState<string | null>(null);
   const previewRef = useRef<HTMLDivElement | null>(null);
 
   const isMobile = () => window.innerWidth < 768;
@@ -220,26 +164,26 @@ function App() {
 
       <div className="mx-auto max-w-[var(--page-max)]">
       <main className="max-w-[900px] px-8 md:px-12 py-24 md:py-32 flex flex-col gap-24">
-        <section id="hero" className="space-y-6">
-          <div className="space-y-1">
-            <h1 className="text-xl md:text-2xl font-medium tracking-tight">Justin Zhao</h1>
-            <p className="text-neutral-500 dark:text-neutral-400">
+        <section id="hero" className="space-y-8">
+          <div className="space-y-3">
+            <h1 className="text-4xl md:text-5xl font-medium tracking-tight leading-[1.05]">
+              Justin Zhao
+            </h1>
+            <p className="text-lg text-neutral-500 dark:text-neutral-400 leading-snug">
               Full-Stack Engineer — Cloud Infrastructure &amp; Interface Design
             </p>
           </div>
-          <p className="text-neutral-600 dark:text-neutral-300 leading-relaxed max-w-[720px]">
+          <p className="text-base text-neutral-600 dark:text-neutral-300 leading-relaxed max-w-[62ch]">
             Based in New York City. I build fast, resilient web products end-to-end — from AWS backends
             and self-hosted infrastructure to typography-first interfaces. Currently working on UX
             Interviewer, the first structured interview prep platform for UI/UX designers.
           </p>
         </section>
 
-        <section id="projects" className="space-y-12">
-          <h2 className="text-xs font-mono uppercase tracking-widest text-neutral-400">
-            Technical Work
-          </h2>
-          <div className="project-list divide-y divide-neutral-200 dark:divide-neutral-800 border-t border-neutral-200 dark:border-neutral-800">
-            {projects.map((project) => (
+        <section id="projects" className="space-y-8">
+          <SectionHeading>Technical Work</SectionHeading>
+          <div className="project-list">
+            {featuredProjects.map((project) => (
               <ProjectRow
                 key={project.slug}
                 project={project}
@@ -257,54 +201,35 @@ function App() {
           </div>
         </section>
 
-        <section id="experience" className="space-y-12">
-          <h2 className="text-xs font-mono uppercase tracking-widest text-neutral-400">
-            Experience
-          </h2>
-          <div className="space-y-8">
+        <section id="experience" className="space-y-8">
+          <SectionHeading>Teams</SectionHeading>
+          <div className="space-y-10">
             {experience.map((e) => (
               <div key={e.role} className="flex justify-between items-start gap-6">
-                <div className="space-y-1">
-                  <p className="font-medium">{e.role}</p>
-                  <p className="text-sm text-neutral-500 dark:text-neutral-400">{e.detail}</p>
+                <div className="space-y-1.5">
+                  <p className="text-lg font-bold tracking-tight leading-snug">{e.role}</p>
+                  <p className="text-sm text-neutral-500 dark:text-neutral-400 leading-snug">
+                    {e.detail}
+                  </p>
                 </div>
-                <p className="text-xs font-mono text-neutral-400 whitespace-nowrap">{e.period}</p>
+                <p className="text-xs font-mono uppercase tracking-widest text-neutral-400 whitespace-nowrap pt-1.5">
+                  {e.period}
+                </p>
               </div>
             ))}
           </div>
         </section>
 
-        <section id="hackathons" className="space-y-12">
-          <h2 className="text-xs font-mono uppercase tracking-widest text-neutral-400">Awards</h2>
-          <div className="project-list divide-y divide-neutral-200 dark:divide-neutral-800 border-t border-neutral-200 dark:border-neutral-800">
-            {awards.map((a) => (
-              <AwardRow
-                key={a.title}
-                item={a}
-                onEnter={() => showPreview(a.title, a.description, a.image)}
-                onMove={movePreview}
-                onLeave={hidePreview}
-                isActive={activeRow === a.title}
-                onMobileToggle={() =>
-                  setActiveRow((cur) => (cur === a.title ? null : a.title))
-                }
-              />
-            ))}
-          </div>
-        </section>
-
-        <section id="elsewhere" className="space-y-12">
-          <h2 className="text-xs font-mono uppercase tracking-widest text-neutral-400">
-            Elsewhere
-          </h2>
+        <section id="elsewhere" className="space-y-8">
+          <SectionHeading>Elsewhere</SectionHeading>
           <div className="space-y-4">
-            <p className="text-neutral-600 dark:text-neutral-300 max-w-[720px]">
+            <p className="text-base text-neutral-600 dark:text-neutral-300 leading-relaxed max-w-[62ch]">
               A dashboard for the things I track outside of work — code, reps, and problems solved,
               pulled live from GitHub, LeetCode, Duolingo, and my gym log.
             </p>
             <Link
               to="/life"
-              className="group inline-flex items-center gap-1 text-sm font-medium hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+              className="group inline-flex items-center gap-1.5 text-sm font-medium hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
             >
               Life dashboard
               <ArrowIcon className="w-3 h-3 text-neutral-400 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors" />
@@ -312,10 +237,10 @@ function App() {
           </div>
         </section>
 
-        <section id="contact" className="space-y-12 pb-32">
-          <h2 className="text-xs font-mono uppercase tracking-widest text-neutral-400">Contact</h2>
-          <div className="space-y-4">
-            <p className="text-neutral-600 dark:text-neutral-300">
+        <section id="contact" className="space-y-8 pb-32">
+          <SectionHeading>Contact</SectionHeading>
+          <div className="space-y-6">
+            <p className="text-base text-neutral-600 dark:text-neutral-300 leading-relaxed max-w-[62ch]">
               Open to full-time roles and collaborations on interesting web or infra problems.
             </p>
             <div className="flex flex-wrap gap-8">
