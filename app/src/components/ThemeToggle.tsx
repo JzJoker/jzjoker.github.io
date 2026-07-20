@@ -29,14 +29,16 @@ function MoonIcon({ className }: { className?: string }) {
 export function ThemeToggle() {
   const { isDark, toggle } = useDarkMode();
   return (
-    <header className="fixed top-0 left-0 w-full px-8 py-8 md:px-12 flex justify-end z-40 pointer-events-none">
-      <button
-        onClick={toggle}
-        className="pointer-events-auto p-2 text-neutral-500 hover:text-neutral-950 dark:hover:text-white transition-colors"
-        aria-label="Toggle dark mode"
-      >
-        {isDark ? <SunIcon className="w-5 h-5" /> : <MoonIcon className="w-5 h-5" />}
-      </button>
+    <header className="fixed top-0 left-0 right-0 z-40 pointer-events-none">
+      <div className="mx-auto max-w-[var(--page-max)] px-8 py-8 md:px-12 flex justify-end">
+        <button
+          onClick={toggle}
+          className="pointer-events-auto p-2 text-neutral-500 hover:text-neutral-950 dark:hover:text-white transition-colors"
+          aria-label="Toggle dark mode"
+        >
+          {isDark ? <SunIcon className="w-5 h-5" /> : <MoonIcon className="w-5 h-5" />}
+        </button>
+      </div>
     </header>
   );
 }

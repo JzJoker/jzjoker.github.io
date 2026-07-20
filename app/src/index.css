@@ -9,6 +9,8 @@
   --border-color: #e5e5e5;
   --accent-color: #2563eb;
   --page-max: 1280px;
+  --page-pad: 3rem;
+  --rail-inset: max(var(--page-pad), calc((100vw - var(--page-max)) / 2 + var(--page-pad)));
 }
 
 .dark {

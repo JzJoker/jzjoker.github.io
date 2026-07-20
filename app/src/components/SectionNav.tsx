@@ -41,7 +41,7 @@ export function SectionNav({ items }: { items: SectionItem[] }) {
   };
 
   return (
-    <nav className="hidden lg:block fixed right-12 top-1/2 -translate-y-1/2 z-30">
+    <nav className="hidden lg:block fixed right-[var(--rail-inset)] top-1/2 -translate-y-1/2 z-30">
       <ul className="space-y-3">
         {items.map((item) => {
           const isActive = active === item.id;
