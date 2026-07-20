@@ -209,7 +209,12 @@ export const projects: ProjectDetail[] = [
   {
     slug: 'clayhacks',
     title: 'ClayHacks',
-    subtitle: 'RIT-hosted student hackathon.',
+    subtitle: (
+      <>
+        Navigation dashboard. Easily track classes, events, and nearby amenities.{' '}
+        <strong className="font-normal underline underline-offset-4">2nd place</strong> at <InlineLink href="https://www.instagram.com/brickhack/?hl=en" arrow={false}>ClayHack</InlineLink>.
+      </>
+    ),
     role: 'Hackathon',
     duration: 'September 2023',
     sortAt: '2023-09-01',
