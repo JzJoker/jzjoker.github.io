@@ -1,203 +1,176 @@
-import { useMemo, useRef, useState } from 'react';
+import { useMemo, useState } from 'react';
 
 export interface HeatmapDay {
-  date: string; // YYYY-MM-DD
+  date: string;
   count: number;
 }
 
-interface HeatmapProps {
-  data: HeatmapDay[];
-  weeks?: number;
-  colorAccent?: string; // hex or rgb; defaults to accent lime
-  emptyColor?: string;
-  label?: string;
-  unitLabel?: string; // e.g. "contributions", "problems"
+interface Cell {
+  date: string;
+  count: number;
+  level: number;
 }
 
-const MONTH_LABELS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
-function toISODate(d: Date): string {
-  return d.toISOString().slice(0, 10);
+function toISO(d: Date): string {
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  return `${y}-${m}-${day}`;
 }
 
-function hexToRgb(hex: string): [number, number, number] {
-  const h = hex.replace('#', '');
-  const full = h.length === 3 ? h.split('').map((c) => c + c).join('') : h;
-  const n = parseInt(full, 16);
-  return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
+function buildGrid(data: HeatmapDay[], weeks: number): { columns: Cell[][]; max: number } {
+  const map = new Map<string, number>();
+  let max = 0;
+  for (const d of data) {
+    map.set(d.date, d.count);
+    if (d.count > max) max = d.count;
+  }
+
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const end = today;
+
+  const start = new Date(end);
+  start.setDate(end.getDate() - (weeks * 7 - 1));
+  start.setDate(start.getDate() - start.getDay()); // align to Sunday
+
+  const columns: Cell[][] = [];
+  const cursor = new Date(start);
+  for (let w = 0; w < weeks; w++) {
+    const col: Cell[] = [];
+    for (let d = 0; d < 7; d++) {
+      const iso = toISO(cursor);
+      const count = map.get(iso) ?? 0;
+      let level = 0;
+      if (count > 0 && max > 0) {
+        const ratio = count / max;
+        if (ratio > 0.75) level = 4;
+        else if (ratio > 0.5) level = 3;
+        else if (ratio > 0.25) level = 2;
+        else level = 1;
+      }
+      col.push({ date: iso, count: cursor > end ? -1 : count, level: cursor > end ? -1 : level });
+      cursor.setDate(cursor.getDate() + 1);
+    }
+    columns.push(col);
+  }
+
+  return { columns, max };
+}
+
+function levelClasses(level: number): string {
+  if (level === -1) return 'bg-transparent';
+  if (level === 0) return 'bg-neutral-200/60 dark:bg-neutral-800/60';
+  return '';
+}
+
+function levelStyle(level: number, accent: string): React.CSSProperties {
+  if (level <= 0) return {};
+  const opacity = { 1: 0.28, 2: 0.5, 3: 0.75, 4: 1 }[level as 1 | 2 | 3 | 4];
+  return { backgroundColor: accent, opacity };
 }
 
 function formatDate(iso: string): string {
-  const [y, m, d] = iso.split('-').map(Number);
-  const date = new Date(Date.UTC(y, m - 1, d));
-  return date.toLocaleDateString(undefined, {
-    weekday: 'short',
-    month: 'short',
-    day: 'numeric',
-    year: 'numeric',
-    timeZone: 'UTC',
-  });
-}
-
-interface Hover {
-  day: HeatmapDay;
-  x: number;
-  y: number;
+  const [y, m, d] = iso.split('-');
+  return `${MONTHS[Number(m) - 1]} ${Number(d)}, ${y}`;
 }
 
 export function Heatmap({
   data,
-  weeks = 53,
-  colorAccent = '#d4ff5a',
-  emptyColor = 'rgba(255,255,255,0.05)',
-  label,
-  unitLabel = 'contributions',
-}: HeatmapProps) {
-  const wrapperRef = useRef<HTMLDivElement>(null);
-  const [hover, setHover] = useState<Hover | null>(null);
+  accent = '#2563eb',
+  unitLabel = 'entries',
+  weeks = 52,
+}: {
+  data: HeatmapDay[];
+  accent?: string;
+  unitLabel?: string;
+  weeks?: number;
+}) {
+  const [hover, setHover] = useState<Cell | null>(null);
+  const { columns } = useMemo(() => buildGrid(data, weeks), [data, weeks]);
 
-  const { grid, months, max } = useMemo(() => {
-    const map = new Map<string, number>();
-    for (const d of data) map.set(d.date, d.count);
-
-    const today = new Date();
-    today.setUTCHours(0, 0, 0, 0);
-    const endDay = new Date(today);
-    endDay.setUTCDate(endDay.getUTCDate() + (6 - endDay.getUTCDay()));
-    const start = new Date(endDay);
-    start.setUTCDate(start.getUTCDate() - (weeks * 7 - 1));
-
-    const grid: (HeatmapDay | null)[][] = [];
-    let maxCount = 0;
-    const monthCols: { col: number; label: string }[] = [];
-    let lastMonth = -1;
-
-    for (let w = 0; w < weeks; w++) {
-      const col: (HeatmapDay | null)[] = [];
-      for (let d = 0; d < 7; d++) {
-        const day = new Date(start);
-        day.setUTCDate(day.getUTCDate() + w * 7 + d);
-        if (day > today) {
-          col.push(null);
-          continue;
-        }
-        const iso = toISODate(day);
-        const count = map.get(iso) ?? 0;
-        if (count > maxCount) maxCount = count;
-        col.push({ date: iso, count });
-        if (d === 0) {
-          const m = day.getUTCMonth();
-          if (m !== lastMonth) {
-            monthCols.push({ col: w, label: MONTH_LABELS[m] });
-            lastMonth = m;
-          }
-        }
-      }
-      grid.push(col);
+  const monthLabels: { label: string; col: number }[] = [];
+  let lastMonth = -1;
+  columns.forEach((col, i) => {
+    const firstReal = col.find((c) => c.count >= 0);
+    if (!firstReal) return;
+    const m = Number(firstReal.date.slice(5, 7)) - 1;
+    if (m !== lastMonth) {
+      monthLabels.push({ label: MONTHS[m], col: i });
+      lastMonth = m;
     }
-
-    return { grid, months: monthCols, max: maxCount };
-  }, [data, weeks]);
-
-  const [ar, ag, ab] = hexToRgb(colorAccent);
-
-  const cellColor = (count: number): string => {
-    if (count <= 0 || max <= 0) return emptyColor;
-    const t = Math.min(1, Math.log(count + 1) / Math.log(max + 1));
-    const alpha = 0.18 + t * 0.82;
-    return `rgba(${ar},${ag},${ab},${alpha.toFixed(3)})`;
-  };
-
-  const cellSize = 11;
-  const gap = 3;
-  const width = weeks * (cellSize + gap);
-  const height = 7 * (cellSize + gap) + 18;
-
-  const handleEnter = (day: HeatmapDay, e: React.MouseEvent<SVGRectElement>) => {
-    const wrapper = wrapperRef.current;
-    if (!wrapper) return;
-    const rect = e.currentTarget.getBoundingClientRect();
-    const wrapperRect = wrapper.getBoundingClientRect();
-    setHover({
-      day,
-      x: rect.left - wrapperRect.left + rect.width / 2,
-      y: rect.top - wrapperRect.top,
-    });
-  };
+  });
 
   return (
-    <div ref={wrapperRef} className="w-full" style={{ position: 'relative' }}>
-      {label && (
-        <div className="text-[10px] tracking-[0.12em] uppercase text-muted-foreground mb-2">
-          {label}
-        </div>
-      )}
-      <div className="overflow-x-auto" style={{ direction: 'rtl' }}>
-        <svg width={width} height={height} style={{ display: 'block', direction: 'ltr' }}>
-          {months.map((m) => (
-            <text
-              key={`${m.col}-${m.label}`}
-              x={m.col * (cellSize + gap)}
-              y={10}
-              fontSize={9}
-              fontFamily='"JetBrains Mono", monospace'
-              fill="rgba(255,255,255,0.4)"
-            >
-              {m.label}
-            </text>
-          ))}
-          {grid.map((col, wi) =>
-            col.map((day, di) => {
-              if (!day) return null;
-              const x = wi * (cellSize + gap);
-              const y = 16 + di * (cellSize + gap);
+    <div className="space-y-2 select-none">
+      <div className="overflow-x-auto -mx-2 px-2">
+        <div className="inline-block">
+          <div
+            className="grid mb-1"
+            style={{
+              gridTemplateColumns: `repeat(${columns.length}, minmax(0, 1fr))`,
+              gap: '2px',
+            }}
+          >
+            {columns.map((_, i) => {
+              const label = monthLabels.find((m) => m.col === i);
               return (
-                <rect
-                  key={`${wi}-${di}`}
-                  x={x}
-                  y={y}
-                  width={cellSize}
-                  height={cellSize}
-                  rx={2}
-                  ry={2}
-                  fill={cellColor(day.count)}
-                  onMouseEnter={(e) => handleEnter(day, e)}
-                  onMouseLeave={() => setHover(null)}
-                  style={{ cursor: 'pointer' }}
-                />
+                <div
+                  key={i}
+                  className="text-[9px] font-mono uppercase tracking-widest text-neutral-400 h-3"
+                  style={{ minWidth: 11 }}
+                >
+                  {label?.label ?? ''}
+                </div>
               );
-            }),
-          )}
-        </svg>
-      </div>
-      {hover && (
-        <div
-          role="tooltip"
-          style={{
-            position: 'absolute',
-            left: hover.x,
-            top: hover.y - 8,
-            transform: 'translate(-50%, -100%)',
-            pointerEvents: 'none',
-            background: 'rgba(10,10,12,0.96)',
-            border: '1px solid rgba(255,255,255,0.12)',
-            borderRadius: 6,
-            padding: '6px 10px',
-            fontFamily: '"JetBrains Mono", monospace',
-            fontSize: 11,
-            lineHeight: 1.35,
-            color: 'rgba(255,255,255,0.92)',
-            whiteSpace: 'nowrap',
-            zIndex: 20,
-            boxShadow: '0 8px 24px rgba(0,0,0,0.4)',
-          }}
-        >
-          <div style={{ color: colorAccent }}>
-            {hover.day.count} {unitLabel}
+            })}
           </div>
-          <div style={{ color: 'rgba(255,255,255,0.55)' }}>{formatDate(hover.day.date)}</div>
+          <div
+            className="grid"
+            style={{
+              gridTemplateColumns: `repeat(${columns.length}, minmax(0, 1fr))`,
+              gap: '2px',
+            }}
+          >
+            {columns.map((col, ci) => (
+              <div key={ci} className="grid grid-rows-7 gap-[2px]">
+                {col.map((cell, ri) => (
+                  <div
+                    key={ri}
+                    onMouseEnter={() => cell.count >= 0 && setHover(cell)}
+                    onMouseLeave={() => setHover((h) => (h === cell ? null : h))}
+                    className={`w-[11px] h-[11px] rounded-[2px] transition-opacity ${levelClasses(
+                      cell.level,
+                    )}`}
+                    style={levelStyle(cell.level, accent)}
+                    title={cell.count >= 0 ? `${formatDate(cell.date)} · ${cell.count}` : ''}
+                  />
+                ))}
+              </div>
+            ))}
+          </div>
         </div>
-      )}
+      </div>
+      <div className="flex items-center justify-between gap-3">
+        <div className="text-[10px] font-mono uppercase tracking-widest text-neutral-400 h-3">
+          {hover ? `${formatDate(hover.date)} · ${hover.count} ${unitLabel}` : ' '}
+        </div>
+        <div className="flex items-center gap-1.5 text-[10px] font-mono uppercase tracking-widest text-neutral-400">
+          <span>Less</span>
+          {[0, 1, 2, 3, 4].map((l) => (
+            <span
+              key={l}
+              className={`w-[10px] h-[10px] rounded-[2px] ${
+                l === 0 ? 'bg-neutral-200/60 dark:bg-neutral-800/60' : ''
+              }`}
+              style={l === 0 ? {} : levelStyle(l, accent)}
+            />
+          ))}
+          <span>More</span>
+        </div>
+      </div>
     </div>
   );
 }

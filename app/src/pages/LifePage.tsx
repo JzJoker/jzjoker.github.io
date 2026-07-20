@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { HomeNav } from '@/sections/home/HomeNav';
-import { useReveal } from '@/hooks/useReveal';
+import { ThemeToggle } from '@/components/ThemeToggle';
+import { SectionNav } from '@/components/SectionNav';
 import { Heatmap, type HeatmapDay } from '@/components/Heatmap';
 import { NEETCODE_ACTIVITY } from '@/data/neetcode';
 
@@ -12,8 +12,17 @@ interface Repo {
   description: string | null;
   language: string | null;
   recentCommits: number;
-  lastCommit: string | null;
   progress: number;
+}
+
+interface Duo {
+  name: string | null;
+  streak: number;
+  totalXp: number;
+  language: string;
+  streakStart: string | null;
+  streakEnd: string | null;
+  courseXp: number;
 }
 
 function useGitHubHeatmap() {
@@ -24,9 +33,7 @@ function useGitHubHeatmap() {
       .then((r) => r.json())
       .then((j: { contributions: HeatmapDay[]; total: Record<string, number> }) => {
         setData(j.contributions ?? []);
-        const t = j.total ?? {};
-        const sum = Object.values(t).reduce((a, b) => a + b, 0);
-        setTotal(sum);
+        setTotal(Object.values(j.total ?? {}).reduce((a, b) => a + b, 0));
       })
       .catch(() => setData([]));
   }, []);
@@ -35,17 +42,15 @@ function useGitHubHeatmap() {
 
 function useLeetCodeHeatmap() {
   const [data, setData] = useState<HeatmapDay[] | null>(null);
-  const [activeDays, setActiveDays] = useState<number>(0);
-  const [streak, setStreak] = useState<number>(0);
+  const [activeDays, setActiveDays] = useState(0);
+  const [streak, setStreak] = useState(0);
   useEffect(() => {
-    const merge = (lc: HeatmapDay[]): { days: HeatmapDay[]; active: number } => {
+    const merge = (lc: HeatmapDay[]) => {
       const map = new Map<string, number>();
       for (const [date, count] of Object.entries(NEETCODE_ACTIVITY)) {
         if (count > 0) map.set(date, count);
       }
-      for (const d of lc) {
-        map.set(d.date, Math.max(map.get(d.date) ?? 0, d.count));
-      }
+      for (const d of lc) map.set(d.date, Math.max(map.get(d.date) ?? 0, d.count));
       const days = Array.from(map, ([date, count]) => ({ date, count })).sort((a, b) =>
         a.date.localeCompare(b.date),
       );
@@ -54,7 +59,7 @@ function useLeetCodeHeatmap() {
 
     fetch('/api/leetcode')
       .then((r) => r.json())
-      .then((j: { contributions: HeatmapDay[]; totalActiveDays?: number; streak?: number }) => {
+      .then((j: { contributions: HeatmapDay[]; streak?: number }) => {
         const { days, active } = merge(j.contributions ?? []);
         setData(days);
         setActiveDays(active);
@@ -83,25 +88,12 @@ function useCrunchHeatmap() {
   return { data, total: checkins?.length ?? 0, loading: checkins === null };
 }
 
-interface Duo {
-  name: string | null;
-  streak: number;
-  totalXp: number;
-  language: string;
-  streakStart: string | null;
-  streakEnd: string | null;
-  courseXp: number;
-}
-
 function useDuolingo() {
-  const [data, setData] = useState<Duo | null>(null);
+  const [data, setData] = useState<Duo | null | 'loading'>('loading');
   useEffect(() => {
     fetch('/api/duolingo')
       .then((r) => r.json())
-      .then((j: Duo & { error?: string }) => {
-        if (j.error) setData(null);
-        else setData(j);
-      })
+      .then((j: Duo & { error?: string }) => setData(j.error ? null : j))
       .catch(() => setData(null));
   }, []);
   return data;
@@ -118,55 +110,35 @@ function useTopRepos() {
   return repos;
 }
 
-function Card({
-  title,
-  subtitle,
-  meta,
-  children,
-  fullWidth,
-}: {
-  title: string;
-  subtitle?: string;
-  meta?: string;
-  children: React.ReactNode;
-  fullWidth?: boolean;
-}) {
+const lifeSections = [
+  { id: 'header', label: 'Top' },
+  { id: 'github', label: 'Code' },
+  { id: 'leetcode', label: 'Problems' },
+  { id: 'crunch', label: 'Fitness' },
+  { id: 'duolingo', label: 'Language' },
+  { id: 'repos', label: 'Repos' },
+];
+
+function SectionHeading({ children }: { children: React.ReactNode }) {
   return (
-    <div
-      className={`reveal border border-border bg-card rounded-xl p-6 sm:p-8 flex flex-col gap-4${
-        fullWidth ? ' lg:col-span-2' : ''
-      }`}
-    >
-      <div className="flex flex-col gap-1">
-        <div className="flex items-start justify-between gap-4">
-          <h2
-            className="text-foreground"
-            style={{
-              fontFamily: '"Instrument Serif", Georgia, serif',
-              fontSize: '28px',
-              lineHeight: 1.05,
-              letterSpacing: '-0.01em',
-            }}
-          >
-            {title}
-          </h2>
-          {meta && (
-            <span className="text-[10px] tracking-[0.12em] uppercase text-muted-foreground whitespace-nowrap">
-              {meta}
-            </span>
-          )}
-        </div>
-        {subtitle && (
-          <p className="text-[12px] text-muted-foreground w-full">{subtitle}</p>
-        )}
-      </div>
-      {children}
+    <h2 className="text-xs font-mono uppercase tracking-widest text-neutral-400">{children}</h2>
+  );
+}
+
+function Stat({ value, label }: { value: string | number; label: string }) {
+  return (
+    <div className="space-y-1">
+      <div className="text-2xl md:text-3xl font-medium tracking-tight">{value}</div>
+      <div className="text-xs font-mono uppercase tracking-widest text-neutral-400">{label}</div>
     </div>
   );
 }
 
+function Loading() {
+  return <div className="text-xs font-mono text-neutral-400">Loading…</div>;
+}
+
 export function LifePage() {
-  useReveal();
   const gh = useGitHubHeatmap();
   const lc = useLeetCodeHeatmap();
   const crunch = useCrunchHeatmap();
@@ -174,208 +146,162 @@ export function LifePage() {
   const repos = useTopRepos();
 
   return (
-    <div className="min-h-screen overflow-x-hidden" style={{ background: 'var(--bg)', color: 'var(--fg)' }}>
-      <div className="grid-bg" aria-hidden="true" />
-      <div
-        aria-hidden="true"
-        style={{
-          position: 'fixed',
-          top: '-200px',
-          right: '-200px',
-          width: '800px',
-          height: '800px',
-          background: 'radial-gradient(circle, rgba(212,255,90,0.08) 0%, transparent 60%)',
-          pointerEvents: 'none',
-          zIndex: 0,
-        }}
-      />
-      <HomeNav />
-      <div className="pt-20 px-4 pb-4 sm:px-6 sm:pb-6 lg:px-8 lg:pb-8 flex flex-col gap-4 w-full box-border">
-        <div className="max-w-6xl mx-auto w-full flex flex-col gap-4">
-          <div className="pt-8 pb-24">
-            <Link
-              to="/"
-              className="reveal inline-flex items-center gap-2 text-[11px] tracking-[0.08em] uppercase text-muted-foreground hover:text-accent transition-colors mb-12 group"
-            >
-              <span className="transition-transform group-hover:-translate-x-1">←</span>
-              Back to home
-            </Link>
+    <>
+      <ThemeToggle />
+      <SectionNav items={lifeSections} />
+      <main className="max-w-[900px] px-8 md:px-12 py-24 md:py-32 flex flex-col gap-24">
+        <Link
+          to="/"
+          className="text-xs font-mono uppercase tracking-widest text-neutral-400 hover:text-neutral-950 dark:hover:text-white transition-colors w-fit"
+        >
+          ← Home
+        </Link>
 
-            <h1
-              className="reveal mb-6 leading-none tracking-[-0.03em] text-foreground"
-              style={{
-                fontFamily: '"Instrument Serif", Georgia, serif',
-                fontSize: 'clamp(56px, 9vw, 120px)',
-                lineHeight: 0.95,
-              }}
-            >
-              A dashboard for{' '}
-              <em className="italic text-accent not-italic" style={{ fontStyle: 'italic' }}>
-                life
-              </em>
-              <em className="italic text-accent" style={{ fontStyle: 'italic' }}>
-                .
-              </em>
-            </h1>
-
-            <p className="reveal text-sm text-muted-foreground max-w-xl mb-16 leading-relaxed">
-              Code, reps, and problems solved — the shape of the year so far.
+        <section id="header" className="space-y-6">
+          <div className="space-y-1">
+            <h1 className="text-xl md:text-2xl font-medium tracking-tight">Life</h1>
+            <p className="text-neutral-500 dark:text-neutral-400">
+              A public dashboard for the things I track and grind on daily.
             </p>
-
-            <div className="reveal-stagger grid grid-cols-1 lg:grid-cols-2 gap-6">
-              <Card
-                title="GitHub"
-                subtitle="Public commits, issues, PRs — last 12 months."
-                meta={`${gh.total} contributions`}
-              >
-                {gh.data === null ? (
-                  <div className="text-[11px] text-muted-foreground">Loading…</div>
-                ) : (
-                  <Heatmap data={gh.data} colorAccent="#d4ff5a" unitLabel="contributions" />
-                )}
-              </Card>
-
-              <Card
-                title="LeetCode"
-                subtitle="@justinzhao1324 · problems solved (incl. NeetCode history)"
-                meta={
-                  lc.data === null
-                    ? undefined
-                    : `${lc.activeDays} active · ${lc.streak} streak`
-                }
-              >
-                {lc.data === null ? (
-                  <div className="text-[11px] text-muted-foreground">Loading…</div>
-                ) : (
-                  <Heatmap data={lc.data} colorAccent="#ffa116" unitLabel="problems" />
-                )}
-              </Card>
-
-              <Card
-                title="Crunch Fitness"
-                subtitle="Check-ins — synced from Google Sheets."
-                meta={crunch.loading ? undefined : `${crunch.total} sessions`}
-              >
-                {crunch.loading ? (
-                  <div className="text-[11px] text-muted-foreground">Loading…</div>
-                ) : (
-                  <Heatmap data={crunch.data} colorAccent="#ff2d55" unitLabel="check-ins" />
-                )}
-              </Card>
-
-              <Card
-                title="Duolingo"
-                subtitle={
-                  duo
-                    ? `@justinzhao869949 · learning ${duo.language}`
-                    : '@justinzhao869949'
-                }
-                meta={duo ? `${duo.totalXp.toLocaleString()} XP` : undefined}
-              >
-                {duo === null ? (
-                  <div className="text-[11px] text-muted-foreground">Loading…</div>
-                ) : (
-                  <div className="flex items-baseline gap-8 flex-wrap">
-                    <div>
-                      <div
-                        className="text-accent leading-none"
-                        style={{
-                          fontFamily: '"Instrument Serif", Georgia, serif',
-                          fontSize: '72px',
-                          letterSpacing: '-0.03em',
-                        }}
-                      >
-                        {duo.streak}
-                      </div>
-                      <div className="text-[10px] tracking-[0.12em] uppercase text-muted-foreground mt-1">
-                        day streak
-                      </div>
-                    </div>
-                    {duo.streakStart && duo.streakEnd && (
-                      <div>
-                        <div className="text-[13px] text-foreground">
-                          {duo.streakStart} → {duo.streakEnd}
-                        </div>
-                        <div className="text-[10px] tracking-[0.12em] uppercase text-muted-foreground mt-1">
-                          current run
-                        </div>
-                      </div>
-                    )}
-                    <div>
-                      <div className="text-[13px] text-foreground">
-                        {duo.courseXp.toLocaleString()} XP
-                      </div>
-                      <div className="text-[10px] tracking-[0.12em] uppercase text-muted-foreground mt-1">
-                        in {duo.language}
-                      </div>
-                    </div>
-                  </div>
-                )}
-              </Card>
-
-              <Card
-                fullWidth
-                title="Current projects"
-                subtitle="Top repos ranked by commits in the last 30 days."
-              >
-                {repos === null ? (
-                  <div className="text-[11px] text-muted-foreground">Loading…</div>
-                ) : repos.length === 0 ? (
-                  <div className="text-[11px] text-muted-foreground">
-                    No repos with recent commits.
-                  </div>
-                ) : (
-                  <div className="flex flex-col gap-5">
-                    {repos.map((r) => (
-                      <a
-                        key={r.fullName}
-                        href={r.url}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="group flex flex-col gap-2 no-underline text-inherit"
-                      >
-                        <div className="flex items-baseline justify-between gap-4">
-                          <div className="flex items-baseline gap-3 min-w-0">
-                            <span
-                              className="text-foreground truncate group-hover:text-accent transition-colors"
-                              style={{
-                                fontFamily: '"Instrument Serif", Georgia, serif',
-                                fontSize: '22px',
-                                lineHeight: 1.1,
-                              }}
-                            >
-                              {r.name}
-                            </span>
-                            {r.language && (
-                              <span className="text-[10px] tracking-[0.12em] uppercase text-muted-foreground">
-                                {r.language}
-                              </span>
-                            )}
-                          </div>
-                          <span className="text-[10px] tracking-[0.12em] uppercase text-muted-foreground whitespace-nowrap">
-                            {r.recentCommits} commits · 30d
-                          </span>
-                        </div>
-                        {r.description && (
-                          <p className="text-[12px] text-muted-foreground leading-relaxed line-clamp-2">
-                            {r.description}
-                          </p>
-                        )}
-                        <div className="h-1.5 w-full rounded-full bg-white/5 overflow-hidden">
-                          <div
-                            className="h-full bg-accent transition-all duration-500"
-                            style={{ width: `${Math.max(4, r.progress * 100)}%` }}
-                          />
-                        </div>
-                      </a>
-                    ))}
-                  </div>
-                )}
-              </Card>
-            </div>
           </div>
-        </div>
-      </div>
-    </div>
+          <p className="text-neutral-600 dark:text-neutral-300 leading-relaxed max-w-[720px]">
+            Code, reps, and problems solved — the shape of the year so far. All numbers pulled live
+            from GitHub, LeetCode, Duolingo, and a Google Sheet I log gym check-ins into.
+          </p>
+        </section>
+
+        <section id="github" className="space-y-6">
+          <div className="flex items-baseline justify-between gap-4">
+            <SectionHeading>Code</SectionHeading>
+            <span className="text-xs font-mono text-neutral-400">@JzJoker</span>
+          </div>
+          <p className="text-sm text-neutral-500 dark:text-neutral-400">
+            Public commits, issues, and PRs — last 52 weeks.
+          </p>
+          <div className="flex flex-wrap gap-x-12 gap-y-4">
+            <Stat value={gh.data === null ? '—' : gh.total.toLocaleString()} label="Contributions" />
+          </div>
+          {gh.data === null ? <Loading /> : <Heatmap data={gh.data} accent="#10b981" unitLabel="contributions" />}
+        </section>
+
+        <section id="leetcode" className="space-y-6">
+          <div className="flex items-baseline justify-between gap-4">
+            <SectionHeading>Problems</SectionHeading>
+            <span className="text-xs font-mono text-neutral-400">@justinzhao1324</span>
+          </div>
+          <p className="text-sm text-neutral-500 dark:text-neutral-400">
+            LeetCode submissions — includes historical NeetCode activity from before the switch.
+          </p>
+          <div className="flex flex-wrap gap-x-12 gap-y-4">
+            <Stat value={lc.data === null ? '—' : lc.activeDays} label="Active days" />
+            <Stat value={lc.data === null ? '—' : lc.streak} label="Current streak" />
+          </div>
+          {lc.data === null ? <Loading /> : <Heatmap data={lc.data} accent="#f97316" unitLabel="problems" />}
+        </section>
+
+        <section id="crunch" className="space-y-6">
+          <div className="flex items-baseline justify-between gap-4">
+            <SectionHeading>Fitness</SectionHeading>
+            <span className="text-xs font-mono text-neutral-400">Crunch NYC</span>
+          </div>
+          <p className="text-sm text-neutral-500 dark:text-neutral-400">
+            Gym check-ins — synced from a personal Google Sheet.
+          </p>
+          <div className="flex flex-wrap gap-x-12 gap-y-4">
+            <Stat value={crunch.loading ? '—' : crunch.total} label="Sessions" />
+          </div>
+          {crunch.loading ? (
+            <Loading />
+          ) : (
+            <Heatmap data={crunch.data} accent="#f43f5e" unitLabel="check-ins" />
+          )}
+        </section>
+
+        <section id="duolingo" className="space-y-6">
+          <div className="flex items-baseline justify-between gap-4">
+            <SectionHeading>Language</SectionHeading>
+            <span className="text-xs font-mono text-neutral-400">@justinzhao869949</span>
+          </div>
+          <p className="text-sm text-neutral-500 dark:text-neutral-400">
+            {duo && duo !== 'loading' ? `Currently learning ${duo.language}.` : 'Duolingo streak and XP.'}
+          </p>
+          {duo === 'loading' ? (
+            <Loading />
+          ) : duo === null ? (
+            <p className="text-xs font-mono text-neutral-400">Unavailable.</p>
+          ) : (
+            <div className="flex flex-wrap gap-x-12 gap-y-4">
+              <Stat value={duo.streak} label="Day streak" />
+              <Stat value={duo.totalXp.toLocaleString()} label="Total XP" />
+              <Stat value={duo.courseXp.toLocaleString()} label={`XP in ${duo.language}`} />
+            </div>
+          )}
+          {duo && duo !== 'loading' && duo.streakStart && duo.streakEnd && (
+            <p className="text-xs font-mono text-neutral-400">
+              Current run: {duo.streakStart} → {duo.streakEnd}
+            </p>
+          )}
+        </section>
+
+        <section id="repos" className="space-y-6">
+          <div className="flex items-baseline justify-between gap-4">
+            <SectionHeading>Repos</SectionHeading>
+            <span className="text-xs font-mono text-neutral-400">Last 30 days</span>
+          </div>
+          <p className="text-sm text-neutral-500 dark:text-neutral-400">
+            The GitHub repositories I've committed to most recently.
+          </p>
+          {repos === null ? (
+            <Loading />
+          ) : repos.length === 0 ? (
+            <p className="text-xs font-mono text-neutral-400">No repos with recent commits.</p>
+          ) : (
+            <div className="divide-y divide-neutral-200 dark:divide-neutral-800 border-t border-neutral-200 dark:border-neutral-800">
+              {repos.map((r) => (
+                <a
+                  key={r.fullName}
+                  href={r.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="project-row group py-6 md:py-8 block cursor-pointer transition-all duration-300 no-underline text-inherit"
+                >
+                  <div className="flex flex-col md:flex-row md:items-baseline justify-between gap-3">
+                    <div className="space-y-1 min-w-0">
+                      <h3 className="text-lg font-medium group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors truncate">
+                        {r.name}
+                      </h3>
+                      {r.description && (
+                        <p className="text-sm text-neutral-500 dark:text-neutral-400 line-clamp-2">
+                          {r.description}
+                        </p>
+                      )}
+                    </div>
+                    <div className="flex items-center gap-3 whitespace-nowrap">
+                      {r.language && (
+                        <span className="font-mono text-[10px] border border-neutral-200 dark:border-neutral-800 px-2 py-0.5 text-neutral-500 uppercase">
+                          {r.language}
+                        </span>
+                      )}
+                      <span className="text-xs font-mono text-neutral-400">
+                        {r.recentCommits} commits
+                      </span>
+                    </div>
+                  </div>
+                  <div className="mt-3 h-px w-full bg-neutral-200/60 dark:bg-neutral-800/60 overflow-hidden">
+                    <div
+                      className="h-full transition-all duration-500"
+                      style={{
+                        width: `${Math.max(4, r.progress * 100)}%`,
+                        backgroundColor: '#2563eb',
+                      }}
+                    />
+                  </div>
+                </a>
+              ))}
+            </div>
+          )}
+        </section>
+      </main>
+    </>
   );
 }

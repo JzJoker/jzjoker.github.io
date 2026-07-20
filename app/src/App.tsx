@@ -9,6 +9,7 @@ const homeSections = [
   { id: 'projects', label: 'Work' },
   { id: 'experience', label: 'Experience' },
   { id: 'hackathons', label: 'Awards' },
+  { id: 'elsewhere', label: 'Elsewhere' },
   { id: 'contact', label: 'Contact' },
 ];
 
@@ -288,6 +289,25 @@ function App() {
                 }
               />
             ))}
+          </div>
+        </section>
+
+        <section id="elsewhere" className="space-y-12">
+          <h2 className="text-xs font-mono uppercase tracking-widest text-neutral-400">
+            Elsewhere
+          </h2>
+          <div className="space-y-4">
+            <p className="text-neutral-600 dark:text-neutral-300 max-w-[720px]">
+              A dashboard for the things I track outside of work — code, reps, and problems solved,
+              pulled live from GitHub, LeetCode, Duolingo, and my gym log.
+            </p>
+            <Link
+              to="/life"
+              className="group inline-flex items-center gap-1 text-sm font-medium hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+            >
+              Life dashboard
+              <ArrowIcon className="w-3 h-3 text-neutral-400 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors" />
+            </Link>
           </div>
         </section>
 
