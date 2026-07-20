@@ -155,7 +155,7 @@ export function LifePage() {
 
         <section id="header" className="space-y-8">
           <div className="space-y-3">
-            <h1 className="text-4xl md:text-5xl font-medium tracking-tight leading-[1.05]">Life</h1>
+            <h1 className="text-4xl font-medium tracking-tight leading-[1.05]">Life</h1>
             <p className="text-lg text-neutral-500 dark:text-neutral-400 leading-snug">
               A public dashboard for the things I track and grind on daily.
             </p>
@@ -263,7 +263,7 @@ export function LifePage() {
                 >
                   <div className="flex flex-col md:flex-row md:items-baseline justify-between gap-3">
                     <div className="space-y-1.5 min-w-0">
-                      <h3 className="text-lg font-bold tracking-tight leading-snug group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors truncate">
+                      <h3 className="text-lg font-medium tracking-tight leading-snug group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors truncate">
                         {r.name}
                       </h3>
                       {r.description && (

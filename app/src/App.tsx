@@ -92,7 +92,7 @@ function ProjectRow({
       <div className="flex flex-col md:flex-row md:items-baseline justify-between gap-4">
         <div className="space-y-1.5">
           <div className="flex items-baseline gap-3 flex-wrap">
-            <h3 className="text-lg font-bold tracking-tight leading-snug">{project.title}</h3>
+            <h3 className="text-lg font-medium tracking-tight leading-snug">{project.title}</h3>
             <span className="text-xs font-mono text-neutral-400 whitespace-nowrap">
               {project.duration}
             </span>
@@ -166,7 +166,7 @@ function App() {
       <main className="max-w-[900px] px-8 md:px-12 py-24 md:py-32 flex flex-col gap-24">
         <section id="hero" className="space-y-8">
           <div className="space-y-3">
-            <h1 className="text-4xl md:text-5xl font-medium tracking-tight leading-[1.05]">
+            <h1 className="text-4xl font-medium tracking-tight leading-[1.05]">
               Justin Zhao
             </h1>
             <p className="text-lg text-neutral-500 dark:text-neutral-400 leading-snug">
@@ -207,7 +207,7 @@ function App() {
             {experience.map((e) => (
               <div key={e.role} className="flex justify-between items-start gap-6">
                 <div className="space-y-1.5">
-                  <p className="text-lg font-bold tracking-tight leading-snug">{e.role}</p>
+                  <p className="text-lg font-medium tracking-tight leading-snug">{e.role}</p>
                   <p className="text-sm text-neutral-500 dark:text-neutral-400 leading-snug">
                     {e.detail}
                   </p>

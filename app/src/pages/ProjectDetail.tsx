@@ -29,7 +29,7 @@ export function ProjectDetailPage() {
         <div className="mx-auto max-w-[var(--page-max)]">
           <main className="max-w-[900px] px-8 md:px-12 py-24 md:py-32 flex flex-col gap-6">
             <p className="text-xs font-mono uppercase tracking-widest text-neutral-400">404</p>
-            <h1 className="text-4xl md:text-5xl font-medium tracking-tight leading-[1.05]">
+            <h1 className="text-4xl font-medium tracking-tight leading-[1.05]">
               Project not found
             </h1>
             <Link
@@ -91,7 +91,7 @@ export function ProjectDetailPage() {
 
         <section id="header" className="space-y-8">
           <div className="space-y-3">
-            <h1 className="text-4xl md:text-5xl font-medium tracking-tight leading-[1.05]">
+            <h1 className="text-4xl font-medium tracking-tight leading-[1.05]">
               {project.title}
             </h1>
             <p className="text-lg text-neutral-500 dark:text-neutral-400 leading-snug max-w-[62ch]">
@@ -239,7 +239,7 @@ export function ProjectDetailPage() {
               <p className="text-xs font-mono uppercase tracking-widest text-neutral-400">
                 Next project
               </p>
-              <p className="text-2xl md:text-3xl font-medium tracking-tight leading-none group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+              <p className="text-2xl font-medium tracking-tight leading-none group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                 {nextProject.title}
               </p>
             </div>
