@@ -119,7 +119,7 @@ export function Heatmap({
               return (
                 <div
                   key={i}
-                  className="text-[9px] font-mono uppercase tracking-widest text-neutral-400 h-3"
+                  className="text-[10px] font-mono uppercase tracking-widest text-neutral-400 h-3"
                   style={{ minWidth: 11 }}
                 >
                   {label?.label ?? ''}
