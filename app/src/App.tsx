@@ -1,9 +1,8 @@
-import { useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useRef, useState, type ReactNode } from 'react';
 import { Navbar } from '@/components/Navbar';
 import { SectionNav } from '@/components/SectionNav';
 import { SectionHeading } from '@/components/SectionHeading';
-import { ExternalLink } from '@/components/ExternalLink';
+import { ExternalLink, InlineLink } from '@/components/ExternalLink';
 import { featuredProjects, type ProjectDetail } from '@/data/projectDetails';
 
 const homeSections = [
@@ -16,44 +15,40 @@ const homeSections = [
 
 interface RoleItem {
   role: string;
+  company: string;
+  companyUrl?: string;
   detail: string;
   period: string;
 }
 
 const experience: RoleItem[] = [
   {
-    role: 'Site Reliability Engineer @ Vanguard',
+    role: 'Site Reliability Engineer',
+    company: 'Vanguard',
+    companyUrl:
+      'https://corporate.vanguard.com/content/corporatesite/us/en/corp/why-vanguard/sets-us-apart/client-centered-technology.html',
     detail: 'Product-owned ScriptHub — an Electron + PowerShell remote script execution platform.',
     period: '2024 — 2025',
   },
   {
-    role: 'Software Development Intern @ RIT ITS',
+    role: 'Software Development Intern',
+    company: 'RIT ITS',
+    companyUrl: 'https://www.rit.edu/its/',
     detail: 'Built TCTools — post-image setup automation adopted department-wide.',
     period: '2024',
   },
   {
-    role: 'Web Developer @ RIT HR',
+    role: 'Web Developer',
+    company: 'RIT HR',
+    companyUrl: 'https://www.rit.edu/humanresources/',
     detail: 'Led a department-wide Drupal site redesign; migrated every HR site under one system.',
     period: '2022 — 2023',
   },
 ];
 
-function ArrowIcon({ className }: { className?: string }) {
-  return (
-    <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth={2}
-        d="M14 5l7 7m0 0l-7 7m7-7H3"
-      />
-    </svg>
-  );
-}
-
 interface PreviewState {
   title: string;
-  description: string;
+  description: ReactNode;
   image: string;
   x: number;
   y: number;
@@ -132,7 +127,7 @@ function App() {
 
   const isMobile = () => window.innerWidth < 768;
 
-  const showPreview = (title: string, description: string, image: string) => {
+  const showPreview = (title: string, description: ReactNode, image: string) => {
     if (isMobile()) return;
     setPreview((p) => ({ ...p, title, description, image, visible: true }));
   };
@@ -207,7 +202,14 @@ function App() {
             {experience.map((e) => (
               <div key={e.role} className="flex justify-between items-start gap-6">
                 <div className="space-y-1.5">
-                  <p className="text-lg font-medium tracking-tight leading-snug">{e.role}</p>
+                  <p className="text-lg font-medium tracking-tight leading-snug">
+                    {e.role} @{' '}
+                    {e.companyUrl ? (
+                      <InlineLink href={e.companyUrl}>{e.company}</InlineLink>
+                    ) : (
+                      e.company
+                    )}
+                  </p>
                   <p className="text-sm text-neutral-500 dark:text-neutral-400 leading-snug">
                     {e.detail}
                   </p>
@@ -227,13 +229,7 @@ function App() {
               A dashboard for the things I track outside of work — code, reps, and problems solved,
               pulled live from GitHub, LeetCode, Duolingo, and my gym log.
             </p>
-            <Link
-              to="/life"
-              className="group inline-flex items-center gap-1.5 text-sm font-medium hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-            >
-              Life dashboard
-              <ArrowIcon className="w-3 h-3 text-neutral-400 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors" />
-            </Link>
+            <ExternalLink href="/life" label="Life dashboard" variant="inline" />
           </div>
         </section>
 
@@ -244,31 +240,21 @@ function App() {
               Open to full-time roles and collaborations on interesting web or infra problems.
             </p>
             <div className="flex flex-wrap gap-8">
-              <a
+              <ExternalLink
                 href="mailto:justinzhao1324@gmail.com"
-                className="group flex items-center gap-1 text-sm font-medium hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-              >
-                justinzhao1324@gmail.com
-                <ArrowIcon className="w-3 h-3 text-neutral-400 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors" />
-              </a>
-              <a
+                label="justinzhao1324@gmail.com"
+                variant="inline"
+              />
+              <ExternalLink
                 href="https://github.com/JzJoker"
-                target="_blank"
-                rel="noreferrer"
-                className="group flex items-center gap-1 text-sm font-medium hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-              >
-                GitHub
-                <ArrowIcon className="w-3 h-3 text-neutral-400 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors" />
-              </a>
-              <a
+                label="GitHub"
+                variant="inline"
+              />
+              <ExternalLink
                 href="https://www.linkedin.com/in/justinzhao1324/"
-                target="_blank"
-                rel="noreferrer"
-                className="group flex items-center gap-1 text-sm font-medium hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-              >
-                LinkedIn
-                <ArrowIcon className="w-3 h-3 text-neutral-400 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors" />
-              </a>
+                label="LinkedIn"
+                variant="inline"
+              />
             </div>
           </div>
         </section>

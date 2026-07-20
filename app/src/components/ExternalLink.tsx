@@ -25,18 +25,24 @@ export function ExternalLink({
   href,
   label,
   size = 'sm',
+  variant = 'label',
   onClick,
 }: {
   href: string;
   label: string;
   size?: 'sm' | 'md';
+  variant?: 'label' | 'inline';
   onClick?: (e: React.MouseEvent) => void;
 }) {
   const isSmall = size === 'sm';
   const isInternal = href.startsWith('/');
-  const classes = `relative inline-flex items-center gap-1 font-mono uppercase tracking-widest text-blue-600 dark:text-blue-400 after:content-[''] after:absolute after:left-0 after:bottom-[-2px] after:h-px after:w-0 after:bg-current after:transition-[width] after:duration-300 after:ease-out hover:after:w-full ${
-    isSmall ? 'text-[11px]' : 'text-sm'
-  }`;
+  const base =
+    "relative inline-flex items-center gap-1 text-blue-600 dark:text-blue-400 after:content-[''] after:absolute after:left-0 after:bottom-[-2px] after:h-px after:w-0 after:bg-current after:transition-[width] after:duration-300 after:ease-out hover:after:w-full";
+  const variantClasses =
+    variant === 'label'
+      ? `font-mono uppercase tracking-widest ${isSmall ? 'text-[11px]' : 'text-sm'}`
+      : `font-medium ${isSmall ? 'text-sm' : 'text-base'}`;
+  const classes = `${base} ${variantClasses}`;
   const iconClass = isSmall ? 'w-2.5 h-2.5' : 'w-3 h-3';
 
   if (isInternal) {
@@ -57,6 +63,40 @@ export function ExternalLink({
     >
       {label}
       <ArrowUpRight className={iconClass} />
+    </a>
+  );
+}
+
+/**
+ * Inline text link that inherits the surrounding font size/weight — for prose
+ * (e.g. inside a heading, subtitle, or paragraph). Always blue with the same
+ * left-to-right underline sweep on hover.
+ */
+export function InlineLink({
+  href,
+  children,
+  arrow = true,
+}: {
+  href: string;
+  children: React.ReactNode;
+  arrow?: boolean;
+}) {
+  const isInternal = href.startsWith('/');
+  const cls =
+    "relative inline-flex items-baseline gap-1 text-blue-600 dark:text-blue-400 after:content-[''] after:absolute after:left-0 after:bottom-[-2px] after:h-px after:w-0 after:bg-current after:transition-[width] after:duration-300 after:ease-out hover:after:w-full";
+
+  if (isInternal) {
+    return (
+      <Link to={href} className={cls}>
+        {children}
+        {arrow && <ArrowRight className="w-3 h-3 self-center" />}
+      </Link>
+    );
+  }
+  return (
+    <a href={href} target="_blank" rel="noreferrer" className={cls}>
+      {children}
+      {arrow && <ArrowUpRight className="w-3 h-3 self-center" />}
     </a>
   );
 }

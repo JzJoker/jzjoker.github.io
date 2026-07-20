@@ -1,3 +1,6 @@
+import type { ReactNode } from 'react';
+import { InlineLink } from '@/components/ExternalLink';
+
 export interface TechStackRow {
   layer: string;
   technology: string;
@@ -12,7 +15,7 @@ export interface Screenshot {
 export interface ProjectDetail {
   slug: string;
   title: string;
-  subtitle: string;
+  subtitle: ReactNode;
   role: string;
   /** Human-readable date shown in the UI. */
   duration: string;
@@ -137,7 +140,16 @@ export const projects: ProjectDetail[] = [
   {
     slug: 'superplane-hackathon',
     title: 'Software Factory',
-    subtitle: "Turns GitHub issues into deployed PRs. 1st place at SuperPlane's NYC Hackathon.",
+    subtitle: (
+      <>
+        Turns GitHub issues into deployed PRs.{' '}
+        <strong className="font-normal underline underline-offset-4">1st place</strong> at{' '}
+        <InlineLink href="https://superplane.com" arrow={false}>
+          SuperPlane
+        </InlineLink>
+        's NYC Hackathon.
+      </>
+    ),
     role: 'Team Brunson',
     duration: 'July 2026',
     sortAt: '2026-07-19',
@@ -167,7 +179,19 @@ export const projects: ProjectDetail[] = [
   {
     slug: 'hackprinceton',
     title: 'SomeoneSave.Us',
-    subtitle: 'A game where real-life decisions shape your in-game success. Best Entertainment Hack and two other awards at HackPrinceton.',
+    subtitle: (
+      <>
+        A game where real-life decisions shape your in-game success.{' '}
+        <strong className="font-normal underline underline-offset-4">
+          Best Entertainment Hack
+        </strong>{' '}
+        at{' '}
+        <InlineLink href="https://www.hackprinceton.com/" arrow={false}>
+          HackPrinceton
+        </InlineLink>
+        .
+      </>
+    ),
     role: 'Hackathon',
     duration: 'April 2026',
     sortAt: '2026-04-01',
@@ -201,7 +225,19 @@ export const projects: ProjectDetail[] = [
   {
     slug: 'uncommonhacks',
     title: 'LifeStory',
-    subtitle: "A collaborative memory journal for Alzheimer's patients. Best Social Impact at UncommonHacks.",
+    subtitle: (
+      <>
+        A collaborative memory journal for Alzheimer's patients.{' '}
+        <strong className="font-normal underline underline-offset-4">
+          Best Social Impact
+        </strong>{' '}
+        at{' '}
+        <InlineLink href="https://uncommonhacks.com/" arrow={false}>
+          UncommonHacks
+        </InlineLink>
+        .
+      </>
+    ),
     role: 'Hackathon',
     duration: 'May 2026',
     sortAt: '2026-05-01',
