@@ -25,6 +25,8 @@ body {
   background-color: var(--bg-color);
   color: var(--text-color);
   font-family: 'Inter', sans-serif;
+  font-feature-settings: 'ss01', 'cv11';
+  font-optical-sizing: auto;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
