@@ -8,7 +8,7 @@ import { featuredProjects, getProject } from '@/data/projectDetails';
 
 function Tag({ children }: { children: React.ReactNode }) {
   return (
-    <span className="font-mono text-[10px] tracking-widest border border-neutral-200 dark:border-neutral-800 px-2 py-0.5 text-neutral-500 uppercase">
+    <span className="font-mono text-[10px] border border-neutral-200 dark:border-neutral-800 px-2 py-0.5 text-neutral-500 uppercase">
       {children}
     </span>
   );
@@ -29,9 +29,7 @@ export function ProjectDetailPage() {
         <div className="mx-auto max-w-[var(--page-max)]">
           <main className="max-w-[900px] px-8 md:px-12 py-24 md:py-32 flex flex-col gap-6">
             <p className="text-xs font-mono uppercase tracking-widest text-neutral-400">404</p>
-            <h1 className="text-4xl md:text-5xl font-medium tracking-tight leading-[1.05]">
-              Project not found
-            </h1>
+            <h1 className="text-xl md:text-2xl font-medium tracking-tight">Project not found</h1>
             <Link
               to="/"
               className="text-sm font-medium hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
@@ -89,14 +87,10 @@ export function ProjectDetailPage() {
           ← Work
         </Link>
 
-        <section id="header" className="space-y-8">
-          <div className="space-y-3">
-            <h1 className="text-4xl md:text-5xl font-medium tracking-tight leading-[1.05]">
-              {project.title}
-            </h1>
-            <p className="text-lg text-neutral-500 dark:text-neutral-400 leading-snug max-w-[62ch]">
-              {project.subtitle}
-            </p>
+        <section id="header" className="space-y-6">
+          <div className="space-y-2">
+            <h1 className="text-xl md:text-2xl font-medium tracking-tight">{project.title}</h1>
+            <p className="text-neutral-500 dark:text-neutral-400">{project.subtitle}</p>
           </div>
 
           <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
@@ -115,17 +109,17 @@ export function ProjectDetailPage() {
           </div>
 
           <dl className="grid grid-cols-2 md:grid-cols-3 gap-x-8 gap-y-4 pt-2 border-t border-neutral-200 dark:border-neutral-800">
-            <div className="space-y-1.5 pt-4">
+            <div className="space-y-1 pt-4">
               <dt className="text-xs font-mono uppercase tracking-widest text-neutral-400">Role</dt>
               <dd className="text-sm">{project.role}</dd>
             </div>
-            <div className="space-y-1.5 pt-4">
+            <div className="space-y-1 pt-4">
               <dt className="text-xs font-mono uppercase tracking-widest text-neutral-400">
                 Duration
               </dt>
               <dd className="text-sm">{project.duration}</dd>
             </div>
-            <div className="space-y-1.5 pt-4 col-span-2 md:col-span-1">
+            <div className="space-y-1 pt-4 col-span-2 md:col-span-1">
               <dt className="text-xs font-mono uppercase tracking-widest text-neutral-400">
                 Stack
               </dt>
@@ -150,7 +144,7 @@ export function ProjectDetailPage() {
             {project.intro.map((p, i) => (
               <p
                 key={i}
-                className="text-base text-neutral-600 dark:text-neutral-300 leading-relaxed max-w-[62ch]"
+                className="text-neutral-600 dark:text-neutral-300 leading-relaxed max-w-[720px]"
               >
                 {p}
               </p>
@@ -210,7 +204,7 @@ export function ProjectDetailPage() {
               {project.conclusion.map((p, i) => (
                 <p
                   key={i}
-                  className="text-base text-neutral-600 dark:text-neutral-300 leading-relaxed max-w-[62ch]"
+                  className="text-neutral-600 dark:text-neutral-300 leading-relaxed max-w-[720px]"
                 >
                   {p}
                 </p>
@@ -235,11 +229,11 @@ export function ProjectDetailPage() {
             to={`/work/${nextProject.slug}`}
             className="group flex justify-between items-baseline gap-4"
           >
-            <div className="space-y-1.5">
+            <div className="space-y-1">
               <p className="text-xs font-mono uppercase tracking-widest text-neutral-400">
                 Next project
               </p>
-              <p className="text-2xl md:text-3xl font-medium tracking-tight leading-none group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+              <p className="text-lg font-medium group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                 {nextProject.title}
               </p>
             </div>

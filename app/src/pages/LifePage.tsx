@@ -122,8 +122,8 @@ const lifeSections = [
 
 function Stat({ value, label }: { value: string | number; label: string }) {
   return (
-    <div className="space-y-1.5">
-      <div className="text-3xl md:text-4xl font-medium tracking-tight leading-none">{value}</div>
+    <div className="space-y-1">
+      <div className="text-2xl md:text-3xl font-medium tracking-tight">{value}</div>
       <div className="text-xs font-mono uppercase tracking-widest text-neutral-400">{label}</div>
     </div>
   );
@@ -153,14 +153,14 @@ export function LifePage() {
           ← Home
         </Link>
 
-        <section id="header" className="space-y-8">
-          <div className="space-y-3">
-            <h1 className="text-4xl md:text-5xl font-medium tracking-tight leading-[1.05]">Life</h1>
-            <p className="text-lg text-neutral-500 dark:text-neutral-400 leading-snug">
+        <section id="header" className="space-y-6">
+          <div className="space-y-1">
+            <h1 className="text-xl md:text-2xl font-medium tracking-tight">Life</h1>
+            <p className="text-neutral-500 dark:text-neutral-400">
               A public dashboard for the things I track and grind on daily.
             </p>
           </div>
-          <p className="text-base text-neutral-600 dark:text-neutral-300 leading-relaxed max-w-[62ch]">
+          <p className="text-neutral-600 dark:text-neutral-300 leading-relaxed max-w-[720px]">
             Code, reps, and problems solved — the shape of the year so far. All numbers pulled live
             from GitHub, LeetCode, Duolingo, and a Google Sheet I log gym check-ins into.
           </p>
@@ -171,7 +171,7 @@ export function LifePage() {
             <SectionHeading>Code</SectionHeading>
             <span className="text-xs font-mono text-neutral-400">@JzJoker</span>
           </div>
-          <p className="text-sm text-neutral-500 dark:text-neutral-400 leading-relaxed max-w-[62ch]">
+          <p className="text-sm text-neutral-500 dark:text-neutral-400">
             Public commits, issues, and PRs — last 52 weeks.
           </p>
           <div className="flex flex-wrap gap-x-12 gap-y-4">
@@ -185,7 +185,7 @@ export function LifePage() {
             <SectionHeading>Problems</SectionHeading>
             <span className="text-xs font-mono text-neutral-400">@justinzhao1324</span>
           </div>
-          <p className="text-sm text-neutral-500 dark:text-neutral-400 leading-relaxed max-w-[62ch]">
+          <p className="text-sm text-neutral-500 dark:text-neutral-400">
             LeetCode submissions — includes historical NeetCode activity from before the switch.
           </p>
           <div className="flex flex-wrap gap-x-12 gap-y-4">
@@ -200,7 +200,7 @@ export function LifePage() {
             <SectionHeading>Fitness</SectionHeading>
             <span className="text-xs font-mono text-neutral-400">Crunch NYC</span>
           </div>
-          <p className="text-sm text-neutral-500 dark:text-neutral-400 leading-relaxed max-w-[62ch]">
+          <p className="text-sm text-neutral-500 dark:text-neutral-400">
             Gym check-ins — synced from a personal Google Sheet.
           </p>
           <div className="flex flex-wrap gap-x-12 gap-y-4">
@@ -218,7 +218,7 @@ export function LifePage() {
             <SectionHeading>Language</SectionHeading>
             <span className="text-xs font-mono text-neutral-400">@justinzhao869949</span>
           </div>
-          <p className="text-sm text-neutral-500 dark:text-neutral-400 leading-relaxed max-w-[62ch]">
+          <p className="text-sm text-neutral-500 dark:text-neutral-400">
             {duo && duo !== 'loading' ? `Currently learning ${duo.language}.` : 'Duolingo streak and XP.'}
           </p>
           {duo === 'loading' ? (
@@ -244,7 +244,7 @@ export function LifePage() {
             <SectionHeading>Repos</SectionHeading>
             <span className="text-xs font-mono text-neutral-400">Last 30 days</span>
           </div>
-          <p className="text-sm text-neutral-500 dark:text-neutral-400 leading-relaxed max-w-[62ch]">
+          <p className="text-sm text-neutral-500 dark:text-neutral-400">
             The GitHub repositories I've committed to most recently.
           </p>
           {repos === null ? (
@@ -262,23 +262,23 @@ export function LifePage() {
                   className="project-row group py-6 md:py-8 block cursor-pointer transition-all duration-300 no-underline text-inherit"
                 >
                   <div className="flex flex-col md:flex-row md:items-baseline justify-between gap-3">
-                    <div className="space-y-1.5 min-w-0">
-                      <h3 className="text-lg font-bold tracking-tight leading-snug group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors truncate">
+                    <div className="space-y-1 min-w-0">
+                      <h3 className="text-lg font-medium group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors truncate">
                         {r.name}
                       </h3>
                       {r.description && (
-                        <p className="text-sm text-neutral-500 dark:text-neutral-400 leading-snug line-clamp-2">
+                        <p className="text-sm text-neutral-500 dark:text-neutral-400 line-clamp-2">
                           {r.description}
                         </p>
                       )}
                     </div>
                     <div className="flex items-center gap-3 whitespace-nowrap">
                       {r.language && (
-                        <span className="font-mono text-[10px] tracking-widest border border-neutral-200 dark:border-neutral-800 px-2 py-0.5 text-neutral-500 uppercase">
+                        <span className="font-mono text-[10px] border border-neutral-200 dark:border-neutral-800 px-2 py-0.5 text-neutral-500 uppercase">
                           {r.language}
                         </span>
                       )}
-                      <span className="text-xs font-mono uppercase tracking-widest text-neutral-400">
+                      <span className="text-xs font-mono text-neutral-400">
                         {r.recentCommits} commits
                       </span>
                     </div>

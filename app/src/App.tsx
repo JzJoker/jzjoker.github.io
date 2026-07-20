@@ -62,7 +62,7 @@ interface PreviewState {
 
 function Tag({ children }: { children: React.ReactNode }) {
   return (
-    <span className="font-mono text-[10px] tracking-widest border border-neutral-200 dark:border-neutral-800 px-2 py-0.5 text-neutral-500 uppercase">
+    <span className="font-mono text-[10px] border border-neutral-200 dark:border-neutral-800 px-2 py-0.5 text-neutral-500 uppercase">
       {children}
     </span>
   );
@@ -90,16 +90,14 @@ function ProjectRow({
       onMouseLeave={onLeave}
     >
       <div className="flex flex-col md:flex-row md:items-baseline justify-between gap-4">
-        <div className="space-y-1.5">
+        <div className="space-y-1">
           <div className="flex items-baseline gap-3 flex-wrap">
-            <h3 className="text-lg font-bold tracking-tight leading-snug">{project.title}</h3>
+            <h3 className="text-lg font-medium">{project.title}</h3>
             <span className="text-xs font-mono text-neutral-400 whitespace-nowrap">
               {project.duration}
             </span>
           </div>
-          <p className="text-sm text-neutral-500 dark:text-neutral-400 leading-snug">
-            {project.subtitle}
-          </p>
+          <p className="text-neutral-500 dark:text-neutral-400">{project.subtitle}</p>
           {hasLinks && (
             <div className="flex flex-wrap gap-4 pt-2">
               {project.repoUrl && <ExternalLink href={project.repoUrl} label="GitHub" />}
@@ -164,23 +162,21 @@ function App() {
 
       <div className="mx-auto max-w-[var(--page-max)]">
       <main className="max-w-[900px] px-8 md:px-12 py-24 md:py-32 flex flex-col gap-24">
-        <section id="hero" className="space-y-8">
-          <div className="space-y-3">
-            <h1 className="text-4xl md:text-5xl font-medium tracking-tight leading-[1.05]">
-              Justin Zhao
-            </h1>
-            <p className="text-lg text-neutral-500 dark:text-neutral-400 leading-snug">
+        <section id="hero" className="space-y-6">
+          <div className="space-y-1">
+            <h1 className="text-xl md:text-2xl font-medium tracking-tight">Justin Zhao</h1>
+            <p className="text-neutral-500 dark:text-neutral-400">
               Full-Stack Engineer — Cloud Infrastructure &amp; Interface Design
             </p>
           </div>
-          <p className="text-base text-neutral-600 dark:text-neutral-300 leading-relaxed max-w-[62ch]">
+          <p className="text-neutral-600 dark:text-neutral-300 leading-relaxed max-w-[720px]">
             Based in New York City. I build fast, resilient web products end-to-end — from AWS backends
             and self-hosted infrastructure to typography-first interfaces. Currently working on UX
             Interviewer, the first structured interview prep platform for UI/UX designers.
           </p>
         </section>
 
-        <section id="projects" className="space-y-8">
+        <section id="projects" className="space-y-12">
           <SectionHeading>Technical Work</SectionHeading>
           <div className="project-list">
             {featuredProjects.map((project) => (
@@ -201,35 +197,31 @@ function App() {
           </div>
         </section>
 
-        <section id="experience" className="space-y-8">
+        <section id="experience" className="space-y-12">
           <SectionHeading>Teams</SectionHeading>
-          <div className="space-y-10">
+          <div className="space-y-8">
             {experience.map((e) => (
               <div key={e.role} className="flex justify-between items-start gap-6">
-                <div className="space-y-1.5">
-                  <p className="text-lg font-bold tracking-tight leading-snug">{e.role}</p>
-                  <p className="text-sm text-neutral-500 dark:text-neutral-400 leading-snug">
-                    {e.detail}
-                  </p>
+                <div className="space-y-1">
+                  <p className="font-medium">{e.role}</p>
+                  <p className="text-sm text-neutral-500 dark:text-neutral-400">{e.detail}</p>
                 </div>
-                <p className="text-xs font-mono uppercase tracking-widest text-neutral-400 whitespace-nowrap pt-1.5">
-                  {e.period}
-                </p>
+                <p className="text-xs font-mono text-neutral-400 whitespace-nowrap">{e.period}</p>
               </div>
             ))}
           </div>
         </section>
 
-        <section id="elsewhere" className="space-y-8">
+        <section id="elsewhere" className="space-y-12">
           <SectionHeading>Elsewhere</SectionHeading>
           <div className="space-y-4">
-            <p className="text-base text-neutral-600 dark:text-neutral-300 leading-relaxed max-w-[62ch]">
+            <p className="text-neutral-600 dark:text-neutral-300">
               A dashboard for the things I track outside of work — code, reps, and problems solved,
               pulled live from GitHub, LeetCode, Duolingo, and my gym log.
             </p>
             <Link
               to="/life"
-              className="group inline-flex items-center gap-1.5 text-sm font-medium hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+              className="group inline-flex items-center gap-1 text-sm font-medium hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
             >
               Life dashboard
               <ArrowIcon className="w-3 h-3 text-neutral-400 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors" />
@@ -237,10 +229,10 @@ function App() {
           </div>
         </section>
 
-        <section id="contact" className="space-y-8 pb-32">
+        <section id="contact" className="space-y-12 pb-32">
           <SectionHeading>Contact</SectionHeading>
-          <div className="space-y-6">
-            <p className="text-base text-neutral-600 dark:text-neutral-300 leading-relaxed max-w-[62ch]">
+          <div className="space-y-4">
+            <p className="text-neutral-600 dark:text-neutral-300">
               Open to full-time roles and collaborations on interesting web or infra problems.
             </p>
             <div className="flex flex-wrap gap-8">
