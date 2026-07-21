@@ -7,6 +7,7 @@ import App from './App.tsx';
 import { ProjectDetailPage } from './pages/ProjectDetail.tsx';
 import { LifePage } from './pages/LifePage.tsx';
 import { BlogPage } from './pages/BlogPage.tsx';
+import { BlogPostPage } from './pages/BlogPost.tsx';
 import { GalleryPage } from './pages/GalleryPage.tsx';
 
 function ScrollToHash() {
@@ -34,6 +35,7 @@ createRoot(document.getElementById('root')!).render(
         <Route path="/" element={<App />} />
         <Route path="/work/:slug" element={<ProjectDetailPage />} />
         <Route path="/blog" element={<BlogPage />} />
+        <Route path="/blog/:slug" element={<BlogPostPage />} />
         <Route path="/gallery" element={<GalleryPage />} />
         <Route path="/life" element={<LifePage />} />
       </Routes>
