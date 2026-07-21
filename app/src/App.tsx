@@ -3,7 +3,9 @@ import { Navbar } from '@/components/Navbar';
 import { SectionNav } from '@/components/SectionNav';
 import { SectionHeading } from '@/components/SectionHeading';
 import { ExternalLink, InlineLink } from '@/components/ExternalLink';
+import { ImageCarousel } from '@/components/ImageCarousel';
 import { featuredProjects, type ProjectDetail } from '@/data/projectDetails';
+import { galleryImages as carouselImages } from '@/data/galleryImages';
 
 const homeSections = [
   { id: 'hero', label: 'Intro' },
@@ -158,24 +160,31 @@ function App() {
       <SectionNav items={homeSections} />
 
       <div className="mx-auto max-w-[var(--page-max)]">
-      <main className="max-w-[900px] px-8 md:px-12 py-24 md:py-32 flex flex-col gap-24">
-        <section id="hero" className="space-y-8">
-          <div className="space-y-3">
-            <h1 className="text-4xl font-medium tracking-tight leading-[1.05]">
-              Justin Zhao
-            </h1>
-            <p className="text-lg text-neutral-500 dark:text-neutral-400 leading-snug">
-              Full-Stack Engineer — Cloud Infrastructure &amp; Interface Design
-            </p>
+      <main className="px-8 md:px-12 py-24 md:py-32 flex flex-col gap-24">
+        <section id="hero">
+          <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_22rem] gap-12 lg:gap-16 items-center">
+            <div className="space-y-8">
+              <div className="space-y-3">
+                <h1 className="text-4xl font-medium tracking-tight leading-[1.05]">
+                  Justin Zhao
+                </h1>
+                <p className="text-lg text-neutral-500 dark:text-neutral-400 leading-snug">
+                  Full-Stack Engineer — Cloud Infrastructure &amp; LLM Agents
+                </p>
+              </div>
+              <p className="text-base text-neutral-600 dark:text-neutral-300 leading-relaxed max-w-[62ch]">
+                Based in New York City. I build fast, resilient web products end-to-end — from AWS backends
+                and self-hosted infrastructure to typography-first interfaces. Outside of work, I enjoy
+                bouldering, badminton, and running.
+              </p>
+            </div>
+            <div className="hidden lg:block">
+              <ImageCarousel images={carouselImages} />
+            </div>
           </div>
-          <p className="text-base text-neutral-600 dark:text-neutral-300 leading-relaxed max-w-[62ch]">
-            Based in New York City. I build fast, resilient web products end-to-end — from AWS backends
-            and self-hosted infrastructure to typography-first interfaces. Currently working on UX
-            Interviewer, the first structured interview prep platform for UI/UX designers.
-          </p>
         </section>
 
-        <section id="projects" className="space-y-8">
+        <section id="projects" className="space-y-8 max-w-[900px]">
           <SectionHeading>Technical Work</SectionHeading>
           <div className="project-list">
             {featuredProjects.map((project) => (
@@ -196,7 +205,7 @@ function App() {
           </div>
         </section>
 
-        <section id="experience" className="space-y-8">
+        <section id="experience" className="space-y-8 max-w-[900px]">
           <SectionHeading>Teams</SectionHeading>
           <div className="space-y-10">
             {experience.map((e) => (
@@ -222,7 +231,7 @@ function App() {
           </div>
         </section>
 
-        <section id="elsewhere" className="space-y-8">
+        <section id="elsewhere" className="space-y-8 max-w-[900px]">
           <SectionHeading>Elsewhere</SectionHeading>
           <div className="space-y-4">
             <p className="text-base text-neutral-600 dark:text-neutral-300 leading-relaxed max-w-[62ch]">
@@ -233,7 +242,7 @@ function App() {
           </div>
         </section>
 
-        <section id="contact" className="space-y-8 pb-32">
+        <section id="contact" className="space-y-8 pb-32 max-w-[900px]">
           <SectionHeading>Contact</SectionHeading>
           <div className="space-y-6">
             <p className="text-base text-neutral-600 dark:text-neutral-300 leading-relaxed max-w-[62ch]">
