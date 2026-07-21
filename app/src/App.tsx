@@ -5,13 +5,12 @@ import { SectionHeading } from '@/components/SectionHeading';
 import { ExternalLink, InlineLink } from '@/components/ExternalLink';
 import { ImageCarousel } from '@/components/ImageCarousel';
 import { featuredProjects, type ProjectDetail } from '@/data/projectDetails';
-import { galleryImages as carouselImages } from '@/data/galleryImages';
+import { carouselImages } from '@/data/galleryImages';
 
 const homeSections = [
   { id: 'hero', label: 'Intro' },
   { id: 'projects', label: 'Work' },
   { id: 'experience', label: 'Teams' },
-  { id: 'elsewhere', label: 'Elsewhere' },
   { id: 'contact', label: 'Contact' },
 ];
 
@@ -169,13 +168,11 @@ function App() {
                   Justin Zhao
                 </h1>
                 <p className="text-lg text-neutral-500 dark:text-neutral-400 leading-snug">
-                  Full-Stack Engineer — Cloud Infrastructure &amp; LLM Agents
+                  Currently working on cloud infrastructure &amp; building LLM agents
                 </p>
               </div>
               <p className="text-base text-neutral-600 dark:text-neutral-300 leading-relaxed max-w-[62ch]">
-                Based in New York City. I build fast, resilient web products end-to-end — from AWS backends
-                and self-hosted infrastructure to typography-first interfaces. Outside of work, I enjoy
-                bouldering, badminton, and running.
+                I like building cool things, winning hackathons, and experimenting. This site is where I write about my experiments, projects, competitions, and more. Read my write ups to learn about my technical process or view the gallery for a glimpse into my life!
               </p>
             </div>
             <div className="hidden lg:block">
@@ -228,17 +225,6 @@ function App() {
                 </p>
               </div>
             ))}
-          </div>
-        </section>
-
-        <section id="elsewhere" className="space-y-8 max-w-[900px]">
-          <SectionHeading>Elsewhere</SectionHeading>
-          <div className="space-y-4">
-            <p className="text-base text-neutral-600 dark:text-neutral-300 leading-relaxed max-w-[62ch]">
-              A dashboard for the things I track outside of work — code, reps, and problems solved,
-              pulled live from GitHub, LeetCode, Duolingo, and my gym log.
-            </p>
-            <ExternalLink href="/life" label="Life dashboard" variant="inline" />
           </div>
         </section>
 
