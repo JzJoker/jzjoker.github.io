@@ -111,7 +111,7 @@ export const projects: ProjectDetail[] = [
   {
     slug: 'homelab',
     title: 'Homelab',
-    subtitle: 'A self-hosted sandbox environment for learning and privacy.',
+    subtitle: 'Where I host my OpenClaw agent, Pi-Hole DNS, JellyFin server, BitWarden, and more.',
     role: 'Hobbyist',
     duration: '2026',
     sortAt: '2026-01-01',
