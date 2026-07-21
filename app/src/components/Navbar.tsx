@@ -28,7 +28,7 @@ function MoonIcon({ className }: { className?: string }) {
 }
 
 function navLinkClass({ isActive }: { isActive: boolean }) {
-  return `text-xs font-mono uppercase tracking-widest transition-colors ${
+  return `text-xs font-mono uppercase tracking-widest transition-colors duration-300 ${
     isActive
       ? 'text-neutral-950 dark:text-white'
       : 'text-neutral-500 hover:text-neutral-950 dark:hover:text-white'
@@ -39,7 +39,7 @@ export function Navbar() {
   const { isDark, toggle } = useDarkMode();
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-40 pointer-events-none bg-neutral-50/70 dark:bg-neutral-950/70 backdrop-blur-md">
+    <header className="fixed top-0 left-0 right-0 z-40 pointer-events-none bg-neutral-50/70 dark:bg-neutral-950/70 backdrop-blur-md transition-colors duration-300">
       <div className="mx-auto max-w-[var(--page-max)] px-8 py-8 md:px-12 flex items-center justify-end">
         <nav className="pointer-events-auto flex items-center gap-6">
           <NavLink to="/" end className={navLinkClass}>
@@ -53,7 +53,7 @@ export function Navbar() {
           </NavLink>
           <button
             onClick={toggle}
-            className="p-2 text-neutral-500 hover:text-neutral-950 dark:hover:text-white transition-colors"
+            className="p-2 text-neutral-500 hover:text-neutral-950 dark:hover:text-white transition-colors duration-300"
             aria-label="Toggle dark mode"
           >
             {isDark ? <SunIcon className="w-5 h-5" /> : <MoonIcon className="w-5 h-5" />}
