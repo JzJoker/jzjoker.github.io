@@ -28,9 +28,18 @@ export function ImageCarousel({
 
   return (
     <div
-      className="relative w-full aspect-[4/3] overflow-hidden bg-neutral-100 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800"
+      className="relative w-full aspect-[4/3] overflow-hidden bg-neutral-100 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 cursor-pointer select-none"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
+      onClick={() => setIndex((n) => (n + 1) % images.length)}
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          setIndex((n) => (n + 1) % images.length);
+        }
+      }}
     >
       {images.map((img, i) => (
         <img
