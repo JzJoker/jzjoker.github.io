@@ -150,7 +150,7 @@ export function ProjectDetailPage() {
             {project.intro.map((p, i) => (
               <p
                 key={i}
-                className="text-base text-neutral-600 dark:text-neutral-300 leading-relaxed max-w-[62ch]"
+                className="text-base leading-relaxed max-w-[62ch]"
               >
                 {p}
               </p>
@@ -210,7 +210,7 @@ export function ProjectDetailPage() {
               {project.conclusion.map((p, i) => (
                 <p
                   key={i}
-                  className="text-base text-neutral-600 dark:text-neutral-300 leading-relaxed max-w-[62ch]"
+                  className="text-base leading-relaxed max-w-[62ch]"
                 >
                   {p}
                 </p>

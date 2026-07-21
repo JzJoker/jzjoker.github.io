@@ -1,6 +1,12 @@
 import type { ReactNode } from 'react';
 import { InlineLink } from '@/components/ExternalLink';
 
+const Code = ({ children }: { children: ReactNode }) => (
+  <code className="font-mono text-[0.9em] px-1.5 py-0.5 rounded bg-neutral-100 dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 transition-colors duration-300 ease-in-out">
+    {children}
+  </code>
+);
+
 export interface TechStackRow {
   layer: string;
   technology: string;
@@ -24,10 +30,10 @@ export interface ProjectDetail {
   techSummary: string;
   tags: string[];
   heroImage?: string;
-  intro: string[];
+  intro: ReactNode[];
   techStack?: TechStackRow[];
   screenshots?: Screenshot[];
-  conclusion?: string[];
+  conclusion?: ReactNode[];
   repoUrl?: string;
   liveUrl?: string;
   blogUrl?: string;
@@ -111,31 +117,58 @@ export const projects: ProjectDetail[] = [
   {
     slug: 'homelab',
     title: 'Homelab',
-    subtitle: 'Where I host my OpenClaw agent, Pi-Hole DNS, JellyFin server, BitWarden, and more.',
+    subtitle: 'Always-on Ubuntu server hosting Pi-hole, Plex, Bitwarden, and my OpenClaw agent, all behind Tailscale.',
     role: 'Hobbyist',
     duration: '2026',
     sortAt: '2026-01-01',
-    techSummary: 'Ubuntu Server · Docker · Tailscale',
+    techSummary: 'Ubuntu 24.04 · Docker Compose · Tailscale · Caddy · Pi-hole',
     tags: ['Ubuntu', 'Docker', 'Tailscale'],
     heroImage: '/images/dell-micro.svg',
     blogUrl: '/work/homelab',
     featured: true,
     intro: [
-      'A personal homelab running on a Dell Optiplex Mini with Ubuntu Server. The setup prioritizes security and privacy — a single port is open, restricted to Tailscale traffic, and every service lives in its own Docker container.',
-      'It doubles as a learning environment for DevOps practices and a practical solution for self-hosted privacy tools.',
+      (
+        <>
+          <Code>brickserver</Code> is a Dell Optiplex Micro (Intel i7-8700) running Ubuntu 24.04 as a headless home server. Everything runs as Docker Compose stacks, and every service port binds to the Tailscale IP rather than <Code>0.0.0.0</Code> — nothing is reachable from the public internet.
+        </>
+      ),
+      (
+        <>
+          The security posture is deliberate: Tailscale is the only ingress, Caddy issues HTTPS certs via the Tailscale socket (no Let's Encrypt DNS-01 dance, no exposed :443), and Pi-hole handles network-wide DNS + ad blocking so every device on the LAN benefits without per-device config. Real secrets live in gitignored <Code>.env</Code> files with <Code>.env.example</Code> templates checked in.
+        </>
+      ),
+      'Layout is split into small stacks: a core stack (Homepage, Portainer, Pi-hole, Netdata, Speedtest Tracker, OpenClaw), a Caddy stack, a Bitwarden stack managed by bitwarden.sh, a media stack (Plex + Prowlarr / Radarr / Sonarr / Bazarr / qBittorrent / Seerr), and a go2rtc restream for the Bambu 3D printer. Each stack is deployable on its own via docker compose.',
     ],
     techStack: [
-      { layer: 'Hardware', technology: 'Dell Optiplex Micro', purpose: 'Low-power always-on host' },
-      { layer: 'OS', technology: 'Ubuntu Server', purpose: 'Headless Linux base' },
-      { layer: 'Networking', technology: 'Tailscale', purpose: 'Zero-trust remote access' },
-      { layer: 'Runtime', technology: 'Docker', purpose: 'Service isolation' },
+      { layer: 'Hardware', technology: 'Dell Optiplex Micro (i7-8700)', purpose: 'Low-power always-on host' },
+      { layer: 'OS', technology: 'Ubuntu 24.04 Server', purpose: 'Headless Linux base' },
+      { layer: 'Networking', technology: 'Tailscale', purpose: 'Only ingress — zero-trust remote access' },
+      { layer: 'Reverse proxy', technology: 'Caddy (host mode + Tailscale socket)', purpose: 'Automatic HTTPS with Tailscale-issued certs' },
+      { layer: 'DNS + ads', technology: 'Pi-hole', purpose: 'Network-wide ad blocker and local DNS' },
+      { layer: 'Runtime', technology: 'Docker + Compose', purpose: 'Per-service isolation, one stack per concern' },
+      { layer: 'Management', technology: 'Portainer', purpose: 'Container UI for quick inspection' },
+      { layer: 'Monitoring', technology: 'Netdata + Speedtest Tracker', purpose: 'Host metrics and ISP sanity checks' },
+      { layer: 'Dashboard', technology: 'Homepage', purpose: 'Single landing page for every service' },
+      { layer: 'Passwords', technology: 'Bitwarden (self-hosted)', purpose: 'Family password vault behind Caddy' },
+      { layer: 'Media', technology: 'Plex + Prowlarr / Radarr / Sonarr / Bazarr / qBittorrent / Seerr', purpose: 'Full *arr automation on a shared /srv/media volume for hardlinking' },
+      { layer: 'IoT', technology: 'go2rtc (Bambu restream)', purpose: 'Pull the printer\'s camera into a normal RTSP/WebRTC feed' },
+      { layer: 'Agent', technology: 'OpenClaw', purpose: 'Long-running personal agent' },
     ],
     screenshots: [
       { src: '/images/screenshots/homelab-homepage.png', caption: 'Homepage dashboard' },
     ],
     conclusion: [
-      'The homelab is a hands-on environment for experimenting with containerization, networking, and self-hosted services while keeping data private.',
-      'Future plans: more services, Proxmox for virtualization, and possibly a second node.',
+      (
+        <>
+          Design principle: nothing is exposed to the public internet, ever. Every service binds to <Code>${'{HOST_IP}'}</Code> (the Tailscale IP), and access from off-LAN goes through the Tailscale tailnet — no port forwarding on the router.
+        </>
+      ),
+      (
+        <>
+          The <Code>arr</Code> stack mounts the whole <Code>/srv/media</Code> volume into every container instead of individual subdirectories. Radarr and Sonarr can hardlink downloads into the library instead of copying — atomic, no space doubling, no I/O spike when a torrent finishes.
+        </>
+      ),
+      'Future: more services (Immich for photo backup is the next candidate), maybe Proxmox to virtualize the host so I can test destructive changes without nuking my Bitwarden vault.',
     ],
   },
   {
@@ -160,9 +193,21 @@ export const projects: ProjectDetail[] = [
     featured: true,
     blogUrl: '/work/superplane-hackathon',
     intro: [
-      'The prompt: build the best SuperPlane canvas for auto-fixing GitHub issues — general enough to handle any issue shape (bug, enhancement, multi-part feature) and rigorous enough to actually validate that the previous step worked before moving on. Judged against five real issues from the SuperPlane repo covering everything from markdown rendering to canvas UX regressions.',
-      'The factory is one canvas: a /solve comment on an issue triggers Triage & Spec (LLM emits a machine-checkable spec), then Localize (find the files that actually need to change), Implement (a coding-agent runner clones, edits, branches, opens a PR), Test (baseline diff + assertions on the new behavior), independent Review of the diff, a Render preview deploy, and finally a Playwright smoke check on the live URL that posts the preview link back to the PR.',
-      'Every stage is a gate that can fail and route back — no silent "it built, ship it" shortcuts. The design bet: a shared requirements[] array threaded through all five gates, tracked per-item, so a partial PoC ships with clear disclosure instead of getting stuck in retry loops on subjective requirements like "warnings should be more visible."',
+      (
+	<>
+	<strong>The prompt:</strong> build the best SuperPlane canvas for auto-fixing GitHub issues — general enough to handle any issue shape (bug, enhancement, multi-part feature) and rigorous enough to actually validate that the previous step worked before moving on. Judged against five real issues from the SuperPlane repo covering everything from markdown rendering to canvas UX regressions.
+	</>
+      ),
+      (
+        <>
+          The factory is one canvas: a <Code>/solve</Code> comment on an issue triggers <strong>Triage & Spec</strong> (LLM emits a machine-checkable spec), then <strong>Localize</strong> (find the files that actually need to change), <strong>Implement</strong> (a coding-agent runner clones, edits, branches, opens a PR), <strong>Test</strong> (baseline diff + assertions on the new behavior), <strong>independent Review</strong> of the diff, a <strong>Render preview deploy</strong>, and finally a Playwright <strong>smoke check</strong> on the live URL that posts the preview link back to the PR.
+        </>
+      ),
+      (
+        <>
+          Every stage is a gate that can fail and route back — no silent "it built, ship it" shortcuts. The design bet: a shared <Code>requirements[]</Code> array threaded through all five gates, tracked per-item, so a partial PoC ships with clear disclosure instead of getting stuck in retry loops on subjective requirements like "warnings should be more visible."
+        </>
+      ),
     ],
     techStack: [
       { layer: 'Orchestration', technology: 'SuperPlane canvas', purpose: 'Nodes, gates, payload chain, retry loops' },
@@ -173,8 +218,16 @@ export const projects: ProjectDetail[] = [
       { layer: 'Target repo', technology: 'JzJoker/superplane fork', purpose: 'Five test issues: #5164, #5366, #5368, #5704, #5705' },
     ],
     conclusion: [
-      'Design philosophy: localization is the #1 bottleneck (find the right files first), gates catch failures at the earliest possible stage, and vague inputs surface an explicit assumptions[] field so the PoC\'s interpretation is visible to reviewers rather than silently baked in.',
-      'Calibrated to the PoC bar — a subjective requirement verdicted "partial" ships with disclosure, only "inadequate" retries. Otherwise the factory loops forever on things that can never cleanly resolve.',
+      (
+        <>
+          Design philosophy: localization is the #1 bottleneck (find the right files first), gates catch failures at the earliest possible stage, and vague inputs surface an explicit <Code>assumptions[]</Code> field so the PoC's interpretation is visible to reviewers rather than silently baked in.
+        </>
+      ),
+      (
+        <>
+          Calibrated to the PoC bar — a subjective requirement verdicted <Code>partial</Code> ships with disclosure, only <Code>inadequate</Code> retries. Otherwise the factory loops forever on things that can never cleanly resolve.
+        </>
+      ),
     ],
   },
   {
@@ -193,18 +246,47 @@ export const projects: ProjectDetail[] = [
         .
       </>
     ),
-    role: 'Hackathon',
+    role: 'Full-stack + agent system · Team of 4',
     duration: 'April 2026',
     sortAt: '2026-04-01',
-    techSummary: 'Hackathon',
+    techSummary: 'React + R3F · Convex · Photon iMessage · K2 Think · Knot',
     tags: ['Hackathon'],
     heroImage: '/images/awards/hackprinceton.jpg',
     featured: true,
+    blogUrl: '/work/hackprinceton',
     repoUrl: 'https://github.com/JzJoker/hackprinceton-island-habits',
     liveUrl: 'https://someonesave.us/',
     devpostUrl: 'https://devpost.com/software/faaah',
     intro: [
-      'Shipped a working prototype in 36 hours alongside a small team at Princeton.',
+      (
+        <>
+          SomeoneSave.Us is a co-op idle game where your productivity IRL is the gameplay. Add the bot to your group chat, text <Code>/start</Code>, pick daily quests, and each player gets an AI agent on a shared island. Hit your goal — your agent builds faster. Skip it — they slow down and start gossiping about you to your friends' agents.
+        </>
+      ),
+      'The island floods. If the crew logs enough real-world progress, everyone escapes to the next one. If not, you sink together. The design bet: people will do things for a pixelated dependent that they won\'t do for themselves — Tamagotchi logic — and peer pressure lands softer when the roast comes from an AI proxy instead of your actual friend.',
+      'Two surfaces, one world. The 3D island runs in the browser (React Three Fiber). The social layer runs in iMessage — reminders, check-ins, votes, and the agents\' gossip all show up in the group chat you already have open. Convex is the source of truth, so a check-in from iMessage updates the island in every browser instantly with no custom WebSocket code.',
+    ],
+    techStack: [
+      { layer: 'Frontend', technology: 'React + Vite + TypeScript', purpose: 'Mobile-first app shell' },
+      { layer: '3D', technology: 'Three.js + React Three Fiber', purpose: 'Low-poly island, buildings, agents' },
+      { layer: 'Realtime + DB', technology: 'Convex', purpose: 'Reactive queries — single source of truth across surfaces' },
+      { layer: 'Messaging', technology: 'Photon iMessage + Spectrum.ts', purpose: 'Play the whole game from a group chat' },
+      { layer: 'LLM', technology: 'K2 Think V2', purpose: 'Agent personalities, gossip, reminders, narrative beats' },
+      { layer: 'Vision', technology: 'Google Gemma', purpose: 'Photo-based quest validation from images in the chat' },
+      { layer: 'Voice', technology: 'ElevenLabs TTS', purpose: 'In-world narration' },
+      { layer: 'Jobs', technology: 'Python + Flask on DigitalOcean', purpose: 'Morning reminders, miss detection, build progression, weekly summaries' },
+      { layer: 'Habits', technology: 'Knot API', purpose: 'Optional transaction-based quest verification (e.g. did you actually skip McDonald\'s?)' },
+      { layer: 'Auth', technology: 'Clerk', purpose: 'Phone-number-based sign-in' },
+      { layer: 'Repo', technology: 'Turborepo', purpose: 'Monorepo for web + agents + jobs' },
+    ],
+    conclusion: [
+      (
+        <>
+          Personality consistency was the hardest part. Every message is a separate LLM call, so the character has to survive round-trips without persistent sessions — solved by structuring each agent's personality as data and injecting it into every prompt. Structured-output parsing had to tolerate the model returning not-quite-JSON without falling over.
+        </>
+      ),
+      '3D on mobile browsers took real tuning. Phone number normalization across regions turned out to be its own project. The rest — sync across web and iMessage — Convex mostly handled, which is exactly why we picked it in a 36-hour window.',
+      'Best domain name at the hackathon, for what it\'s worth. What worked in playtests: real-world actions actually moving the needle in a shared virtual world, and the AI-on-AI trash talk landing as funny instead of demoralizing when you missed a goal.',
     ],
   },
   {
@@ -244,17 +326,41 @@ export const projects: ProjectDetail[] = [
         .
       </>
     ),
-    role: 'Hackathon',
+    role: 'Backend + feature dev · Team of 4',
     duration: 'May 2026',
     sortAt: '2026-05-01',
-    techSummary: 'Hackathon',
+    techSummary: 'Next.js · Supabase · ElevenLabs · ESP32-S3 · DINOv2 + ORB',
     tags: ['Hackathon'],
     heroImage: '/images/awards/uncommonhacks.jpg',
     featured: true,
+    blogUrl: '/work/uncommonhacks',
     repoUrl: 'https://github.com/JzJoker/uncommonhacks-life-story',
     devpostUrl: 'https://devpost.com/software/lifestory',
     intro: [
-      'Traveled to compete; delivered a working project within the event window.',
+      'LifeStory is a "living memory journal" for people with Alzheimer\'s. Families collaboratively upload photos and record short factual narrations; the patient explores familiar faces and moments through a calm, guided app that never quizzes them.',
+      'The premise came from watching a grandmother repeatedly ask "Who are you?" — by the fortieth time, even the most patient caregiver is drained. A consistent, warm narration voice can answer that question indefinitely without emotional exhaustion. That reframe — repetition as therapy rather than limitation — drove every design choice.',
+      (
+        <>
+          The interaction model was rebuilt around one principle: never put the patient in a position to fail. No quiz prompts, no "do you remember?", no AI-improvised stories. When a photo opens, the app narrates it in third person — <Code>"This is Sarah, your daughter. In this photo, you were taking her to the park."</Code> — and lets recognition happen on its own.
+        </>
+      ),
+    ],
+    techStack: [
+      { layer: 'Frontend', technology: 'Next.js + React + Tailwind', purpose: 'Mobile / tablet / desktop app shell' },
+      { layer: 'Backend', technology: 'Supabase', purpose: 'Auth, storage, database for family-supplied facts' },
+      { layer: 'Voice', technology: 'ElevenLabs', purpose: 'Warm third-person narration, consistent across sessions' },
+      { layer: 'Vision', technology: 'Object/person detection (no facial recognition)', purpose: 'Tap-on-person interactions without biometrics' },
+      { layer: 'Hardware trigger', technology: 'ESP32-S3 camera', purpose: 'Memory Record Player — slide a printed photo under the lens to trigger playback' },
+      { layer: 'Photo matching', technology: 'DINOv2 → ORB/RANSAC (PyTorch + OpenCV)', purpose: 'Rank by global similarity, verify with local keypoint alignment' },
+    ],
+    conclusion: [
+      (
+        <>
+          The hybrid matching pipeline exists because neither half is enough alone. <Code>ORB</Code> matches keypoints locally but produces false positives under glare, blur, and angled photos. <Code>DINOv2</Code> filters for global visual similarity but doesn't verify that the same object is present. Running <Code>DINOv2</Code> first, then <Code>ORB/RANSAC</Code> on its shortlist, catches false positives in both directions — if <Code>DINO</Code> similarity is too low, no <Code>ORB</Code> match rescues it; if <Code>ORB</Code> inliers are weak, close <Code>DINO</Code> scores don't disambiguate.
+        </>
+      ),
+      'Self-imposed constraints: no facial recognition, no hallucinated narrations, no unverified content, explicit consent for voice cloning, and human validation before anything reaches the patient. The AI is deliberately narrow — it reads family-supplied facts in the voice we trained, and nothing else.',
+      'Biggest lesson: good AI design is often about knowing where to place limits. Consistency mattered more than intelligence here. Calm repetition was the therapy. Ethical constraints made the product better, not weaker.',
     ],
   },
   {
