@@ -24,10 +24,13 @@
 body {
   background-color: var(--bg-color);
   color: var(--text-color);
-  font-family: 'Inter', sans-serif;
-  font-feature-settings: 'ss01', 'cv11';
+  font-family: 'STK Bureau Serif', 'Charter', 'Iowan Old Style', Georgia, 'Times New Roman', serif;
   font-optical-sizing: auto;
   transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1), color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'NB International', 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
 .font-mono {
