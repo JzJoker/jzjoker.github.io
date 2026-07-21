@@ -101,7 +101,7 @@ function ProjectRow({
               {project.repoUrl && <ExternalLink href={project.repoUrl} label="GitHub" />}
               {project.liveUrl && <ExternalLink href={project.liveUrl} label="Live" />}
               {project.devpostUrl && <ExternalLink href={project.devpostUrl} label="Devpost" />}
-              {project.blogUrl && <ExternalLink href={project.blogUrl} label="Blog" />}
+              {project.blogUrl && <ExternalLink href={project.blogUrl} label="Read" />}
             </div>
           )}
         </div>
