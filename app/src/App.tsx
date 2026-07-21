@@ -93,7 +93,7 @@ function ProjectRow({
               {project.duration}
             </span>
           </div>
-          <p className="text-sm text-neutral-500 dark:text-neutral-400 leading-snug">
+          <p className="text-sm leading-snug">
             {project.subtitle}
           </p>
           {hasLinks && (
@@ -167,11 +167,11 @@ function App() {
                 <h1 className="text-4xl font-medium tracking-tight leading-[1.05]">
                   Justin Zhao
                 </h1>
-                <p className="text-lg text-neutral-500 dark:text-neutral-400 leading-snug">
+                <p className="text-lg leading-snug">
                   Currently working on cloud infrastructure &amp; building LLM agents
                 </p>
               </div>
-              <p className="text-base text-neutral-600 dark:text-neutral-300 leading-relaxed max-w-[62ch]">
+              <p className="text-base leading-relaxed max-w-[62ch]">
                 I like building cool things, winning hackathons, and experimenting. This site is where I write about my experiments, projects, competitions, and more. Read my write ups to learn about my technical process or view the gallery for a glimpse into my life!
               </p>
             </div>
@@ -216,7 +216,7 @@ function App() {
                       e.company
                     )}
                   </p>
-                  <p className="text-sm text-neutral-500 dark:text-neutral-400 leading-snug">
+                  <p className="text-sm leading-snug">
                     {e.detail}
                   </p>
                 </div>
@@ -231,7 +231,7 @@ function App() {
         <section id="contact" className="space-y-8 pb-32 max-w-[900px]">
           <SectionHeading>Contact</SectionHeading>
           <div className="space-y-6">
-            <p className="text-base text-neutral-600 dark:text-neutral-300 leading-relaxed max-w-[62ch]">
+            <p className="text-base leading-relaxed max-w-[62ch]">
               Open to full-time roles and collaborations on interesting web or infra problems.
             </p>
             <div className="flex flex-wrap gap-8">
