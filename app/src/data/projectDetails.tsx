@@ -299,8 +299,8 @@ export const projects: ProjectDetail[] = [
       </>
     ),
     role: 'Hackathon',
-    duration: 'September 2023',
-    sortAt: '2023-09-01',
+    duration: 'September 2022',
+    sortAt: '2022-09-01',
     techSummary: 'Hackathon',
     tags: ['Hackathon'],
     heroImage: '/images/awards/clayhacks.jpg',
