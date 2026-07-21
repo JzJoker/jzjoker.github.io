@@ -30,11 +30,13 @@ function buildGrid(data: HeatmapDay[], weeks: number): { columns: Cell[][]; max:
 
   const today = new Date();
   today.setHours(0, 0, 0, 0);
-  const end = today;
+
+  // Extend grid end to this week's Saturday so today is always drawn.
+  const end = new Date(today);
+  end.setDate(today.getDate() + (6 - today.getDay()));
 
   const start = new Date(end);
-  start.setDate(end.getDate() - (weeks * 7 - 1));
-  start.setDate(start.getDate() - start.getDay()); // align to Sunday
+  start.setDate(end.getDate() - (weeks * 7 - 1)); // Sunday-aligned since end is Saturday
 
   const columns: Cell[][] = [];
   const cursor = new Date(start);
@@ -51,7 +53,7 @@ function buildGrid(data: HeatmapDay[], weeks: number): { columns: Cell[][]; max:
         else if (ratio > 0.25) level = 2;
         else level = 1;
       }
-      col.push({ date: iso, count: cursor > end ? -1 : count, level: cursor > end ? -1 : level });
+      col.push({ date: iso, count: cursor > today ? -1 : count, level: cursor > today ? -1 : level });
       cursor.setDate(cursor.getDate() + 1);
     }
     columns.push(col);
