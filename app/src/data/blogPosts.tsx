@@ -281,6 +281,30 @@ export const posts: BlogPost[] = [
       <P>Draft in progress — check back soon.</P>
     ),
   },
+  {
+    slug: 'vibe-coding-github-discord-bot',
+    title: 'Integrating GitHub into Discord: 3 increasingly customizable ways to do it.',
+    subtitle: 'Draft in progress.',
+    date: '2026-07-18',
+    displayDate: 'Jul 18, 2026',
+    readTime: '— min read',
+    heroImage: '/images/blog/discord-bot.jpg',
+    content: (
+      <P>Draft in progress — check back soon.</P>
+    ),
+  },
+  {
+    slug: 'higgsfield-mcp-music-videos',
+    title: 'What I learned from making music videos with Higgsfield MCP',
+    subtitle: 'Draft in progress.',
+    date: '2026-07-10',
+    displayDate: 'Jul 10, 2026',
+    readTime: '— min read',
+    heroImage: '/images/blog/higgsfield.jpg',
+    content: (
+      <P>Draft in progress — check back soon.</P>
+    ),
+  },
 ];
 
 export function getPost(slug: string): BlogPost | undefined {
