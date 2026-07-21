@@ -11,7 +11,7 @@ export function GalleryPage() {
             <div className="space-y-1">
               <h1 className="text-4xl font-medium tracking-tight leading-[1.05]">Gallery</h1>
               <p className="text-neutral-500 dark:text-neutral-400">
-                Photos from my life, work, and more.
+                A glimpse into my world. Photos from my life, work, and more.
               </p>
             </div>
           </section>
