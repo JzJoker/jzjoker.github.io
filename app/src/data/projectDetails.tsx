@@ -41,12 +41,13 @@ export const projects: ProjectDetail[] = [
   {
     slug: 'forecast-arena',
     title: 'Forecast Arena',
-    subtitle: 'Head-to-head benchmark for LLM forecasting architectures.',
+    subtitle: 'Experimenting with various LLM forecasting architectures. My findings on what works best.',
     role: 'Solo Project',
     duration: '2026',
     sortAt: '2026-06-24',
     techSummary: 'Python CLI · Multi-provider LLM APIs',
     tags: ['Python', 'LLMs', 'Benchmarks', 'CLI'],
+    heroImage: '/images/forecast-arena-banner.jpg',
     repoUrl: 'https://github.com/JzJoker/Forecast-Arena',
     blogUrl: '/work/forecast-arena',
     featured: true,
@@ -116,7 +117,7 @@ export const projects: ProjectDetail[] = [
     sortAt: '2026-01-01',
     techSummary: 'Ubuntu Server · Docker · Tailscale',
     tags: ['Ubuntu', 'Docker', 'Tailscale'],
-    heroImage: '/images/homelab-banner.svg',
+    heroImage: '/images/dell-micro.svg',
     blogUrl: '/work/homelab',
     featured: true,
     intro: [
@@ -142,7 +143,7 @@ export const projects: ProjectDetail[] = [
     title: 'Software Factory',
     subtitle: (
       <>
-        Turns GitHub issues into deployed PRs.{' '}
+        LLM development pipeline that turns any Github issue into a fully deployed PR.{' '}
         <strong className="font-normal underline underline-offset-4">1st place</strong> at{' '}
         <InlineLink href="https://superplane.com" arrow={false}>
           SuperPlane
