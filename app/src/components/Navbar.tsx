@@ -39,7 +39,7 @@ export function Navbar() {
   const { isDark, toggle } = useDarkMode();
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-40 pointer-events-none">
+    <header className="fixed top-0 left-0 right-0 z-40 pointer-events-none bg-neutral-50/70 dark:bg-neutral-950/70 backdrop-blur-md">
       <div className="mx-auto max-w-[var(--page-max)] px-8 py-8 md:px-12 flex items-center justify-end">
         <nav className="pointer-events-auto flex items-center gap-6">
           <NavLink to="/" end className={navLinkClass}>
@@ -48,8 +48,8 @@ export function Navbar() {
           <NavLink to="/blog" className={navLinkClass}>
             Blog
           </NavLink>
-          <NavLink to="/life" className={navLinkClass}>
-            Life
+          <NavLink to="/gallery" className={navLinkClass}>
+            Gallery
           </NavLink>
           <button
             onClick={toggle}
