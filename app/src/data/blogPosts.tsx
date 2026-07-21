@@ -257,6 +257,30 @@ export const posts: BlogPost[] = [
       </>
     ),
   },
+  {
+    slug: 'i-hate-siri-openclaw-shortcuts',
+    title: "I hate Siri. Replacing iPhone's voice assistant with OpenClaw using Siri Shortcuts.",
+    subtitle: 'Draft in progress.',
+    date: '2026-07-21',
+    displayDate: 'Jul 21, 2026',
+    readTime: '— min read',
+    heroImage: '/images/blog/siri-shortcuts.webp',
+    content: (
+      <P>Draft in progress — check back soon.</P>
+    ),
+  },
+  {
+    slug: 'openclaw-3d-printer-camera-proxy',
+    title: "Weekend Project: Connecting OpenClaw to my 3d printer's camera using a proxy server",
+    subtitle: 'Draft in progress.',
+    date: '2026-07-14',
+    displayDate: 'Jul 14, 2026',
+    readTime: '— min read',
+    heroImage: '/images/blog/bambu-a1.webp',
+    content: (
+      <P>Draft in progress — check back soon.</P>
+    ),
+  },
 ];
 
 export function getPost(slug: string): BlogPost | undefined {
