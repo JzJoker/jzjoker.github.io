@@ -33,22 +33,34 @@ export function BlogPage() {
                   to={`/work/${project.slug}`}
                   className="project-row group py-6 md:py-8 block transition-all duration-300 no-underline text-inherit"
                 >
-                  <div className="flex flex-col md:flex-row md:items-baseline justify-between gap-4">
-                    <div className="space-y-1">
-                      <div className="flex items-baseline gap-3 flex-wrap">
-                        <h3 className="text-lg font-medium tracking-tight leading-snug group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-                          {project.title}
-                        </h3>
-                        <span className="text-xs font-mono text-neutral-400 whitespace-nowrap">
-                          {project.duration}
-                        </span>
-                      </div>
-                      <p className="text-neutral-500 dark:text-neutral-400">{project.subtitle}</p>
+                  <div className="flex items-start gap-4 md:gap-6">
+                    <div className="w-24 md:w-40 shrink-0 aspect-[4/3] overflow-hidden bg-neutral-100 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800">
+                      {project.heroImage ? (
+                        <img
+                          src={project.heroImage}
+                          alt={project.title}
+                          loading="lazy"
+                          className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]"
+                        />
+                      ) : null}
                     </div>
-                    <div className="flex flex-wrap gap-2">
-                      {project.tags.map((t) => (
-                        <Tag key={t}>{t}</Tag>
-                      ))}
+                    <div className="flex-1 min-w-0 flex flex-col md:flex-row md:items-baseline justify-between gap-2 md:gap-4">
+                      <div className="space-y-1 min-w-0">
+                        <div className="flex items-baseline gap-3 flex-wrap">
+                          <h3 className="text-lg font-medium tracking-tight leading-snug group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                            {project.title}
+                          </h3>
+                          <span className="text-xs font-mono text-neutral-400 whitespace-nowrap">
+                            {project.duration}
+                          </span>
+                        </div>
+                        <p>{project.subtitle}</p>
+                      </div>
+                      <div className="flex flex-wrap gap-2">
+                        {project.tags.map((t) => (
+                          <Tag key={t}>{t}</Tag>
+                        ))}
+                      </div>
                     </div>
                   </div>
                 </Link>
