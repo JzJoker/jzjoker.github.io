@@ -55,6 +55,7 @@ export function ProjectDetailPage() {
     [
       project.repoUrl && { label: 'GitHub', href: project.repoUrl },
       project.liveUrl && { label: 'Live', href: project.liveUrl },
+      project.demoUrl && { label: 'Demo', href: project.demoUrl },
       project.devpostUrl && { label: 'Devpost', href: project.devpostUrl },
       project.blogUrl && { label: 'Read', href: project.blogUrl },
     ].filter(Boolean) as { label: string; href: string }[]

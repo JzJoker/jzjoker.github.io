@@ -59,6 +59,14 @@ export function BlogPostPage() {
             </div>
           </header>
 
+          {post.heroImage && (
+            <img
+              src={post.heroImage}
+              alt={post.title}
+              className="w-full h-auto"
+            />
+          )}
+
           <article className="flex flex-col gap-6">{post.content}</article>
 
           {post.externalUrl && (

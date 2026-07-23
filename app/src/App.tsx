@@ -76,7 +76,7 @@ function ProjectRow({
   onLeave: () => void;
 }) {
   const hasLinks =
-    project.repoUrl || project.liveUrl || project.blogUrl || project.devpostUrl;
+    project.repoUrl || project.liveUrl || project.demoUrl || project.blogUrl || project.devpostUrl;
 
   return (
     <div
@@ -100,6 +100,7 @@ function ProjectRow({
             <div className="flex flex-wrap gap-4 pt-2">
               {project.repoUrl && <ExternalLink href={project.repoUrl} label="GitHub" />}
               {project.liveUrl && <ExternalLink href={project.liveUrl} label="Live" />}
+              {project.demoUrl && <ExternalLink href={project.demoUrl} label="Demo" />}
               {project.devpostUrl && <ExternalLink href={project.devpostUrl} label="Devpost" />}
               {project.blogUrl && <ExternalLink href={project.blogUrl} label="Read" />}
             </div>

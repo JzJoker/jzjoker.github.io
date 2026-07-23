@@ -7,10 +7,30 @@ const P = ({ children }: { children: ReactNode }) => (
   <p className="text-base leading-relaxed max-w-[62ch] mx-auto">{children}</p>
 );
 
+const H2 = ({ children }: { children: ReactNode }) => (
+  <h2 className="text-2xl md:text-3xl font-medium tracking-tight leading-snug max-w-[62ch] mx-auto pt-8">
+    {children}
+  </h2>
+);
+
 const H3 = ({ children }: { children: ReactNode }) => (
   <h3 className="text-xl md:text-2xl font-medium tracking-tight leading-snug max-w-[62ch] mx-auto pt-6">
     {children}
   </h3>
+);
+
+const List = ({ children }: { children: ReactNode }) => (
+  <ul className="list-disc pl-5 space-y-2 max-w-[62ch] mx-auto text-base leading-relaxed">
+    {children}
+  </ul>
+);
+
+const Item = ({ children }: { children: ReactNode }) => <li>{children}</li>;
+
+const Code = ({ children }: { children: ReactNode }) => (
+  <code className="font-mono text-[0.9em] px-1.5 py-0.5 rounded bg-neutral-100 dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 transition-colors duration-300 ease-in-out">
+    {children}
+  </code>
 );
 
 const Quote = ({ children }: { children: ReactNode }) => (
@@ -260,13 +280,99 @@ export const posts: BlogPost[] = [
   {
     slug: 'i-hate-siri-openclaw-shortcuts',
     title: "I hate Siri. Replacing iPhone's voice assistant with OpenClaw using Siri Shortcuts.",
-    subtitle: 'Draft in progress.',
-    date: '2026-07-21',
-    displayDate: 'Jul 21, 2026',
-    readTime: '— min read',
+    subtitle: "Siri didn't need to get smarter, it just needed to get out of the way.",
+    date: '2026-07-23',
+    displayDate: 'Jul 23, 2026',
+    readTime: '5 min read',
     heroImage: '/images/blog/siri-shortcuts.webp',
     content: (
-      <P>Draft in progress — check back soon.</P>
+      <>
+        <H2>Premise</H2>
+        <P>
+          The Siri that is currently shipping with iPhones (not Apple Intelligence) is borderline unusable. Here are some notes:
+        </P>
+        <List>
+          <Item>
+            <strong>Vague error messages</strong> — Siri will often use phrases like “I didn’t quite get that” and “Something went wrong” as failure messages but they tell you nothing about what actually went wrong. You cannot adjust your language or command to remediate failed tasks.
+          </Item>
+          <Item>
+            <strong>Apple Intelligence Siri is not out</strong> — Apple has been working on revamping Siri. They have trained a new model in partnership with Google in addition to their in-house AFM 3 model. It is supposed to fix a lot of the issues I mention but it is in Beta gated by a waitlist and hasn’t shipped in a stable release to the general public.
+          </Item>
+          <Item>
+            <strong>Siri is not an LLM</strong> — the underlying technology behind the current Siri is a command router, not a reasoner. Relying on classical intent matching as opposed to an LLM holds back Siri’s potential to complete multi-step tasks, understand complex commands, and overall causes the assistant to fail at anything that requires reasoning.
+          </Item>
+          <Item>
+            <strong>Poor integrations</strong> — SiriKit only exposed Apple-defined domains, so apps that didn’t fit a predefined intent were simply not voice-controllable. Its replacement, App Intents, allows custom actions, but without a language model behind it Siri can only match rigid trigger phrases. So “text Mom I’m running late” works and “let Mom know I’ll be a bit” doesn’t. Apple deprecated SiriKit last month, but a new framework doesn’t fix what is fundamentally a model problem.
+          </Item>
+        </List>
+
+        <H2>Routing around Siri with Shortcuts + a self-hosted agent</H2>
+
+        <H3>The Solution</H3>
+        <P>
+          Rather than wait for Apple, I demoted Siri to what it’s actually good at: a microphone and a speaker. Everything above the transport layer (reasoning, tools, integrations) got moved to a machine that I have complete control over.
+        </P>
+
+        <H3>HTTP and basic logic in Shortcuts</H3>
+        <P>
+          During the research phase of this project, I learned that <Code>Get Contents of URL</Code> in Shortcuts does GET/POST/PUT/PATCH/DELETE with arbitrary headers and a JSON body. This is basically everything you need to talk to your own API.
+        </P>
+        <P>
+          Shortcuts also has real primitives: variables, <Code>If/Otherwise</Code>, <Code>Repeat</Code> and <Code>Repeat With Each</Code>, <Code>Wait</Code>, and <Code>Get Dictionary Value</Code> for pulling fields out of a JSON response.
+        </P>
+        <P>
+          It’s by no means a programming language, but it’s enough to implement a request/poll loop and branch on the response.
+        </P>
+
+        <H3>The agent side</H3>
+        <P>
+          Prior to this project, I was already running my own OpenClaw adjacent agent on my home server. The foundation for this agent was built by my friend, Kolbe.
+        </P>
+        <P>
+          Just like OpenClaw, it connects an LLM of your choice to the web, messaging apps, your emails and basically anything you decide to strap on. I used a custom agent for this project, but you can just as easily use OpenClaw or anything adjacent you are already hosting.
+        </P>
+        <P>
+          The only set up I had to do to integrate my existing agent was expose a single prompt endpoint on it with bearer token authentication.
+        </P>
+
+        <H3>Why polling instead of one request</H3>
+        <P>
+          Siri times out and agents don’t, so a single blocking request is the wrong idea for anything that calls tools. The pattern I landed on is as follows:
+        </P>
+        <Quote>
+          POST the prompt → get back a job ID → Repeat + Wait + GET the status endpoint until it reports done
+        </Quote>
+        <P>
+          Because each poll returns what the agent has outputted so far, Siri can speak preliminary statuses like “searching” and “reading the camera” instead of leaving you hanging.
+        </P>
+        <P>
+          Note: A long-running job can still outlive Siri’s timeout so cap the loop and fall back to a notification. You can also set the Shortcut to run when double-tapping the back of your iPhone for a drastically longer timeout.
+        </P>
+
+        <H3>Integration heaven</H3>
+        <P>
+          The beauty of OpenClaw and OpenClaw-adjacent agents is that they can run shell commands, web search, handle email and calendar, and are extensible. Siri can now trigger anything you are capable of scripting. And with modern day tools like Claude Code, the sky is the limit.
+        </P>
+        <P>Here are two examples:</P>
+        <P>
+          In a previous project, I created a proxy server that exposes my Bambu A1’s camera feed to my agent as an image that the model can actually look at. Now, in the car I ask how the print is going, it reports on things like stringing, bed adhesion, whether the temps look right, and layers/time remaining.
+        </P>
+        <P>
+          Example 2: I taught the shortcut to check the response body for a URL and open it, which turns a simple text answer into an action. “Find me the nearest place with Nike socks in stock” makes the agent search live store inventory and return a Maps link that opens straight into CarPlay. Multi-step tool calls straight from talking to Siri in CarPlay. No typing, no browser, no picking through four websites at a red light.
+        </P>
+
+        <H3>Caveats worth noting</H3>
+        <List>
+          <Item>Don’t put the endpoint on the open internet. Currently, I have everything on my server, including the prompting endpoint routed only through Tailscale.</Item>
+          <Item>The bearer token sits in plaintext inside the shortcut, treat it as a rotatable credential, not a secret.</Item>
+          <Item>As this post is more about sharing that Shortcuts is a nice tool for communicating with your OpenClaw agent, prompt injection from things like web surfing is out of the scope, but here’s an easy one you can do:</Item>
+          <Item>Treat any URL the model returns as untrusted. Allowlist specific domains (<Code>maps.google.com</Code>, <Code>apple.com/maps</Code>) before the shortcut opens anything</Item>
+        </List>
+
+        <P>
+          All of this runs on hardware that Apple says is not good enough for the new Siri. I have an iPhone 15 and this can easily run on older models. The phone isn’t doing any of the real work. Siri didn’t need to get smarter, it just needed to get out of the way.
+        </P>
+      </>
     ),
   },
   {

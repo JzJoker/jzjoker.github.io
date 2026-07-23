@@ -38,6 +38,7 @@ export interface ProjectDetail {
   liveUrl?: string;
   blogUrl?: string;
   devpostUrl?: string;
+  demoUrl?: string;
   links?: { label: string; href: string }[];
   /** Show on the home page's Technical Work list. */
   featured?: boolean;
@@ -56,6 +57,7 @@ export const projects: ProjectDetail[] = [
     heroImage: '/images/forecast-arena-banner.jpg',
     repoUrl: 'https://github.com/JzJoker/Forecast-Arena',
     blogUrl: '/work/forecast-arena',
+    demoUrl: 'https://colab.research.google.com/drive/1bnaQmiQ5ILr7iuPXF7h1ilr-646MH1hF?usp=sharing',
     featured: true,
     intro: [
       'Forecast Arena is a Python CLI that runs the same prediction question ("Will China invade Taiwan by end of 2026?", say) through five interchangeable LLM forecasting architectures and reports the results side by side — prediction, confidence, tokens, wall-clock time, and USD cost.',
@@ -125,6 +127,7 @@ export const projects: ProjectDetail[] = [
     tags: ['Ubuntu', 'Docker', 'Tailscale'],
     heroImage: '/images/dell-micro.svg',
     blogUrl: '/work/homelab',
+    repoUrl: 'https://github.com/JzJoker/homelab',
     featured: true,
     intro: [
       (
