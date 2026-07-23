@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react';
+import { useEffect, useState } from 'react';
 import { InlineLink } from '@/components/ExternalLink';
 
 const IMG = '/images/blog/18-pitches';
@@ -47,16 +48,68 @@ const Figure = ({
   src: string;
   alt: string;
   caption?: ReactNode;
-}) => (
-  <figure className="space-y-3 my-2 max-w-[62ch] mx-auto">
-    <img src={src} alt={alt} loading="lazy" className="w-full h-auto" />
-    {caption && (
-      <figcaption className="text-xs font-mono uppercase tracking-widest text-neutral-400 text-center">
-        {caption}
-      </figcaption>
-    )}
-  </figure>
-);
+}) => {
+  const [zoomed, setZoomed] = useState(false);
+  const [entered, setEntered] = useState(false);
+
+  useEffect(() => {
+    if (!zoomed) {
+      setEntered(false);
+      return;
+    }
+    const raf = requestAnimationFrame(() => setEntered(true));
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setZoomed(false);
+    };
+    document.addEventListener('keydown', onKey);
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      cancelAnimationFrame(raf);
+      document.removeEventListener('keydown', onKey);
+      document.body.style.overflow = prevOverflow;
+    };
+  }, [zoomed]);
+
+  return (
+    <>
+      <figure className="space-y-3 my-2 max-w-[62ch] mx-auto">
+        <button
+          type="button"
+          onClick={() => setZoomed(true)}
+          className="block w-full cursor-pointer"
+          aria-label={`View larger: ${alt}`}
+        >
+          <img src={src} alt={alt} loading="lazy" className="w-full h-auto" />
+        </button>
+        {caption && (
+          <figcaption className="text-xs font-mono uppercase tracking-widest text-neutral-400 text-center">
+            {caption}
+          </figcaption>
+        )}
+      </figure>
+      {zoomed && (
+        <div
+          onClick={() => setZoomed(false)}
+          className={`fixed inset-0 z-50 flex items-center justify-center p-4 md:p-8 bg-black/70 backdrop-blur-sm cursor-pointer transition-opacity duration-200 ease-out ${
+            entered ? 'opacity-100' : 'opacity-0'
+          }`}
+          role="dialog"
+          aria-modal="true"
+          aria-label={alt}
+        >
+          <img
+            src={src}
+            alt={alt}
+            className={`max-w-[min(90vw,64rem)] max-h-[85vh] w-auto h-auto object-contain rounded-md shadow-2xl transition-transform duration-200 ease-out ${
+              entered ? 'scale-100' : 'scale-95'
+            }`}
+          />
+        </div>
+      )}
+    </>
+  );
+};
 
 export interface BlogPost {
   slug: string;
@@ -317,6 +370,11 @@ export const posts: BlogPost[] = [
         <P>
           During the research phase of this project, I learned that <Code>Get Contents of URL</Code> in Shortcuts does GET/POST/PUT/PATCH/DELETE with arbitrary headers and a JSON body. This is basically everything you need to talk to your own API.
         </P>
+        <Figure
+          src="/images/blog/shortcut-http-primitive.png"
+          alt="Shortcuts Get Contents of URL action configured with POST, Authorization + Content-Type headers, and a JSON body carrying the dictated text"
+          caption="Get Contents of URL — POST + headers + JSON body"
+        />
         <P>
           Shortcuts also has real primitives: variables, <Code>If/Otherwise</Code>, <Code>Repeat</Code> and <Code>Repeat With Each</Code>, <Code>Wait</Code>, and <Code>Get Dictionary Value</Code> for pulling fields out of a JSON response.
         </P>
@@ -342,6 +400,11 @@ export const posts: BlogPost[] = [
         <Quote>
           POST the prompt → get back a job ID → Repeat + Wait + GET the status endpoint until it reports done
         </Quote>
+        <Figure
+          src="/images/blog/simon-shortcut.png"
+          alt="Simon — the Siri Shortcut implementing the dictate → POST → parse job_id → poll → speak pattern"
+          caption="Simon — the Shortcut wiring it all together"
+        />
         <P>
           Because each poll returns what the agent has outputted so far, Siri can speak preliminary statuses like “searching” and “reading the camera” instead of leaving you hanging.
         </P>
@@ -357,6 +420,11 @@ export const posts: BlogPost[] = [
         <P>
           In a previous project, I created a proxy server that exposes my Bambu A1’s camera feed to my agent as an image that the model can actually look at. Now, in the car I ask how the print is going, it reports on things like stringing, bed adhesion, whether the temps look right, and layers/time remaining.
         </P>
+        <Figure
+          src="/images/blog/simon-printer-convo.png"
+          alt="iMessage conversation with Simon — 'How's my print' returns a camera snapshot and a structured status report on the current print"
+          caption="Asking Simon how the print is going"
+        />
         <P>
           Example 2: I taught the shortcut to check the response body for a URL and open it, which turns a simple text answer into an action. “Find me the nearest place with Nike socks in stock” makes the agent search live store inventory and return a Maps link that opens straight into CarPlay. Multi-step tool calls straight from talking to Siri in CarPlay. No typing, no browser, no picking through four websites at a red light.
         </P>
