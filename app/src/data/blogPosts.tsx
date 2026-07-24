@@ -332,7 +332,7 @@ export const posts: BlogPost[] = [
   },
   {
     slug: 'i-hate-siri-openclaw-shortcuts',
-    title: "I hate Siri. Replacing iPhone's voice assistant with OpenClaw using Siri Shortcuts.",
+    title: "I hate Siri. How I replaced it with OpenClaw using Siri Shortcuts.",
     subtitle: "Siri didn't need to get smarter, it just needed to get out of the way.",
     date: '2026-07-23',
     displayDate: 'Jul 23, 2026',
@@ -349,7 +349,7 @@ export const posts: BlogPost[] = [
             <strong>Vague error messages</strong> — Siri will often use phrases like “I didn’t quite get that” and “Something went wrong” as failure messages but they tell you nothing about what actually went wrong. You cannot adjust your language or command to remediate failed tasks.
           </Item>
           <Item>
-            <strong>Apple Intelligence Siri is not out</strong> — Apple has been working on revamping Siri. They have trained a new model in partnership with Google in addition to their in-house AFM 3 model. It is supposed to fix a lot of the issues I mention but it is in Beta gated by a waitlist and hasn’t shipped in a stable release to the general public.
+            <strong>Apple Intelligence Siri is not out</strong> — Apple has been working on revamping Siri. They have trained a new model in partnership with Google in addition to their in-house AFM 3 model. It is supposed to fix a lot of the issues I mention but it is in Beta and gated by a waitlist and hasn’t shipped in a stable release to the general public.
           </Item>
           <Item>
             <strong>Siri is not an LLM</strong> — the underlying technology behind the current Siri is a command router, not a reasoner. Relying on classical intent matching as opposed to an LLM holds back Siri’s potential to complete multi-step tasks, understand complex commands, and overall causes the assistant to fail at anything that requires reasoning.
