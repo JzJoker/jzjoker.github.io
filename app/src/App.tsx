@@ -247,7 +247,7 @@ function App() {
                 variant="inline"
               />
               <ExternalLink
-                href="https://www.linkedin.com/in/justinzhao1324/"
+                href="https://www.linkedin.com/in/justinzhao1/"
                 label="LinkedIn"
                 variant="inline"
               />
