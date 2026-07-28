@@ -1,4 +1,5 @@
 import { Navbar } from '@/components/Navbar';
+import { ZoomableImage } from '@/components/ZoomableImage';
 import { galleryImages as images } from '@/data/galleryImages';
 
 export function GalleryPage() {
@@ -23,10 +24,9 @@ export function GalleryPage() {
                   key={img.src + i}
                   className="mb-4 md:mb-6 break-inside-avoid overflow-hidden bg-neutral-100 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800"
                 >
-                  <img
+                  <ZoomableImage
                     src={img.src}
                     alt={img.alt}
-                    loading="lazy"
                     className="w-full h-auto block transition-transform duration-500 ease-out hover:scale-[1.02]"
                   />
                 </div>
