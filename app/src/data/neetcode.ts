@@ -1,6 +1,6 @@
-// Historical NeetCode activity, exported once on 2026-07-07 before switching to
-// LeetCode as the source of truth going forward. Merged into the heatmap so
-// pre-switch activity still shows up.
+// NeetCode activity snapshot, last exported 2026-08-28. Merged into the heatmap
+// alongside the live LeetCode data source. Repaired-streak placeholder days
+// (count 0) are filtered out at export time.
 // Format: 'YYYY-MM-DD' → problems solved on that day.
 export const NEETCODE_ACTIVITY: Record<string, number> = {
   '2025-10-27': 4,
@@ -62,4 +62,30 @@ export const NEETCODE_ACTIVITY: Record<string, number> = {
   '2026-07-03': 18,
   '2026-07-04': 13,
   '2026-07-07': 1,
+  '2026-07-08': 3,
+  '2026-07-09': 11,
+  '2026-07-10': 46,
+  '2026-07-11': 2,
+  '2026-07-12': 47,
+  '2026-07-14': 7,
+  '2026-07-15': 61,
+  '2026-07-16': 17,
+  '2026-07-17': 12,
+  '2026-07-19': 1,
+  '2026-07-22': 2,
+  '2026-07-23': 2,
+  '2026-07-24': 4,
+  '2026-07-27': 18,
+  '2026-07-30': 46,
+  '2026-07-31': 40,
+  '2026-08-02': 33,
+  '2026-08-04': 15,
+  '2026-08-07': 2,
+  '2026-08-09': 29,
+  '2026-08-11': 7,
+  '2026-08-12': 63,
+  '2026-08-13': 23,
+  '2026-08-17': 9,
+  '2026-08-18': 12,
+  '2026-08-20': 9,
 };
