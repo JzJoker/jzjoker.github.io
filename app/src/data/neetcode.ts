@@ -1,4 +1,4 @@
-// NeetCode activity snapshot, last exported 2026-08-28. Merged into the heatmap
+// NeetCode activity snapshot, last exported 2026-08-29. Merged into the heatmap
 // alongside the live LeetCode data source. Repaired-streak placeholder days
 // (count 0) are filtered out at export time.
 // Format: 'YYYY-MM-DD' → problems solved on that day.
@@ -88,4 +88,6 @@ export const NEETCODE_ACTIVITY: Record<string, number> = {
   '2026-08-17': 9,
   '2026-08-18': 12,
   '2026-08-20': 9,
+  '2026-08-28': 28,
+  '2026-08-29': 23,
 };
