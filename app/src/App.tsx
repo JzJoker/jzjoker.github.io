@@ -24,6 +24,14 @@ interface RoleItem {
 
 const experience: RoleItem[] = [
   {
+    role: 'Software Engineer Co-op',
+    company: 'Megazone Cloud',
+    companyUrl: 'https://www.megazone.com/us',
+    detail:
+      'Shipping Terraform/CloudFormation modules for multi-account AWS landing zones and executing VMware-to-AWS workload migrations.',
+    period: 'Present',
+  },
+  {
     role: 'Site Reliability Engineer',
     company: 'Vanguard',
     companyUrl:
