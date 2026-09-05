@@ -34,8 +34,7 @@ const experience: RoleItem[] = [
   {
     role: 'Site Reliability Engineer',
     company: 'Vanguard',
-    companyUrl:
-      'https://corporate.vanguard.com/content/corporatesite/us/en/corp/why-vanguard/sets-us-apart/client-centered-technology.html',
+    companyUrl: 'https://www.vanguard.com',
     detail: 'Product-owned ScriptHub — an Electron + PowerShell remote script execution platform.',
     period: '2024 — 2025',
   },
@@ -50,7 +49,7 @@ const experience: RoleItem[] = [
     role: 'Web Developer',
     company: 'RIT HR',
     companyUrl: 'https://www.rit.edu/humanresources/',
-    detail: 'Led a department-wide Drupal site redesign; migrated every HR site under one system.',
+    detail: 'Led a department-wide Drupal site redesign and modernization; migrated every HR site under one system.',
     period: '2022 — 2023',
   },
 ];
