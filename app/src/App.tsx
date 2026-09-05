@@ -32,7 +32,7 @@ const experience: RoleItem[] = [
     period: 'Present',
   },
   {
-    role: 'Site Reliability Engineer',
+    role: 'Software Engineer Intern (SRE)',
     company: 'Vanguard',
     companyUrl: 'https://www.vanguard.com',
     detail: 'Product-owned ScriptHub — an Electron + PowerShell remote script execution platform.',
