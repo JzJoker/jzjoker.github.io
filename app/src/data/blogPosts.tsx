@@ -69,6 +69,7 @@ export interface BlogPost {
   readTime: string;
   heroImage?: string;
   externalUrl?: string;
+  wip?: boolean;
   content: ReactNode;
 }
 
@@ -399,6 +400,7 @@ export const posts: BlogPost[] = [
     displayDate: 'Jul 14, 2026',
     readTime: '— min read',
     heroImage: '/images/blog/bambu-a1.webp',
+    wip: true,
     content: (
       <P>Draft in progress — check back soon.</P>
     ),
@@ -411,6 +413,7 @@ export const posts: BlogPost[] = [
     displayDate: 'Jul 18, 2026',
     readTime: '— min read',
     heroImage: '/images/blog/discord-bot.jpg',
+    wip: true,
     content: (
       <P>Draft in progress — check back soon.</P>
     ),
@@ -423,6 +426,7 @@ export const posts: BlogPost[] = [
     displayDate: 'Jul 10, 2026',
     readTime: '— min read',
     heroImage: '/images/blog/higgsfield.jpg',
+    wip: true,
     content: (
       <P>Draft in progress — check back soon.</P>
     ),
@@ -433,4 +437,9 @@ export function getPost(slug: string): BlogPost | undefined {
   return posts.find((p) => p.slug === slug);
 }
 
-export const sortedPosts = [...posts].sort((a, b) => (a.date < b.date ? 1 : -1));
+export const sortedPosts = [...posts].sort((a, b) => {
+  const aWip = a.wip ? 1 : 0;
+  const bWip = b.wip ? 1 : 0;
+  if (aWip !== bWip) return aWip - bWip;
+  return a.date < b.date ? 1 : -1;
+});
