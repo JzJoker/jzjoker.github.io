@@ -345,6 +345,7 @@ export const projects: ProjectDetail[] = [
     repoUrl: 'https://github.com/JzJoker/hackprinceton-island-habits',
     liveUrl: 'https://someonesave.us/',
     devpostUrl: 'https://devpost.com/software/faaah',
+    videoUrl: 'https://www.youtube.com/watch?v=iOFIhzbkjSk',
     intro: [
       (
         <>
