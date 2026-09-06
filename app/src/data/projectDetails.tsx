@@ -18,6 +18,12 @@ export interface Screenshot {
   caption?: string;
 }
 
+export interface DeckSlide {
+  src: string;
+  alt: string;
+  caption?: string;
+}
+
 export interface ProjectDetail {
   slug: string;
   title: string;
@@ -33,6 +39,7 @@ export interface ProjectDetail {
   intro: ReactNode[];
   techStack?: TechStackRow[];
   screenshots?: Screenshot[];
+  deck?: DeckSlide[];
   conclusion?: ReactNode[];
   repoUrl?: string;
   liveUrl?: string;
@@ -220,6 +227,43 @@ export const projects: ProjectDetail[] = [
       { layer: 'Verification', technology: 'Playwright smoke', purpose: 'DOM-level assertions run against the deployed preview' },
       { layer: 'Target repo', technology: 'JzJoker/superplane fork', purpose: 'Five test issues: #5164, #5366, #5368, #5704, #5705' },
     ],
+    deck: [
+      {
+        src: '/images/superplane-deck/slide-00.jpg',
+        alt: 'On Solve trigger fires Triage & Spec',
+        caption: 'Entry — a /solve comment on the issue triggers Triage & Spec.',
+      },
+      {
+        src: '/images/superplane-deck/slide-01.jpg',
+        alt: 'Triage & Spec stage detail',
+        caption: 'Triage & Spec — Claude classifies the issue and emits a machine-checkable spec that every downstream gate reads from.',
+      },
+      {
+        src: '/images/superplane-deck/slide-02.jpg',
+        alt: 'Spec Grounded gate and Baseline test',
+        caption: 'Spec Grounded (gate-spec) + Baseline — gate a usable spec, then record which tests already fail at HEAD.',
+      },
+      {
+        src: '/images/superplane-deck/slide-03.jpg',
+        alt: 'Implement coding stage',
+        caption: 'Implement — smallest change, factory/issue-<n>-<runId> branch, test-first, open a PR. Currently stubbed to PR #9.',
+      },
+      {
+        src: '/images/superplane-deck/slide-04.jpg',
+        alt: 'Build OK and No New Failures gates',
+        caption: 'Build OK? + No New Failures? — compile check, then baseline-aware regression that lets pre-existing red tests through.',
+      },
+      {
+        src: '/images/superplane-deck/slide-05.jpg',
+        alt: 'New Behavior gate and Independent Review',
+        caption: 'New Behavior Passes? + Independent Review — prove the new test passes; a separate Claude grades the diff against acceptance criteria.',
+      },
+      {
+        src: '/images/superplane-deck/slide-06.jpg',
+        alt: 'Deploy Preview success',
+        caption: 'Deploy Preview — Render preview env comes up, Playwright smoke runs against the live URL, link posts back to the PR.',
+      },
+    ],
     conclusion: [
       (
         <>
@@ -231,6 +275,46 @@ export const projects: ProjectDetail[] = [
           Calibrated to the PoC bar — a subjective requirement verdicted <Code>partial</Code> ships with disclosure, only <Code>inadequate</Code> retries. Otherwise the factory loops forever on things that can never cleanly resolve.
         </>
       ),
+    ],
+  },
+  {
+    slug: 'buy-high-sell-low',
+    title: 'Buy High, Sell Low',
+    subtitle: 'Tracking stock sentiment across Reddit.',
+    role: 'Cloud computing term project · Team of 5',
+    duration: 'Spring 2026',
+    sortAt: '2026-04-23',
+    techSummary: 'Python · PRAW · AWS Comprehend · Lambda · DynamoDB · Terraform · React',
+    tags: ['Python', 'AWS', 'Terraform', 'React'],
+    repoUrl: 'https://github.com/JzJoker/term-project-buy-high-sell-low',
+    blogUrl: '/work/buy-high-sell-low',
+    featured: true,
+    intro: [
+      'Buy High, Sell Low scrapes r/wallstreetbets and r/stocks every 30 minutes, runs each post through AWS Comprehend for sentiment and entity extraction, and surfaces the result in a terminal-styled dashboard so you can see which tickers Reddit is loving or hating in near-real-time.',
+      (
+        <>
+          The scraper is a <Code>PRAW</Code> loop in a Docker container running on an EC2 auto-scaling group inside a NAT-gated VPC. Each cycle sweeps eight fetch strategies — <Code>new</Code>, <Code>rising</Code>, <Code>hot</Code>, plus <Code>top</Code> and <Code>controversial</Code> across day/week/month windows — deduplicates within the cycle, and batch-writes into a DynamoDB raw table.
+        </>
+      ),
+      (
+        <>
+          Each new raw item fires a DynamoDB Stream that triggers a Comprehend Lambda (<Code>detect_sentiment</Code> + <Code>detect_entities</Code>), and the enriched output lands in a second table. An API Gateway Lambda serves <Code>/entities</Code>, <Code>/entities/counts</Code>, and <Code>/sentiments</Code> to a React frontend hosted on S3 + CloudFront. Everything is defined in Terraform with an S3 state backend.
+        </>
+      ),
+    ],
+    techStack: [
+      { layer: 'Scraper', technology: 'Python + PRAW', purpose: '30-min ingest loop across 8 sort strategies with retry + dedup' },
+      { layer: 'Compute', technology: 'EC2 Auto Scaling Group', purpose: 'Runs the scraper container, scales on CPU target' },
+      { layer: 'Container', technology: 'Docker + ECR', purpose: 'Reproducible scraper image pulled on every EC2 launch' },
+      { layer: 'Raw store', technology: 'DynamoDB (streams)', purpose: 'Source of truth for scraped posts, streams fan out to Comprehend' },
+      { layer: 'NLP', technology: 'AWS Comprehend', purpose: 'Sentiment + entity extraction per post' },
+      { layer: 'Enrichment', technology: 'Lambda (Python)', purpose: 'Stream trigger — writes enriched output to the processed table' },
+      { layer: 'API', technology: 'API Gateway + Lambda', purpose: 'Filterable entities and sentiments routes' },
+      { layer: 'Frontend', technology: 'React + Vite on S3/CloudFront', purpose: 'Terminal-styled dashboard' },
+      { layer: 'IaC', technology: 'Terraform (S3 backend)', purpose: 'VPC, subnets, NAT, IAM, Lambda, EC2, DynamoDB, ECR, CloudFront' },
+    ],
+    conclusion: [
+      'Built for a cloud computing course — the fun part was the architecture, not the ML. Comprehend does the sentiment heavy lifting, so the design work went into making the data path event-driven end to end: scraper → DynamoDB → stream → Lambda → processed table → API, no polling anywhere.',
     ],
   },
   {

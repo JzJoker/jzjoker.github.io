@@ -4,6 +4,7 @@ import { Navbar } from '@/components/Navbar';
 import { SectionNav, type SectionItem } from '@/components/SectionNav';
 import { SectionHeading } from '@/components/SectionHeading';
 import { ExternalLink } from '@/components/ExternalLink';
+import { SlideCarousel } from '@/components/SlideCarousel';
 import { featuredProjects, getProject } from '@/data/projectDetails';
 
 function Tag({ children }: { children: React.ReactNode }) {
@@ -68,6 +69,7 @@ export function ProjectDetailPage() {
       { id: 'header', label: 'Top' },
       { id: 'overview', label: 'Overview' },
     ];
+    if (project.deck?.length) items.push({ id: 'deck', label: 'Deck' });
     if (project.techStack?.length) items.push({ id: 'stack', label: 'Stack' });
     if (project.screenshots?.length) items.push({ id: 'gallery', label: 'Gallery' });
     if (project.conclusion?.length) items.push({ id: 'notes', label: 'Notes' });
@@ -158,6 +160,13 @@ export function ProjectDetailPage() {
             ))}
           </div>
         </section>
+
+        {project.deck && project.deck.length > 0 && (
+          <section id="deck" className="space-y-6">
+            <SectionHeading>Deck</SectionHeading>
+            <SlideCarousel slides={project.deck} />
+          </section>
+        )}
 
         {project.techStack && project.techStack.length > 0 && (
           <section id="stack" className="space-y-6">
