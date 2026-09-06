@@ -169,7 +169,7 @@ function App() {
       <div className="mx-auto max-w-[var(--page-max)]">
       <main className="px-8 md:px-12 py-24 md:py-32 flex flex-col gap-24">
         <section id="hero">
-          <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_22rem] gap-12 lg:gap-16 items-center">
+          <div className="grid grid-cols-1 md:grid-cols-[minmax(0,1fr)_22rem] gap-12 md:gap-16 items-center">
             <div className="space-y-8">
               <div className="space-y-3">
                 <h1 className="text-4xl font-medium tracking-tight leading-[1.05]">
@@ -183,7 +183,7 @@ function App() {
                 I like building cool things, winning hackathons, and experimenting. This site is where I write about my experiments, projects, competitions, and more. Read my write ups to learn about my technical process or view the gallery for a glimpse into my life!
               </p>
             </div>
-            <div className="hidden lg:block">
+            <div>
               <ImageCarousel images={carouselImages} />
             </div>
           </div>
