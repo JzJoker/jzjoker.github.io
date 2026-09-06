@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
+import { ZoomableImage } from '@/components/ZoomableImage';
 
 export interface Slide {
   src: string;
@@ -34,14 +35,14 @@ export function SlideCarousel({ slides }: { slides: Slide[] }) {
     <div className="space-y-4">
       <div className="relative w-full aspect-[16/9] overflow-hidden bg-neutral-100 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800">
         {slides.map((slide, i) => (
-          <img
+          <ZoomableImage
             key={slide.src}
             src={slide.src}
             alt={slide.alt}
-            loading={i === 0 ? 'eager' : 'lazy'}
-            className={`absolute inset-0 w-full h-full object-contain transition-opacity duration-300 ease-in-out ${
-              i === index ? 'opacity-100' : 'opacity-0'
+            wrapperClassName={`absolute inset-0 w-full h-full transition-opacity duration-300 ease-in-out ${
+              i === index ? 'opacity-100 z-10' : 'opacity-0 pointer-events-none'
             }`}
+            className="w-full h-full object-contain"
           />
         ))}
 
@@ -49,7 +50,7 @@ export function SlideCarousel({ slides }: { slides: Slide[] }) {
           type="button"
           onClick={prev}
           aria-label="Previous slide"
-          className="absolute left-2 top-1/2 -translate-y-1/2 w-9 h-9 flex items-center justify-center bg-white/80 dark:bg-neutral-900/80 border border-neutral-200 dark:border-neutral-800 text-neutral-700 dark:text-neutral-200 hover:text-neutral-950 dark:hover:text-white transition-colors"
+          className="absolute left-2 top-1/2 -translate-y-1/2 w-9 h-9 flex items-center justify-center bg-white/80 dark:bg-neutral-900/80 border border-neutral-200 dark:border-neutral-800 text-neutral-700 dark:text-neutral-200 hover:text-neutral-950 dark:hover:text-white transition-colors z-20"
         >
           ←
         </button>
@@ -57,12 +58,12 @@ export function SlideCarousel({ slides }: { slides: Slide[] }) {
           type="button"
           onClick={next}
           aria-label="Next slide"
-          className="absolute right-2 top-1/2 -translate-y-1/2 w-9 h-9 flex items-center justify-center bg-white/80 dark:bg-neutral-900/80 border border-neutral-200 dark:border-neutral-800 text-neutral-700 dark:text-neutral-200 hover:text-neutral-950 dark:hover:text-white transition-colors"
+          className="absolute right-2 top-1/2 -translate-y-1/2 w-9 h-9 flex items-center justify-center bg-white/80 dark:bg-neutral-900/80 border border-neutral-200 dark:border-neutral-800 text-neutral-700 dark:text-neutral-200 hover:text-neutral-950 dark:hover:text-white transition-colors z-20"
         >
           →
         </button>
 
-        <div className="absolute bottom-3 right-3 font-mono text-[10px] tracking-widest text-white mix-blend-difference">
+        <div className="absolute bottom-3 right-3 font-mono text-[10px] tracking-widest text-white mix-blend-difference z-20">
           {String(index + 1).padStart(2, '0')} / {String(total).padStart(2, '0')}
         </div>
       </div>

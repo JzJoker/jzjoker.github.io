@@ -4,9 +4,10 @@ interface ZoomableImageProps {
   src: string;
   alt: string;
   className?: string;
+  wrapperClassName?: string;
 }
 
-export function ZoomableImage({ src, alt, className }: ZoomableImageProps) {
+export function ZoomableImage({ src, alt, className, wrapperClassName }: ZoomableImageProps) {
   const [zoomed, setZoomed] = useState(false);
   const [entered, setEntered] = useState(false);
 
@@ -34,7 +35,7 @@ export function ZoomableImage({ src, alt, className }: ZoomableImageProps) {
       <button
         type="button"
         onClick={() => setZoomed(true)}
-        className="block w-full cursor-pointer"
+        className={`block w-full cursor-pointer ${wrapperClassName ?? ''}`}
         aria-label={`View larger: ${alt}`}
       >
         <img src={src} alt={alt} loading="lazy" className={className} />
