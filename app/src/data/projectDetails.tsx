@@ -281,7 +281,7 @@ export const projects: ProjectDetail[] = [
   {
     slug: 'buy-high-sell-low',
     title: 'Buy High, Sell Low',
-    subtitle: 'Tracking stock sentiment across Reddit.',
+    subtitle: 'Analyzing + aggregating stock sentiments across financial subreddits.',
     role: 'Cloud computing term project · Team of 5',
     duration: 'Spring 2026',
     sortAt: '2026-04-23',
