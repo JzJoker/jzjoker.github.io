@@ -287,6 +287,7 @@ export const projects: ProjectDetail[] = [
     sortAt: '2026-04-23',
     techSummary: 'Python · PRAW · AWS Comprehend · Lambda · DynamoDB · Terraform · React',
     tags: ['Python', 'AWS', 'Terraform', 'React'],
+    heroImage: '/images/buy-high-sell-low-architecture.png',
     repoUrl: 'https://github.com/JzJoker/term-project-buy-high-sell-low',
     blogUrl: '/work/buy-high-sell-low',
     featured: true,
@@ -313,6 +314,10 @@ export const projects: ProjectDetail[] = [
       { layer: 'API', technology: 'API Gateway + Lambda', purpose: 'Filterable entities and sentiments routes' },
       { layer: 'Frontend', technology: 'React + Vite on S3/CloudFront', purpose: 'Terminal-styled dashboard' },
       { layer: 'IaC', technology: 'Terraform (S3 backend)', purpose: 'VPC, subnets, NAT, IAM, Lambda, EC2, DynamoDB, ECR, CloudFront' },
+    ],
+    screenshots: [
+      { src: '/images/screenshots/buy-high-sell-low-overview.webp', caption: 'Sentiment Radar — global sentiment index, top movers, and per-ticker mentions with AWS confidence and sentiment score' },
+      { src: '/images/screenshots/buy-high-sell-low-dashboard.png', caption: 'Entity Radar — per-ticker bullish/bearish spread, volatility, and recent Comprehend-extracted post snippets' },
     ],
     conclusion: [
       'Built for a cloud computing course — the fun part was the architecture, not the ML. Comprehend does the sentiment heavy lifting, so the design work went into making the data path event-driven end to end: scraper → DynamoDB → stream → Lambda → processed table → API, no polling anywhere.',

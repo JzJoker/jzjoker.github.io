@@ -5,6 +5,7 @@ import { SectionNav, type SectionItem } from '@/components/SectionNav';
 import { SectionHeading } from '@/components/SectionHeading';
 import { ExternalLink } from '@/components/ExternalLink';
 import { SlideCarousel } from '@/components/SlideCarousel';
+import { ZoomableImage } from '@/components/ZoomableImage';
 import { featuredProjects, getProject } from '@/data/projectDetails';
 
 function Tag({ children }: { children: React.ReactNode }) {
@@ -216,11 +217,10 @@ export function ProjectDetailPage() {
               {project.screenshots.map((shot) => (
                 <figure key={shot.src} className="space-y-2">
                   <div className="overflow-hidden bg-neutral-100 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 aspect-video">
-                    <img
+                    <ZoomableImage
                       src={shot.src}
                       alt={shot.caption ?? project.title}
                       className="w-full h-full object-cover"
-                      loading="lazy"
                     />
                   </div>
                   {shot.caption && (
