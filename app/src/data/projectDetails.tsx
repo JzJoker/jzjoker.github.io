@@ -404,7 +404,7 @@ export const projects: ProjectDetail[] = [
       <>
         A collaborative memory journal for Alzheimer's patients.{' '}
         <strong className="font-normal underline underline-offset-4">
-          Best Social Impact
+          Best Social Impact Hack
         </strong>{' '}
         at{' '}
         <InlineLink href="https://uncommonhacks.com/" arrow={false}>
