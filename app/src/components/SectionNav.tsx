@@ -28,7 +28,22 @@ export function SectionNav({ items }: { items: SectionItem[] }) {
     );
 
     els.forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
+
+    const lastId = items[items.length - 1]?.id;
+    const onScroll = () => {
+      if (!lastId) return;
+      const nearBottom =
+        window.innerHeight + window.scrollY >=
+        document.documentElement.scrollHeight - 4;
+      if (nearBottom) setActive(lastId);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('scroll', onScroll);
+    };
   }, [items]);
 
   const handleClick = (id: string) => (e: React.MouseEvent) => {
