@@ -64,11 +64,16 @@ export function ProjectDetailPage() {
 
   const allLinks = [...typedLinks, ...(project.links ?? [])];
 
+  const youtubeId = project.videoUrl?.match(
+    /(?:youtube\.com\/(?:watch\?v=|embed\/)|youtu\.be\/)([\w-]+)/,
+  )?.[1];
+
   const navItems: SectionItem[] = useMemo(() => {
     const items: SectionItem[] = [
       { id: 'header', label: 'Top' },
       { id: 'overview', label: 'Overview' },
     ];
+    if (project.videoUrl) items.push({ id: 'video', label: 'Video' });
     if (project.deck?.length) items.push({ id: 'deck', label: 'Deck' });
     if (project.techStack?.length) items.push({ id: 'stack', label: 'Stack' });
     if (project.screenshots?.length) items.push({ id: 'gallery', label: 'Gallery' });
@@ -160,6 +165,22 @@ export function ProjectDetailPage() {
             ))}
           </div>
         </section>
+
+        {youtubeId && (
+          <section id="video" className="space-y-6">
+            <SectionHeading>Video Demo</SectionHeading>
+            <div className="relative w-full aspect-video overflow-hidden bg-neutral-100 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800">
+              <iframe
+                src={`https://www.youtube-nocookie.com/embed/${youtubeId}`}
+                title={`${project.title} — video`}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+                loading="lazy"
+                className="absolute inset-0 w-full h-full"
+              />
+            </div>
+          </section>
+        )}
 
         {project.deck && project.deck.length > 0 && (
           <section id="deck" className="space-y-6">

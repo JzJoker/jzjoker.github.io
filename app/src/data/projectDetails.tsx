@@ -40,6 +40,7 @@ export interface ProjectDetail {
   techStack?: TechStackRow[];
   screenshots?: Screenshot[];
   deck?: DeckSlide[];
+  videoUrl?: string;
   conclusion?: ReactNode[];
   repoUrl?: string;
   liveUrl?: string;
@@ -423,6 +424,7 @@ export const projects: ProjectDetail[] = [
     blogUrl: '/work/uncommonhacks',
     repoUrl: 'https://github.com/JzJoker/uncommonhacks-life-story',
     devpostUrl: 'https://devpost.com/software/lifestory',
+    videoUrl: 'https://www.youtube.com/watch?v=qAj0T48g6-k',
     intro: [
       'LifeStory is a "living memory journal" for people with Alzheimer\'s. Families collaboratively upload photos and record short factual narrations; the patient explores familiar faces and moments through a calm, guided app that never quizzes them.',
       'The premise came from watching a grandmother repeatedly ask "Who are you?" — by the fortieth time, even the most patient caregiver is drained. A consistent, warm narration voice can answer that question indefinitely without emotional exhaustion. That reframe — repetition as therapy rather than limitation — drove every design choice.',
